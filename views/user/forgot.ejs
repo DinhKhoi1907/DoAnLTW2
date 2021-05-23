@@ -1,0 +1,32 @@
+h3>Login</h3>
+        <form method="post" action="/user/login">
+        	<div class="row">
+        		 <label for="username">
+                    Username:
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tài khoản..." required pattern="\S+.*"/>
+                </label>
+        	</div>
+           
+            <div class="row">
+            	<label for="password">
+                    Password:
+                    <input type="password" class="form-control" id="password2" name="password" placeholder="Nhập mật khẩu..." required pattern="\S+.*"/>
+                </label>
+            </div>
+            <div class="row">
+            	<div class="remember">
+					<div>
+						<input type="checkbox" name="remember" value="Remember me"><span>Remember me</span>
+					</div>
+            		<a href="/user/forgot">Forget password ?</a>
+            	</div>
+            </div>
+           <div class="row">
+           	 <button type="submit">Login</button>
+           </div>
+        </form>
+        <div class="row">
+        
+        </div>
+    </div>
+</div>
