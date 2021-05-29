@@ -30,27 +30,23 @@ router.post('/register',asyncHandler (async function(req,res){
 
       
     const user={};
-    const {username,email,password,repassword} = req.body;
+    const {email,password,repassword} = req.body;
     
-    user.username = username;
     user.email = email;
     //ma hoa password
     user.password = passwordHash.generate(password);
 
     // kiem tra username da ton toi trong db chua
-      const found = await User.findByUsername(username);
-      const found2 = await User.findByEmail(email);
+    
+      const found = await User.findByEmail(email);
 
 
-        if(!username ||!email||!password||!repassword){
+        if(!email||!password||!repassword){
        // httpMsgs.send200(req,res,"Vui long dien het thong tin");
         res.end("0");
        //return done(null, false, {message : 'Vui long dien het thong tin'});
            }
-       else if(found){
-            res.end("-1");
-        }
-        else if(found2){
+        else if(found){
           res.end("-2");
         }
         else if(password !== repassword){
@@ -60,9 +56,8 @@ router.post('/register',asyncHandler (async function(req,res){
         else{
             //neu chua co thi tao user 
             await  User.create(user);
-            
             //tim User moi dang ky
-            const found3 = await User.findByUsername(username);
+            const found3 = await User.findByEmail(email);
             //gui mail xac nhan cho user 
             await transporter.sendMail({
                 from: '"XuanLy 👻" <william.lynguyen@gmail.com>', // sender address
@@ -84,8 +79,8 @@ router.post('/register',asyncHandler (async function(req,res){
 
   router.post('/login',asyncHandler(async function(req,res){
     console.log(req.body);
-    const {username,password} = req.body;
-    const found = await User.findByUsername(username);
+    const {email,password} = req.body;
+    const found = await User.findByEmail(email);
     if(found && passwordHash.verify(password,found.password) ){
         //luu id vao session
         req.session.userId = found.id;
