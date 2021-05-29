@@ -27,10 +27,18 @@
 	<!-- CSS files -->
 	<link rel="stylesheet" href="css/plugins.css">
 	<link rel="stylesheet" href="css/style.css">
-
+	<link rel="stylesheet" href="css/style-2.css">
+	
 </head>
 <body>
 <!--preloading-->
+<div id="preloader">
+    <img class="logo" src="images/logo1.png" alt="" width="119" height="58">
+    <div id="status">
+        <span></span>
+        <span></span>
+    </div>
+</div>
 
 <!--end of preloading-->
 <!--login form popup-->
@@ -38,18 +46,21 @@
     <div class="login-content">
         <a href="#" class="close">x</a>
         <h3>Login</h3>
-        <form method="post" action="/user/login">
+		<p style="text-align: center;"id="response"></p>
+        <form method="post" action="/user/login" id="form-login-2">
+
         	<div class="row">
         		 <label for="username">
                     Username:
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tài khoản..." required pattern="\S+.*"/>
+                    <input type="text"  class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Nhập tài khoản..."   pattern="\S+.*"
+					 title="Vui lòng nhập username của bạn !" required>
                 </label>
         	</div>
            
             <div class="row">
             	<label for="password">
                     Password:
-                    <input type="password" class="form-control" id="password2" name="password" placeholder="Nhập mật khẩu..." required pattern="\S+.*"/>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu..." required pattern="\S+.*" >
                 </label>
             </div>
             <div class="row">
@@ -57,19 +68,20 @@
 					<div>
 						<input type="checkbox" name="remember" value="Remember me"><span>Remember me</span>
 					</div>
-					<div class="forgotLink"><a href="#" >Forget password d?</a></div>
+					<div class="forgotLink"><a href="#" >Forget password?</a></div>
             		
             	</div>
             </div>
+			<input type="hidden" name="type_ajax" value="login">
            <div class="row">
-           	 <button type="submit">Login</button>
+           	 <button type="submit" id="loginBtn" >Login</button>
            </div>
         </form>
         <div class="row">
         	<p>Or via social</p>
             <div class="social-btn-2">
-            	<a class="fb" href="#"><i class="ion-social-facebook"></i>Facebook</a>
-            	<a class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
+            	<a class="fb" href="/user/facebook"><i class="ion-social-facebook"></i>Facebook</a>
+            	<a class="tw" href="/user/google"><i class="ion-social-google"></i>Google</a>
             </div>
         </div>
     </div>
@@ -80,34 +92,40 @@
     <div class="login-content">
         <a href="#" class="close">x</a>
         <h3>Register</h3>
-        <form method="post" action="/user/register">
+		<p id = "check-reg-empty"></p>
+        <form method="post" action="/user/register" id="form-register-2">
             <div class="row">
-                 <label for="username-2">
-                    Username:
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tài khoản..." required pattern="\S+.*"/>
-                </label>
+                 <label for="username">
+                    Username:<p id="check-reg-username" style="margin:-1px;">&nbsp;</p>
+                    <input type="text" class="form-control" id="username-2" name="username" placeholder="Nhập tài khoản..." required >
+				</label>
+				
             </div>
            
             <div class="row">
-                <label for="email-2">
+                <label for="email">
                     your email:
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email..." required pattern="\S+.*"/>
+					<p id="check-reg-email" style="margin:-1px;"> &nbsp; </p>
+					<input type="email" class="form-control" id="email-2" name="email" placeholder="Nhập email..."  aria-describedby="emailHelp"  >
+				</label>
+				
+            </div>
+             <div class="row">
+                <label for="password">
+                    Password:<p id="check-reg-password" style="margin: -1px;"> &nbsp; </p>
+                    <input type="password" class="form-control" id="password-2" name="password" placeholder="Nhập mật khẩu..." >
                 </label>
             </div>
              <div class="row">
-                <label for="password-2">
-                    Password:
-                    <input type="password" class="form-control" id="password-2" name="password" placeholder="Nhập mật khẩu..." required pattern="\S+.*"/>
-                </label>
-            </div>
-             <div class="row">
-                <label for="repassword-2">
-                    re-type Password:
-                    <input type="password" class="form-control" id="repassword-2" name="re-password" placeholder="Nhập mật khẩu..."required pattern="\S+.*"/>
-                </label>
+                <label for="repassword">
+                    re-type Password:<p id="check-reg-repassword" style="margin:-1px;"> &nbsp; </p>
+                    <input type="password" class="form-control" id="repassword-2" name="repassword" placeholder="Nhập mật khẩu...">
+					
+				</label>
+				
             </div>
            <div class="row">
-             <button type="submit">Register</button>
+             <button type="submit" id="registerBtn">Register</button>
            </div>
         </form>
     </div>
@@ -118,7 +136,7 @@
     <div class="login-content">
         <a href="#" class="close">x</a>
    
-        <form method="post" action="/user/forgot">
+        <form method="post" action="/user/forgot" id="form-fogot-2">
 			<div class="row">
 				<label>
 					<b>Nhập địa chỉ email đã xác minh của tài khoản người dùng của bạn.</b>
@@ -134,13 +152,13 @@
             <div class="row">
                 <label for="email-2">
                     your email:
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email..." required pattern="\S+.*"/>
+                    <input type="email" class="form-control" id="check-email" name="email" placeholder="Nhập email..." required pattern="\S+.*"/>
                 </label>
             </div>
           
             
            <div class="row">
-             <button type="submit">Send password reset email</button>
+             <button id="emailSubBtn"type="submit">Send password reset email</button>
            </div>
         </form>
     </div>
@@ -244,7 +262,10 @@
                         <%if(currentUser) { %> 
                             <li class=""><a href="#"><%- currentUser.username %></a></li>
                             <li class=""><a href="/user/logout">Log Out</a></li>
-                            <%} else { %> 
+                            <%}else if(user) { %> 
+								<li class=""><a href="#"><%- user.displayName %></a></li>
+								<li class=""><a href="/user/logout">Log Out</a></li>
+								<%} else { %> 
 						<li class="loginLink"><a href="#">LOG In</a></li>
 						<li class="btn signupLink"><a href="#">Register</a></li>
                         <%}%>
@@ -319,28 +340,42 @@
 	</div>
 </footer>
 <!-- end of footer v2 section-->
+   <!-- ajax -->
+<!--  jquery script  -->
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<!--  validation script  -->
+
+
+ 
+<!--Add custom scripts here -->
+
 
 <script src="js/jquery.js"></script>
+<script src="js/validation.js"></script>
+
 <script src="js/plugins.js"></script>
 <script src="js/plugins2.js"></script>
 <script src="js/custom.js"></script>
 
+<script src="js/check_email.js"></script>
+<script src="js/login.js"></script>
+<script src="js/register.js"></script>
 
-<script>
-    var password = document.getElementById("password-2")
-  , confirm_password = document.getElementById("repassword-2");
-
-function validatePassword(){
-  if(password.value != confirm_password.value) {
-    confirm_password.setCustomValidity("password vua nhap Khong giong voi password o tren");
-  } else {
-    confirm_password.setCustomValidity('');
-  }
+<!-- <script>
+	var input = document.getElementById('username');
+	//oninvalid la khong hop le
+	input.oninvalid = function(event) {
+		//in ra dong nay
+    event.target.setCustomValidity('Vui long Nhap dung dinh dang !');
+	//title=""
 }
-
-password.onchange = validatePassword;
-confirm_password.onkeyup = validatePassword;
-</script>
+	input.onemptied= function(event) {
+		//in ra dong nay
+    event.target.setCustomValidity('Vui lòng nhập password của bạn !');
+	//title=""
+}
+</script> -->
 </body>
 
 <!-- homev207:28-->
