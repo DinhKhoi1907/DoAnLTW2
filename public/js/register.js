@@ -1,3 +1,14 @@
+function reloadMask(show,$) {
+    if (show)
+    {
+        $('#status').show();
+        $('#preloader').show();
+    }
+    else {
+        $('#status').hide();
+        $('#preloader').hide();
+    }
+}
 //load du lieu
 $(document).ready(function () {
     $("#form-register-2").submit(function (e) {
@@ -5,6 +16,7 @@ $(document).ready(function () {
         e.preventDefault();
         //laays gia tri tu body
         data = $(this).serializeArray();
+        reloadMask(true,$);
         //ajax
         $.ajax({
             url: "user/register", // lay du lieu tu duong dan
@@ -12,27 +24,24 @@ $(document).ready(function () {
             data: data,
             //thanh cong
             success: function (data) {
+                reloadMask(false,$);
                 if (data === "0") {
                     $("#check-reg-empty").html('<font color="red">Vui lòng điền hết thông tin.</font>');
                 }
-                if (data === "-1") {
-                    $("#check-reg-empty").html('<font color="red">&nbsp;</font>');
-                    $("#check-reg-username").html('<font color="red">Username đã được sử dụng, vui long chọn tên khác!.</font>')
-                }
                 if (data === "-2") {
                     $("#check-reg-empty").html('<font color="red">&nbsp;</font>');
-                    $("#check-reg-username").html('<font color="red">&nbsp;</font>')
+                   
                     $("#check-reg-email").html('<font color="red">Emai đã được sử dụng, vui lòng chọn email khác!</font>')
                 }
                 if (data === "-3") {
                     $("#check-reg-empty").html('<font color="red">&nbsp;</font>');
-                    $("#check-reg-username").html('<font color="red">&nbsp;</font>')
+                    
                     $("#check-reg-email").html('<font color="red">&nbsp;</font>')
                     $("#check-reg-repassword").html('<font color="red">Password không giống, vui lòng kiểm tra lại !</font>')
                 }
                 if (data === "1") {
                     $("#check-reg-empty").html('<font color="red">&nbsp;</font>');
-                    $("#check-reg-username").html('<font color="red">&nbsp;</font>')
+                   
                     $("#check-reg-email").html('<font color="red">&nbsp;</font>')
                     $("check-reg-repassword").html('<font color="red">&nbsp;!</font>')
                     $("#check-reg-empty").html('<font color="green">Register success...</font>')

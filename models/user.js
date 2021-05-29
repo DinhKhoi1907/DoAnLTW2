@@ -18,19 +18,15 @@ const User = db.define('User',{
         type:DataTypes.STRING,
         allowNULL:true,
     },
-    picture:{
-        type:DataTypes.BLOB,
-        allowNull:true,
-    },
-    username:{
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
     password:{
         type:DataTypes.STRING,
         allowNULL:false,
     },
     resetPasswordToken:{
+        type:DataTypes.STRING,
+        allowNull:true,
+    },
+    role:{
         type:DataTypes.STRING,
         allowNull:true,
     }

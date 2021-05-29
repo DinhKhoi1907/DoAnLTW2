@@ -9,10 +9,10 @@ function reloadMask(show,$) {
         $('#preloader').hide();
     }
 }
-
 //bat click loginBtn
 $(document).ready(function () {
     $("#form-login-2").submit(function(e){
+       
         e.preventDefault()
         //lay data trong form bang ham nay
         data = $(this).serializeArray();
@@ -27,7 +27,7 @@ $(document).ready(function () {
      
             //thanh cong 
             success: function(data){
-                self.reloadMask(false,$);
+                reloadMask(false,$);
                 if(data === "1" ){
                     $("#response").html('<font color="green">login success...!</font>');
                     window.location.href = "/";
@@ -35,7 +35,7 @@ $(document).ready(function () {
                 }
                else{
                    
-                    $("#response").html('<font color="red">Username hoac password sai!...!</font>');
+                    $("#response").html('<font color="red">Email hoặc password sai!...!</font>');
                }
             },
             //that bai
