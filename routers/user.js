@@ -8,13 +8,23 @@ var randomstring = require("randomstring");
 var passwordHash = require('password-hash');
 const { request } = require('express');
 const httpMsgs = require("http-msgs");
+
+//cum rap
+const CumRap = require('../models/CumRap.js');
+const Rap = require('../models/Rap.js');
+const Phim = require('../models/Phim.js');
+const SuatChieu= require('../models/SuatChieu.js');
+const DatCho= require('../models/DatCho.js');
+const Ve= require('../models/Ve.js');
 const router = express.Router();
 //
 const passport = require('passport')
 
-router.get('/',function(req,res){
-    res.render('user/try',{layout:'./layouts/home',user: req.user });
-})
+router.get('/',asyncHandler(async function(req,res){
+    const listCumRap = await CumRap.findAll(); 
+    res.render('user/try',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap});
+    
+}))
 router.post('/register',asyncHandler (async function(req,res){
     
     //dinh nghi tai khoan gui mail xac nhan cho user dang ky
@@ -174,10 +184,10 @@ router.get('/google/callback',passport.authenticate('google', { successRedirect 
     res.redirect('/');
   });
   
-// router.get('/logout', function(req, res){
-//   req.logout();
-//   res.redirect('/');
-// });
+
+
+
+
 
 router.get('/logout',function(req,res){
      //delete req.currentUser.id;

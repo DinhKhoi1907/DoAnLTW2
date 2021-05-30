@@ -5,24 +5,24 @@ const DatCho = require('./DatCho')
 
 const Ve = db.define('Ve', {
   MaVe: {
-    type: Sequelize.UUID,
-    defaultValue: Sequelize.UUIDV1,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV1,
     primaryKey: true
   },
   MaGhe: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false
   },
   DiaChiNgang: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false
   },
   DiaChiDoc: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false
   },
   GiaTien: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false
   }
 })

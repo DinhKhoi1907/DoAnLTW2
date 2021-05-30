@@ -1,21 +1,21 @@
 const { DataTypes } = require('sequelize');
 const db = require('./db.js');
 
-const User = require('./User')
+const User = require('./user')
 const SuatChieu = require('./SuatChieu')
 
 const DatCho = db.define('DatCho', {
   MaDatCho: {
-    type: Sequelize.UUID,
-    defaultValue: Sequelize.UUIDV1,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV1,
     primaryKey: true
   },
   ThoiDiemDatVe: {
-    type: Sequelize.DATE,
-    defaultValue: Sequelize.NOW
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW
   },
   TongTien: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false
   }
 
