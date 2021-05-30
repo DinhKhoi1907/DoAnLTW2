@@ -5,15 +5,15 @@ const Rap = require('./Rap');
 
 const SuatChieu = db.define('SuatChieu', {
   ThoiDiemBatDau: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: true
   },
   ThoiDiemKetThuc: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: true
   },
   GiaVe: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true
   }
 });

@@ -1,19 +1,24 @@
 const { DataTypes } = require('sequelize');
 const db = require('./db.js');
-
 const CumRap = db.define("CumRap", {
   TenCum: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false
   },
   DiaChi: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false
   },
-  Maps: {
-    type: Sequelize.TEXT,
-    allowNull: false
-  }
+  
 });
 
 module.exports = CumRap
+
+
+// INSERT INTO "CumRaps"("TenCum","DiaChi","createdAt","updatedAt")
+// VALUES ('Hồ Chí Minh','TP.HCM',NOW(),NOW()),
+// ('Hà Nội','TP.HN',NOW(),NOW()),
+// ('Bà Rịa – Vũng Tàu','Bà Rịa – Vũng Tàu',NOW(),NOW()),
+// ('Khánh Hòa','Tp. Nha Trang',NOW(),NOW()),
+// ('Đồng Nai','Tp. Biên Hoà',NOW(),NOW()),
+// ('Đà Nẵng','Tp. Đà Nẵng',NOW(),NOW())
