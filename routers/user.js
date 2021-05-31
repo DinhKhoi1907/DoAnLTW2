@@ -20,9 +20,12 @@ const router = express.Router();
 //
 const passport = require('passport')
 
+
+
+
 router.get('/',asyncHandler(async function(req,res){
     const listCumRap = await CumRap.findAll(); 
-    res.render('user/try',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap});
+    res.render('user/home',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap});
     
 }))
 router.post('/register',asyncHandler (async function(req,res){
@@ -184,7 +187,17 @@ router.get('/google/callback',passport.authenticate('google', { successRedirect 
     res.redirect('/');
   });
   
-
+//cụm rạp
+//router.get('user/CumRap/:id',asyncHandler())
+//tìm các rạp có các cụm rạp 
+router.get('/rap',asyncHandler(async function(req,res){
+   const listCumRap = await CumRap.findAll(); 
+     //  const id = req.params.id;
+       //const listRap = await Rap.findByIdCumRap(id);
+       res.render('home/rap',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap});
+   
+    
+}));
 
 
 

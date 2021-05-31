@@ -14,6 +14,9 @@ const CumRap = db.define("CumRap", {
 
 module.exports = CumRap
 
+CumRap.findById = async function(id){
+  return CumRap.findByPk(id);
+}
 
 // INSERT INTO "CumRaps"("TenCum","DiaChi","createdAt","updatedAt")
 // VALUES ('Hồ Chí Minh','TP.HCM',NOW(),NOW()),

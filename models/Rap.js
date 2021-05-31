@@ -1,4 +1,5 @@
 const { DataTypes } = require('sequelize');
+const Sequelize = require('sequelize');
 const db = require('./db.js');
 const CumRap = require('./CumRap')
 const Rap = db.define("Rap", {
@@ -28,7 +29,16 @@ const Rap = db.define("Rap", {
 Rap.belongsTo(CumRap)
 module.exports = Rap
 
-// INSERT INTO "Raps"("TenRap","LoaiRap","DiaChi","KTNgang","KTDoc",CumRapId,"createdAt","updatedAt")
+Rap.findByIdCumRap = async function(id){
+  return Rap.findAll({
+      include:[{
+          model:CumRap,
+         where:{id:id,},
+         //left:true,
+      }],
+  });
+}
+// INSERT INTO "Raps"("TenRap","LoaiRap","DiaChi","KTNgang","KTDoc","CumRapId","createdAt","updatedAt")
 // VALUES ('CGV Hùng Vương Plaza','Rạp một phòng chiếu','Tầng 7, Hùng Vương Plaza, 126 Hùng Vương, Q.5',21,11,1,NOW(),NOW()),
 // ('CGV Aeon Tân Phú','Rạp một phòng chiếu','Lầu 3, Aeon Mall 30 Bờ Bao Tân Thắng, P. Sơn Kỳ, Q. Tân Phú',21,11,1,NOW(),NOW()),
 // ('CGV Crescent Mall','Rạp một phòng chiếu','Lầu 5, Crescent Mall Đại lộ Nguyễn Văn Linh, Phú Mỹ Hưng, Q.7',21,11,1,NOW(),NOW()),
@@ -47,3 +57,6 @@ module.exports = Rap
 // ('CGV Lam Sơn Square','Rạp một phòng chiếu','Tầng 4, Lam Sơn Square, 9 Lê Lợi',21,11,3,NOW(),NOW()),
 // ('CGV Lapen Center Vũng Tàu','Rạp một phòng chiếu','Lapen Center 33A đường 30/4',21,11,3,NOW(),NOW())
 
+
+//xóa tất cả bảng
+//await sequelize.drop();
