@@ -1,0 +1,75 @@
+<div class="hero common-hero">
+	<div class="container">
+		
+				<div class="hero-ct">
+					<h1><%-title %></h1>
+				</div>
+	
+	</div>
+</div>
+<div class="page-single movie_list">
+	<div class="container">
+		<div class="row ipad-width2">
+			<div class="col-md-8 col-sm-12 col-xs-12">
+				<div id="ListGhe">
+					<% rows = ['A','B','C','D','E','F','G'] %>
+					<% key = 1 %>
+					<% column = 11 %>
+					<% rows.forEach(row =>{ %>
+						<%for(j=1;j<=column;j++){ %>
+							<%listGhe.forEach(ghe =>{ %>
+								<%if(ghe.ViTriHang == key && ghe.ViTriCot== j){ %>
+									<button class= "btnGhe AnGhe"><%-row%><%-j%></button>
+								<%}else{ %> 
+									<button class= "btnGhe" value="<%-key%>-<%-j%>"><%-row%><%-j%></button> 
+								<% } %>
+							<% }) %>
+						<% } %>
+						<br>
+						<% key++ %>
+					<% }) %>		
+				</div>	
+			</div>
+
+
+			<div class="col-md-4 col-sm-12 col-xs-12">
+				<div class="sidebar">
+					<div class="searh-form">
+					<input type="hidden" id="idSuatChieu" value="<%-suatchieu.id%>">
+					<input type="hidden" id="idRap" value="<%-rap.id%>">
+						<form class="form-style-1" action="#">
+							<div class="row">
+								<div class="col-md-12 form-it">
+									<h1 style="color: cornsilk;text-align: center;"><%-phim.Ten%></h1>
+								<img src="/<%-phim.Poster%>" alt="" style="width:250px; height: 290px;">
+									
+								</div>
+								<div class="col-md-12 form-it">
+									<div><%-rap.TenRap%></div>
+									<div><%-suatchieu.ThoiDiemBatDau%> - <%-suatchieu.ThoiDiemKetThuc%></div>
+								</div>
+								<div class="col-md-12 form-it">
+									<div><%-suatchieu.NgayChieu%></div>
+								
+								</div>
+								<div class="col-md-12 form-it">
+									<input type="hidden" value="<%-suatchieu.GiaVe%>" id="Tien">
+									<input type="hidden" value="0" id="SetTongTien">
+									<div>Tổng Tiền : <p id="TongTien">0</p></div>
+								</div>
+								<div class="col-md-12 ">
+									<input class="submit" type="submit" value="Đặt chỗ" id="DatCho">
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="ads">
+						<img src="images/uploads/ads1.png" alt="">
+					</div>
+				
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

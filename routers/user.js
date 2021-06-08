@@ -8,21 +8,28 @@ var randomstring = require("randomstring");
 var passwordHash = require('password-hash');
 const { request } = require('express');
 const httpMsgs = require("http-msgs");
-
+const db = require('../configs/config');
 //cum rap
 const CumRap = require('../models/CumRap.js');
 const Rap = require('../models/Rap.js');
+const Ghe= require('../models/Ghe.js');
 const Phim = require('../models/Phim.js');
 const SuatChieu= require('../models/SuatChieu.js');
 const DatCho= require('../models/DatCho.js');
 const Ve= require('../models/Ve.js');
+
 const router = express.Router();
 //
 const passport = require('passport')
 
+
+//router.get('/a',CumRap.findListCumRap )
+
 router.get('/',asyncHandler(async function(req,res){
-    const listCumRap = await CumRap.findAll(); 
-    res.render('user/try',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap});
+    const cumRap =   await CumRap.findListCumRap(); 
+   const listCumRap = cumRap.rows
+    console.log(cumRap);
+    res.render('user/home',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap});
     
 }))
 router.post('/register',asyncHandler (async function(req,res){
@@ -184,11 +191,53 @@ router.get('/google/callback',passport.authenticate('google', { successRedirect 
     res.redirect('/');
   });
   
+//cụm rạp
+//router.get('user/CumRap/:id',asyncHandler())
+//tìm các rạp có các cụm rạp 
+router.get('/rap',asyncHandler(async function(req,res){
+   const listCumRap = await CumRap.findAll(); 
+     //  const id = req.params.id;
+       //const listRap = await Rap.findByIdCumRap(id);
+       res.render('home/rap',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap});
+   
+    
+}));
+//đặt chỗ
+router.get('/datcho/:SuatChieuId',asyncHandler(async function(req,res){
+  const listCumRap = await CumRap.findAll(); 
+  // console.log(req.query.id);
+  // const id = req.query.id;
 
+    //khi select tới bảng khác thi mới dùng CumRap 
+    const title = 'Đặt Chỗ';
+    //console.log(listPhim);
+  //lấy ra được rapid 
+  const SuatChieuId = req.params.SuatChieuId;
+   const  suatchieu = await SuatChieu.findById(SuatChieuId);
+//select phim
+const phim = await Phim.findByPk(suatchieu.PhimId)
+   //select rạp để lấy 
+   const rap = await Rap.findByPk(suatchieu.RapId) ;
+   // lấy ra dãy gế và trạng thái gế
+  const listGhe = await Ghe.findByRapId(suatchieu.RapId);
 
+    //res.json(ghe[0].ViTriCot);
+    res.render('user/datcho',{layout:'./layouts/user',rap,suatchieu,listGhe:listGhe,phim,title,user: req.user ,listCumRap:listCumRap});
+}));
 
+router.post('/datcho',asyncHandler(async function(req,res){
+    const {IdSuatChieu,ViTriGhes,IdRap} = req.body;
 
-
+    for(i=0;i<ViTriGhes.length;i++){
+      const ghe = {};
+       ghe.ViTriHang = ViTriGhes[i].slice(0,1);
+       ghe.ViTriCot = ViTriGhes[i].slice(2,3);
+      ghe.RapId = IdRap;
+      await Ghe.create(ghe);
+    }
+      
+    res.end();
+}));
 router.get('/logout',function(req,res){
      //delete req.currentUser.id;
     req.session=null;
