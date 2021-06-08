@@ -13,7 +13,11 @@ Phim.findPhimSapChieu = async function() {
 
   Phim.findById = async function(id) {
     return Phim.query(`SELECT * FROM "Movie" WHERE "MovieISN" = $1`,[id]);
-  }  
+  } 
+  Phim.findPhimBySC = async function(SuatChieuId){
+    return Phim.query(`SELECT * FROM "Movie" mv JOIN "ShowTime" st ON (mv."MovieISN" = st."MovieISN")
+                       WHERE st."ShowTimeISN"  = $1`,[SuatChieuId]);
+  } 
    //findListCumRap = CumRap.query('SELECT * FROM fn_GetAllProvinces()')
   
   // const { Client } = require('pg')

@@ -1,8 +1,9 @@
+const Ghe = require('../configs/config');
 
-const db = require('../configs/config');
-const Rap = require('./Rap');
-
-
+Ghe.findListGhe = async function(IdSuatChieu){
+    return Ghe.query(`SELECT * FROM "SeatsOfShowTime" WHERE "ShowTimeISN" = $1`,[IdSuatChieu]);
+} 
+module.exports = Ghe;
 // const Ghe = db.define('Ghe',{
 //     ViTriHang:{
 //         type:DataTypes.INTEGER,

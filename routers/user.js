@@ -204,25 +204,21 @@ router.get('/rap',asyncHandler(async function(req,res){
 }));
 //đặt chỗ
 router.get('/datcho/:SuatChieuId',asyncHandler(async function(req,res){
-  const listCumRap = await CumRap.findAll(); 
-  // console.log(req.query.id);
-  // const id = req.query.id;
+  const cumRap =   await CumRap.findListCumRap(); 
+  const listCumRap = cumRap.rows
 
-    //khi select tới bảng khác thi mới dùng CumRap 
     const title = 'Đặt Chỗ';
     //console.log(listPhim);
   //lấy ra được rapid 
   const SuatChieuId = req.params.SuatChieuId;
-   const  suatchieu = await SuatChieu.findById(SuatChieuId);
-//select phim
-const phim = await Phim.findByPk(suatchieu.PhimId)
-   //select rạp để lấy 
-   const rap = await Rap.findByPk(suatchieu.RapId) ;
-   // lấy ra dãy gế và trạng thái gế
-  const listGhe = await Ghe.findByRapId(suatchieu.RapId);
-
-    //res.json(ghe[0].ViTriCot);
-    res.render('user/datcho',{layout:'./layouts/user',rap,suatchieu,listGhe:listGhe,phim,title,user: req.user ,listCumRap:listCumRap});
+     // lấy ra dãy gế và trạng thái gế
+  const ghe = await Ghe.findListGhe(SuatChieuId) ;
+  const listGhe = ghe.rows;
+   // lấy ra phim vừa chọn
+  const p = await Phim.findPhimBySC(SuatChieuId);
+  const phim = p.rows;
+ console.log(listGhe)
+  res.render('user/datcho',{layout:'./layouts/user',listGhe:listGhe,phim,title,user: req.user ,listCumRap:listCumRap});
 }));
 
 router.post('/datcho',asyncHandler(async function(req,res){

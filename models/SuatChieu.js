@@ -1,17 +1,19 @@
 
 
-const db = require('../configs/config');
-const Phim = require('./Phim');
-const Rap = require('./Rap');
-
-
-const CumRap = require('./CumRap.js');
+const SuatChieu = require('../configs/config');
 
 
 
 
+SuatChieu.findCrByDateAndMovie = async function(date,idPhim) {
+    return SuatChieu.query(`SELECT * FROM fn_getprovinceshasmovieshowedondate($1,$2)`,[date,idPhim]);
+};
 
+  SuatChieu.findRapByDateAndMovieCr = async function(date,CumRapId,idPhim) {
+    return SuatChieu.query(`SELECT * FROM fn_showtimesofmovie_getbydateandprovince($1,$2,$3)`,[date,CumRapId,idPhim]);
+  }
 
+module.exports = SuatChieu;
 
 // const SuatChieu = db.define('SuatChieu', {
 //   ThoiDiemBatDau: {

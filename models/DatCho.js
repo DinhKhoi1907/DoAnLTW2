@@ -1,11 +1,9 @@
 
-const db = require('../configs/config');
+const DatCho = require('../configs/config');
 
-const User = require('./user');
-const SuatChieu = require('./SuatChieu');
-const Ghe = require('./Ghe');
-
-
+DatCho.SeatsOfShowTime = async function(IdSuatChieu){
+    return DatCho.query(`SELECT * FROM SeatsOfShowTime WHERE "ShowTimeISN" = $1`,[SuatChieuId]);
+} 
 // const DatCho = db.define('DatCho', {
 //   MaDatCho: {
 //     type: DataTypes.UUID,

@@ -40,8 +40,8 @@ router.get('/',asyncHandler(async function(req,res){
     const id = req.query.id;
     const phim = await Phim.findById(id);
     const detailPhim = phim.rows
-    console.log("ahahaha");
-    console.log(detailPhim[0].MovieName);
+   // console.log("ahahaha");
+   //console.log(detailPhim[0].MovieName);
     const date = new Date();
     res.render('home/detail-phim',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap,detailPhim,date})
  }))
@@ -80,13 +80,28 @@ router.get('/',asyncHandler(async function(req,res){
       const {date,idPhim} = req.body;
    // console.log(d)
      
-     const listPhimRap = await SuatChieu.findRapByDateAndMovie(date,idPhim);
-     console.log(listPhimRap[0].Rap.TenRap);
-     var listsPhimRap = json_encode(listPhimRap);
+     const cumRap = await SuatChieu.findCrByDateAndMovie(date,idPhim);
+    //const listCumRap = cumRap.rows;
      
-     console.log(listPhimRap[1]);
+ 
+     var listCumRap = json_encode(cumRap.rows);
+     
+     //console.log(listPhimRap[1]);
 
-    res.end(listsPhimRap);
+    res.end(listCumRap);
  }));
 
+
+ router.post('/datve2',asyncHandler(async function(req,res){
+  const {date,CumRapId,idPhim} = req.body;
+
+ const rap = await SuatChieu.findRapByDateAndMovieCr(date,CumRapId,idPhim);
+ //console.log(rap.rows);
+  var listsRap = json_encode(rap.rows);
+ 
+ //console.log(listPhimRap[1]);
+
+ console.log(rap);
+  res.end(listsRap);
+}));
 module.exports = router;

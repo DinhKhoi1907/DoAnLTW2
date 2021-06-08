@@ -35,16 +35,16 @@ $(document).ready(function () {
                    i=0;
                     for (const element of obj) {
                          //hàm indexOf là hàm kiểm tra phần tử đã có ở mảng hay chưa , nếu có nó sẽ trả về vị trí 0 1  2 ...
-                        if(cumRap.indexOf(element.Rap.CumRap.DiaChi) === -1){
+                        if(cumRap.indexOf(element.provincename) === -1){
                             if(i==0){
-                                $("#ListCumRap").append(`<button class="btnCumRap active" value="CumRap-${element.Rap.CumRap.id}">${element.Rap.CumRap.DiaChi}</button>`);
+                                $("#ListCumRap").append(`<button class="btnCumRap active" value="CumRap-${element.provinceisn}">${element.provincename}</button>`);
                                  // gán cho rạp bằng phần tử hiện tại để vòng lặp tiếp theo nó sẽ không thảo điều kiên
-                                cumRap.push(element.Rap.CumRap.DiaChi);
+                                cumRap.push(element.provincename);
                             
                             }
                             else{
-                                $("#ListCumRap").append(`<button class="btnCumRap" value="CumRap-${element.Rap.CumRap.id}">${element.Rap.CumRap.DiaChi}</button>`);
-                            cumRap.push(element.Rap.CumRap.DiaChi);
+                                $("#ListCumRap").append(`<button class="btnCumRap" value="CumRap-${element.provinceisn}">${element.provincename}</button>`);
+                            cumRap.push(element.provincename);
                             }
                             i++;
                         }
@@ -71,42 +71,28 @@ $(document).ready(function () {
                        var string = $(".active").val();
                        var CumRapId = Number(string.slice(7));
                        //ban đầu cho mảng rap = rỗng để thêm phần tử dầu
-                       var Rap = [];
-                       i=0;
-                       for (const element of obj){
-                        if(element.Rap.CumRap.id == CumRapId){
-                            //hàm indexOf là hàm kiểm tra phần tử đã có ở mảng hay chưa , nếu có nó sẽ trả về vị trí 0 1  2 ...
-                            if(Rap.indexOf(element.Rap.TenRap) === -1){
-
-                                if(i==0){
-                                    $("#ListRap").append(`<div id="RapId-${element.Rap.id}" class="RapTime"><p class="TenRap"  >${element.Rap.TenRap}</p><br></div> <hr>`);
-                                   // gán cho rạp bằng phần tử hiện tại để vòng lặp tiếp theo nó sẽ không thảo điều kiên
-                                     Rap.push(element.Rap.TenRap);
-                                     
-                                   
-                                }
-                                else{
-                                    $("#ListRap").append(`<div id="RapId-${element.Rap.id}" class="RapTime"><p class="TenRap"  >${element.Rap.TenRap}</p> <br></div> <hr>`);
-                                     Rap.push(element.Rap.TenRap);
-                                }
-                                i++;
-                                
-                            }
-                        }
-                    }
-                    
-                    for(const element of obj){
-                        var string2 = `RapId-${element.Rap.id}`;
-                        var RapId = Number(string2.slice(6));
-                        //alert(RapId);
-                        if(element.RapId == RapId){
-                            $(`#RapId-${element.Rap.id}`).append(`<button class="btnTime" value="SuatChieu-${element.id}">${element.ThoiDiemBatDau}</button>`);
-                            
-                        }
-                         
-                   }
-                  
-                 
+                       $.ajax({
+                        //${window.location.origin}
+                        url:`/phim/datve2`, // lay du lieu tu file
+                        type:"POST",
+                        timeout: 5000,
+                        data: {
+                            date:date,
+                            CumRapId:CumRapId,
+                            idPhim:idPhim,
+                        }, 
+                        success: function(data){
+                            var obj = JSON.parse(data);
+                            for (const element of obj){
+                                         $("#ListRap").append(`<div id="DetailRap" class="RapTime"><p class="TenRap"  >${element.cinemaname}</p><br></div> <hr>`);
+                                          var isn = element.showtimeisnlist.split(",");
+                                            var timelist = element.timeshowlist.split(",");       
+                                            for(i=0;i<timelist.length;i++){
+                                                $(`#DetailRap`).append(`<button class="btnTime" value="SuatChieu-${isn[i]}">${timelist[i]}</button>`);            
+                                            }
+                               
+                         }
+                          
                     // bắt click vào giờ
                     var header = document.getElementById("ListRap");
                     var btns = header.getElementsByClassName("btnTime");
@@ -121,29 +107,38 @@ $(document).ready(function () {
                         this.className += " active2";
                        
                             var string3 = $(".active2").val();
+                            alert(string3);
                             SuatChieuId = Number(string3.slice(10));
                             
                         
-                            window.location.href = `/user/datcho/${SuatChieuId}`
+                            window.location.href = `/user/datcho/${SuatChieuId}`;
             
                         
                       }
                      
                       });
-                    }
-                 //  }
-                  
+                    }///
+                    
+                        },
+                        error : function(xhr,status,err){
+                            alert(err);
+                         } 
+
 
                     });
-                     
+                });  
 
                 }
-              
-            },
-            //that bai
+                     
+
+                },
+                 //that bai
             error : function(xhr,status,err){
-               alert(err);
-            } 
+                alert(err);
+             }
+                
+            });
+            
         });
 
 
@@ -152,4 +147,3 @@ $(document).ready(function () {
     
 
     
-})
