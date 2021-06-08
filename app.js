@@ -2,7 +2,11 @@ require('dotenv').config()
 const express = require('express');
 const bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
+
 const userRouter = require('./routers/user.js');
+const rapRouter = require('./routers/rap.js');
+const phimRouter = require('./routers/phim.js');
+
 const asyncHandler = require('express-async-handler')
 const User = require('./models/user.js');
 var cookieSession = require('cookie-session');
@@ -16,12 +20,14 @@ const configg = require('./configs/google.js');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const session  = require('express-session');
 //truoc khi app chay , thi ta chay db truoc
-const db = require('./models/db.js');
+const db = require('./configs/config');
 
 const userMiddlewares = require('./middlewares/user');
 
 const app = express();
 
+var path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
 //use session
 //session
 app.use(cookieSession({
@@ -81,6 +87,7 @@ passport.deserializeUser(function(obj, done) {
     )
   );
 app.use(session({ secret: 'keyboard cat', key: 'sid'}));  //Save user login
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -98,12 +105,17 @@ app.get('/',function(req,res){
  
 
 app.use('/user',userRouter);
+app.use('/rap',rapRouter);
+app.use('/phim',phimRouter);
 
 
+var path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
 //khoi dong db
-db.sync().then(function(){
+
     //lam cho no hoat dong tren heroku,
     const port = process.env.PORT || 3000;
     console.log(`server is listening on port ${port}`);
     app.listen(port);
-}).catch(console.error)
+
+

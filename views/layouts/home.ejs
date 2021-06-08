@@ -49,14 +49,13 @@
 		<p style="text-align: center;"id="response"></p>
         <form method="post" action="/user/login" id="form-login-2">
 
-        	<div class="row">
-        		 <label for="username">
-                    Username:
-                    <input type="text"  class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Nhập tài khoản..."   pattern="\S+.*"
-					 title="Vui lòng nhập username của bạn !" required>
-                </label>
-        	</div>
-           
+			<div class="row">
+                <label for="email">
+                  Email:
+					<input type="email" class="form-control" id="email" name="email" placeholder="Nhập email..."  aria-describedby="emailHelp"  >
+				</label>
+				
+            </div>
             <div class="row">
             	<label for="password">
                     Password:
@@ -94,17 +93,10 @@
         <h3>Register</h3>
 		<p id = "check-reg-empty"></p>
         <form method="post" action="/user/register" id="form-register-2">
-            <div class="row">
-                 <label for="username">
-                    Username:<p id="check-reg-username" style="margin:-1px;">&nbsp;</p>
-                    <input type="text" class="form-control" id="username-2" name="username" placeholder="Nhập tài khoản..." required >
-				</label>
-				
-            </div>
-           
+            
             <div class="row">
                 <label for="email">
-                    your email:
+                  Email:
 					<p id="check-reg-email" style="margin:-1px;"> &nbsp; </p>
 					<input type="email" class="form-control" id="email-2" name="email" placeholder="Nhập email..."  aria-describedby="emailHelp"  >
 				</label>
@@ -260,7 +252,7 @@
 						</li>                
 						<li><a href="#">Help</a></li>
                         <%if(currentUser) { %> 
-                            <li class=""><a href="#"><%- currentUser.username %></a></li>
+                            <li class=""><a href="#"><%- currentUser.email %></a></li>
                             <li class=""><a href="/user/logout">Log Out</a></li>
                             <%}else if(user) { %> 
 								<li class=""><a href="#"><%- user.displayName %></a></li>
@@ -362,20 +354,7 @@
 <script src="js/login.js"></script>
 <script src="js/register.js"></script>
 
-<!-- <script>
-	var input = document.getElementById('username');
-	//oninvalid la khong hop le
-	input.oninvalid = function(event) {
-		//in ra dong nay
-    event.target.setCustomValidity('Vui long Nhap dung dinh dang !');
-	//title=""
-}
-	input.onemptied= function(event) {
-		//in ra dong nay
-    event.target.setCustomValidity('Vui lòng nhập password của bạn !');
-	//title=""
-}
-</script> -->
+
 </body>
 
 <!-- homev207:28-->

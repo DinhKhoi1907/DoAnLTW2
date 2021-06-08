@@ -1,0 +1,9 @@
+CREATE FUNCTION fn_Movie_NowShowing()
+RETURNS TABLE(MovieISN bigint, MovieName character varying, Plot text, Director character varying, KindOfMovie character varying, MovieTime int, Country character varying, Premiere timestamp without time zone, Poster character varying)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+BEGIN
+	RETURN QUERY SELECT mov."MovieISN", mov."MovieName", mov."Plot", mov."Director", mov."KindOfMovie", mov."MovieTime", mov."Country", mov."Premiere", mov."Poster" FROM "Movie" AS mov 
+				 WHERE mov."MovieStatus"=0 AND mov."Premiere" < now()::timestamp without time zone;
+END; $$

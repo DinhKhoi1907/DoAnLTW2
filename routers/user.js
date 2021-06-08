@@ -8,13 +8,30 @@ var randomstring = require("randomstring");
 var passwordHash = require('password-hash');
 const { request } = require('express');
 const httpMsgs = require("http-msgs");
+const db = require('../configs/config');
+//cum rap
+const CumRap = require('../models/CumRap.js');
+const Rap = require('../models/Rap.js');
+const Ghe= require('../models/Ghe.js');
+const Phim = require('../models/Phim.js');
+const SuatChieu= require('../models/SuatChieu.js');
+const DatCho= require('../models/DatCho.js');
+const Ve= require('../models/Ve.js');
+
 const router = express.Router();
 //
 const passport = require('passport')
 
-router.get('/',function(req,res){
-    res.render('user/try',{layout:'./layouts/home',user: req.user });
-})
+
+//router.get('/a',CumRap.findListCumRap )
+
+router.get('/',asyncHandler(async function(req,res){
+    const cumRap =   await CumRap.findListCumRap(); 
+   const listCumRap = cumRap.rows
+    console.log(cumRap);
+    res.render('user/home',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap});
+    
+}))
 router.post('/register',asyncHandler (async function(req,res){
     
     //dinh nghi tai khoan gui mail xac nhan cho user dang ky
@@ -30,27 +47,23 @@ router.post('/register',asyncHandler (async function(req,res){
 
       
     const user={};
-    const {username,email,password,repassword} = req.body;
+    const {email,password,repassword} = req.body;
     
-    user.username = username;
     user.email = email;
     //ma hoa password
     user.password = passwordHash.generate(password);
 
     // kiem tra username da ton toi trong db chua
-      const found = await User.findByUsername(username);
-      const found2 = await User.findByEmail(email);
+    
+      const found = await User.findByEmail(email);
 
 
-        if(!username ||!email||!password||!repassword){
+        if(!email||!password||!repassword){
        // httpMsgs.send200(req,res,"Vui long dien het thong tin");
         res.end("0");
        //return done(null, false, {message : 'Vui long dien het thong tin'});
            }
-       else if(found){
-            res.end("-1");
-        }
-        else if(found2){
+        else if(found){
           res.end("-2");
         }
         else if(password !== repassword){
@@ -60,9 +73,8 @@ router.post('/register',asyncHandler (async function(req,res){
         else{
             //neu chua co thi tao user 
             await  User.create(user);
-            
             //tim User moi dang ky
-            const found3 = await User.findByUsername(username);
+            const found3 = await User.findByEmail(email);
             //gui mail xac nhan cho user 
             await transporter.sendMail({
                 from: '"XuanLy 👻" <william.lynguyen@gmail.com>', // sender address
@@ -84,8 +96,8 @@ router.post('/register',asyncHandler (async function(req,res){
 
   router.post('/login',asyncHandler(async function(req,res){
     console.log(req.body);
-    const {username,password} = req.body;
-    const found = await User.findByUsername(username);
+    const {email,password} = req.body;
+    const found = await User.findByEmail(email);
     if(found && passwordHash.verify(password,found.password) ){
         //luu id vao session
         req.session.userId = found.id;
@@ -179,11 +191,53 @@ router.get('/google/callback',passport.authenticate('google', { successRedirect 
     res.redirect('/');
   });
   
-// router.get('/logout', function(req, res){
-//   req.logout();
-//   res.redirect('/');
-// });
+//cụm rạp
+//router.get('user/CumRap/:id',asyncHandler())
+//tìm các rạp có các cụm rạp 
+router.get('/rap',asyncHandler(async function(req,res){
+   const listCumRap = await CumRap.findAll(); 
+     //  const id = req.params.id;
+       //const listRap = await Rap.findByIdCumRap(id);
+       res.render('home/rap',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap});
+   
+    
+}));
+//đặt chỗ
+router.get('/datcho/:SuatChieuId',asyncHandler(async function(req,res){
+  const listCumRap = await CumRap.findAll(); 
+  // console.log(req.query.id);
+  // const id = req.query.id;
 
+    //khi select tới bảng khác thi mới dùng CumRap 
+    const title = 'Đặt Chỗ';
+    //console.log(listPhim);
+  //lấy ra được rapid 
+  const SuatChieuId = req.params.SuatChieuId;
+   const  suatchieu = await SuatChieu.findById(SuatChieuId);
+//select phim
+const phim = await Phim.findByPk(suatchieu.PhimId)
+   //select rạp để lấy 
+   const rap = await Rap.findByPk(suatchieu.RapId) ;
+   // lấy ra dãy gế và trạng thái gế
+  const listGhe = await Ghe.findByRapId(suatchieu.RapId);
+
+    //res.json(ghe[0].ViTriCot);
+    res.render('user/datcho',{layout:'./layouts/user',rap,suatchieu,listGhe:listGhe,phim,title,user: req.user ,listCumRap:listCumRap});
+}));
+
+router.post('/datcho',asyncHandler(async function(req,res){
+    const {IdSuatChieu,ViTriGhes,IdRap} = req.body;
+
+    for(i=0;i<ViTriGhes.length;i++){
+      const ghe = {};
+       ghe.ViTriHang = ViTriGhes[i].slice(0,1);
+       ghe.ViTriCot = ViTriGhes[i].slice(2,3);
+      ghe.RapId = IdRap;
+      await Ghe.create(ghe);
+    }
+      
+    res.end();
+}));
 router.get('/logout',function(req,res){
      //delete req.currentUser.id;
     req.session=null;
