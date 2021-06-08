@@ -17,13 +17,15 @@ const passport = require('passport')
 
 
 router.get('/',asyncHandler(async function(req,res){
-        const listCumRap = await CumRap.findAll(); 
+        const cumRap =   await CumRap.findListCumRap(); 
+        const listCumRap = cumRap.rows
         console.log(req.query.id);
         const id = req.query.id;
      
-        const listRap = await Rap.findByIdCumRap(id);
+        const rap = await Rap.findListRapByIdCR(id);
+        const listRap = rap.rows
          //khi select tới bảng khác thi mới dùng CumRap 
-        console.log(listRap.length);
+      //  console.log(listRap);
         res.render('home/rap',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap,listRap:listRap});
     
      

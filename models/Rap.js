@@ -1,6 +1,16 @@
 
-const db = require('../configs/config');
-const CumRap = require('./CumRap');
+const Rap  = require('../configs/config');
+
+
+
+
+
+Rap.findListRapByIdCR = async function(id) {
+    return Rap.query(`SELECT * FROM "Cinema" WHERE "ProvinceISN" = $1`,[id]);
+  }
+
+
+module.exports=Rap;
 //const Ghe = require('./Ghe.js');
 // const Rap = db.define("Rap", {
 //   TenRap: {
