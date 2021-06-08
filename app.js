@@ -20,7 +20,7 @@ const configg = require('./configs/google.js');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const session  = require('express-session');
 //truoc khi app chay , thi ta chay db truoc
-const db = require('./models/db.js');
+const db = require('./configs/config');
 
 const userMiddlewares = require('./middlewares/user');
 
@@ -112,10 +112,10 @@ app.use('/phim',phimRouter);
 var path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 //khoi dong db
-db.sync().then(function(){
+
     //lam cho no hoat dong tren heroku,
     const port = process.env.PORT || 3000;
     console.log(`server is listening on port ${port}`);
     app.listen(port);
-}).catch(console.error)
+
 

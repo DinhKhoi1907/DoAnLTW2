@@ -1,49 +1,59 @@
-const { DataTypes } = require('sequelize');
-const db = require('./db.js');
+
+const db = require('../configs/config');
 const { findById } = require('./user.js');
 
-const Phim = db.define('Phim', {
-  Ten: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  NgayCongChieu: {
-    type: DataTypes.DATE,
-    allowNull: false
-  },
-  Poster: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  TraiLers: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  
-  ThoiLuong: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  DaoDien: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  DienVien: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  TheLoai: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  
-});
 
-Phim.findById = async function(id){
-  return Phim.findByPk(id);
-}
 
-module.exports = Phim
+// const Phim = db.define('Phim', {
+//   Ten: {
+//     type: DataTypes.STRING,
+//     allowNull: false
+//   },
+//   NgayCongChieu: {
+//     type: DataTypes.DATE,
+//     allowNull: false
+//   },
+//   Poster: {
+//     type: DataTypes.STRING,
+//     allowNull: false
+//   },
+//   TraiLers: {
+//     type: DataTypes.STRING,
+//     allowNull: true
+//   },
+  
+//   ThoiLuong: {
+//     type: DataTypes.INTEGER,
+//     allowNull: false
+//   },
+//   DaoDien: {
+//     type: DataTypes.STRING,
+//     allowNull: true
+//   },
+//   DienVien: {
+//     type: DataTypes.STRING,
+//     allowNull: true
+//   },
+//   TheLoai: {
+//     type: DataTypes.STRING,
+//     allowNull: true
+//   },
+
+// });
+
+// Phim.findById = async function(id){
+//   return Phim.findByPk(id);
+// }
+// Phim.findPhimSapChieu = async function(){
+//   return Phim.findAll({
+//     where:{
+//       NgayCongChieu:{
+//         [Op.gte]: Sequelize.fn('NOW'), //// lớn hơn hoặc bằng ngày hiện tại
+//       }
+//     }
+//   })
+// }
+//module.exports = Phim
 
 // INSERT INTO "Phims"("Ten","NgayCongChieu","Poster","ThoiLuong","TraiLers","createdAt","updatedAt")
 // VALUES ('Iron man 1','2012/10/5','images/uploads/iron-man-1.jpg',150,'https://www.youtube.com/watch?v=8ugaeA-nMTc&ab_channel=SonyPicturesEntertainmentSonyPicturesEntertainment%C4%90%C3%A3x%C3%A1cminh',NOW(),NOW()),

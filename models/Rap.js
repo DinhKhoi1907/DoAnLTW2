@@ -1,43 +1,45 @@
-const { DataTypes } = require('sequelize');
-const Sequelize = require('sequelize');
-const db = require('./db.js');
-const CumRap = require('./CumRap')
-const Rap = db.define("Rap", {
-  TenRap: {
-    type: DataTypes.STRING,
-    allowNull: false
 
-  },
-  LoaiRap: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  DiaChi:{
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  KTNgang: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  KTDoc: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  }
+const db = require('../configs/config');
+const CumRap = require('./CumRap');
+//const Ghe = require('./Ghe.js');
+// const Rap = db.define("Rap", {
+//   TenRap: {
+//     type: DataTypes.STRING,
+//     allowNull: false
 
-})
-Rap.belongsTo(CumRap)
-module.exports = Rap
+//   },
+//   LoaiRap: {
+//     type: DataTypes.STRING,
+//     allowNull: false
+//   },
+//   DiaChi:{
+//     type: DataTypes.STRING,
+//     allowNull: false
+//   },
+//   KTNgang: {
+//     type: DataTypes.INTEGER,
+//     allowNull: false
+//   },
+//   KTDoc: {
+//     type: DataTypes.INTEGER,
+//     allowNull: false
+//   }
 
-Rap.findByIdCumRap = async function(id){
-  return Rap.findAll({
-      include:[{
-          model:CumRap,
-         where:{id:id,},
-         //left:true,
-      }],
-  });
-}
+// })
+// Rap.belongsTo(CumRap)
+
+// Rap.findByIdCumRap = async function(id){
+//   return Rap.findAll({
+//       include:[{
+//           model:CumRap,
+//          where:{id:id,},
+//          //left:true,
+//       }],
+//   });
+// }
+
+
+//module.exports = Rap
 // INSERT INTO "Raps"("TenRap","LoaiRap","DiaChi","KTNgang","KTDoc","CumRapId","createdAt","updatedAt")
 // VALUES ('CGV Hùng Vương Plaza','Rạp một phòng chiếu','Tầng 7, Hùng Vương Plaza, 126 Hùng Vương, Q.5',21,11,1,NOW(),NOW()),
 // ('CGV Aeon Tân Phú','Rạp một phòng chiếu','Lầu 3, Aeon Mall 30 Bờ Bao Tân Thắng, P. Sơn Kỳ, Q. Tân Phú',21,11,1,NOW(),NOW()),

@@ -4,3 +4,16 @@
     font-style: italic;
     font-size: smaller;
 }
+.datve{
+    background-color: #dcf836;
+    color: black;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    height: 48px;
+    width: 290px;
+    border:0px;
+}
+.datve:hover{
+    background-color: goldenrod;
+}

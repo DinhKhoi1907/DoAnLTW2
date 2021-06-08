@@ -18,15 +18,15 @@
 		<div class="row ipad-width2">
 			<div class="col-md-8 col-sm-12 col-xs-12">
 				<div class="topbar-filter">
-					<p>Đã tìm thấy <span><b><%-listPhim.length%></b></span> phim</p>
+					<p>Đã tìm thấy  <span><%-lists.length%></span> phim</p>
 					<a href="movielist.html" class="list"><i class="ion-ios-list-outline active"></i></a>
 					<a  href="moviegrid.html" class="grid"><i class="ion-grid"></i></a>
 				</div>
-                <% listPhim.forEach(list =>{ %> 
+                <% lists.forEach(list =>{ %> 
 				<div class="movie-item-style-2">
-					<img src="/<%-list.Poster%>" alt="">
+					<img src="/<%-list.Phim.Poster%>" alt="">
 					<div class="mv-item-infor">
-						<h6><a href="/phim/detail?id=<%-list.id%>"><%-list.Ten%> <span>(2012)</span></a></h6>
+						<h6><a href="/phim/detail?id=<%-list.Phim.id%>"><%-list.Phim.Ten%> <span>(2012)</span></a></h6>
 						<p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
 						<p class="describe">Earth's mightiest heroes must come together and learn to fight as a team if they are to stop the mischievous Loki and his alien army from enslaving humanity...</p>
 						<p class="run-time"> Thời Lượng: <%-list.ThoiLuong%> phút  .     <span>MMPA: PG-13 </span>    .     <span>Phát hành: <%-list.NgayCongChieu%></span></p>

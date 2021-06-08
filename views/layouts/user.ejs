@@ -27,9 +27,8 @@
 	<!-- CSS files -->
 	<link rel="stylesheet" href="/css/plugins.css">
 	<link rel="stylesheet" href="/css/style.css">
+	<!-- CSS BOOTSTRAP -->
 	<!--  jquery script  -->
-
-
 
 </head>
 <body>
@@ -178,7 +177,7 @@
 						<li class="hidden">
 							<a href="#page-top"></a>
 						</li>
-						<li class="dropdown first">
+						<!-- <li class="dropdown first">
 							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
 							Home <i class="fa fa-angle-down" aria-hidden="true"></i>
 							</a>
@@ -187,16 +186,23 @@
 								<li><a href="homev2.html">Home 02</a></li>
 								<li><a href="homev3.html">Home 03</a></li>
 							</ul>
-						</li>
+						</li> -->
 						<li class="dropdown first">
 							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
 							Phim<i class="fa fa-angle-down" aria-hidden="true"></i>
 							</a>
 							<ul class="dropdown-menu level1">
-											
+								<li><a href="/phim/phimdangchieu">Phim đang chiếu</a></li>
+								<li class="it-last"><a href="/phim/phimsapchieu">Phim sắp chiếu</a></li>
 								<li><a href="/phim">Danh sách phim</a></li>
-								<li><a href="moviesingle.html">Movie single</a></li>
-								<li class="it-last"><a href="seriessingle.html">Series single</a></li>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" >Thể loại<i class="ion-ios-arrow-forward"></i></a>
+									<ul class="dropdown-menu level2">
+										<li><a href="moviegrid.html">Siêu nhân</a></li>
+										<li><a href="moviegridfw.html">Dật gân</a></li>
+										<li><a href="moviegridfw.html">Viễn tưởng</a></li>
+									</ul>
+								</li>
 							</ul>
 						</li>
 						<li class="dropdown first">
@@ -207,7 +213,7 @@
 
 							<ul class="dropdown-menu level1">	
 								<% listCumRap.forEach(list => { %>
-								<li><a href="/rap?id=<%-list.id%>"><%- list.TenCum %></a></li>
+								<li><a href="/rap?id=<%-list.id%>"><%- list.province %></a></li>
 								<%}) %>
 								
 							</ul>
@@ -359,8 +365,12 @@
 <script src="/js/check_email.js"></script>
 <script src="/js/login.js"></script>
 <script src="/js/register.js"></script>
-
-
+<script src="/js/date.js"></script>
+<script src="/js/DatCho.js"></script>
+<!-- js bootstrap -->
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
 </body>
 
 <!-- homev207:28-->

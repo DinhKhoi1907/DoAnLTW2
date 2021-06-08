@@ -21,18 +21,118 @@
 					<div class="movie-btn">	
 						<div class="btn-transform transform-vertical red">
 							<div><a href="#" class="item item-1 redbtn"> <i class="ion-play"></i> Watch Trailer</a></div>
-							<div><a href="<%-detailPhim.TraiLers%>" class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a></div>
+							<div><a href="<%-detailPhim.TraiLers%>" class="item item-2 redbtn fancybox-media hvr-grow" style="margin-bottom: -45px;"><i class="ion-play"></i></a></div>
 						</div>
 						<div class="btn-transform transform-vertical">
-							<div><a href="#" class="item item-1 yellowbtn"> <i class="ion-card"></i> Buy ticket</a></div>
-							<div><a href="#" class="item item-2 yellowbtn"><i class="ion-card"></i></a></div>
+							<button type="button" class="btn btn-primary yellowbtn datve"   data-toggle="modal" data-target="#exampleModal">
+								<i class="ion-card" > </i>     ĐẶT VÉ
+							  </button>
+							  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document" style="width:1305px;">
+								  <div class="modal-content" style="background-color: #020d18;">
+									<div class="modal-header">
+									  <h5 class="modal-title" id="exampleModalLabel">Đặt vé</h5>
+									  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									  </button>
+									</div>
+									<div class="modal-body" style="text-align: left;">
+										
+											<p>
+												<ul>
+													<%date.setDate(date.getDate() - 1 ) %>
+													<% for (var i =0; i <=10;  i++ ) { %>
+															<li style="display: inline;">
+																<%date.setDate(date.getDate() + 1 ) %>
+																<button class="btnDate" value="<%-date%>" > 
+															
+															<strong class="date"><%-date.getDate() ;%></strong>	
+															<% k = date.getMonth() %>
+															<%if(k == 0){%>
+																<span class="day">Tháng 1</span>  
+																<%} else if(k == 1){ %>
+																<span class="day">Tháng 2</span> 
+																<%}else if(k == 2){ %>
+																<span class="day">Tháng 3</span> 
+																<%} else if(k == 3){ %>
+																<span class="day">Tháng 4</span> 
+																<%} else if(k == 4){ %>
+																<span class="day">Tháng 5</span> 
+																<%} else if(k == 5){ %>
+																<span class="day">Tháng 6</span> 
+																<%} else if (k == 6){ %>
+																<span class="day">Tháng 7</span> 
+																<%}else if(k == 7){ %>
+																	<span class="day">Tháng 8</span> 
+																	<%} else if(k == 8){ %>
+																	<span class="day">Tháng 9</span> 
+																	<%} else if(k == 9){ %>
+																	<span class="day">Tháng 10</span> 
+																	<%} else if(k == 10){ %>
+																	<span class="day">Tháng 11</span> 
+																	<%} else if (k == 11){ %>
+																	<span class="day">Tháng 12</span> 
+																	<%}%>
+															
+
+															<%  x = date.getDay() %>
+															<%if(x == 0) {%>
+															<em class="day">Thứ 2</em>  
+															<%} else if(x == 1){ %>
+															<em class="day">Thứ 3</em> 
+															<%}
+															 else if(x == 2){ %>
+															<em class="day">Thứ 4</em> 
+															<%} else if(x == 3){ %>
+															<em class="day">Thứ 5</em> 
+															<%} else if(x == 4){ %>
+															<em class="day">Thứ 6</em> 
+															<%} else if(x == 5){ %>
+															<em class="day">Thứ 7</em> 
+															<%} else if (x == 6){ %>
+															<em class="day">Chủ nhật</em> 
+															<%}%>
+
+															
+															  </button>
+															</li>
+															  <% } %>
+														</ul>
+											</p>
+										
+									
+												<hr>
+							
+												<p id="ListCumRap"> </p>
+												<hr>
+
+											<div id="ListRap">
+												
+											</div>	
+											<p ></p>
+												<hr>
+												
+									</div>
+									<div class="modal-footer">
+									  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									</div>
+
+								  </div>
+								</div>
+							  </div>
+			
+						
 						</div>
 					</div>
 				</div>
 			</div>
+
+	
+			  
 			<div class="col-md-8 col-sm-12 col-xs-12">
 				<div class="movie-single-ct main-content">
 					<h1 class="bd-hd"><%-detailPhim.Ten%></h1>
+					<input type="hidden" value="<%-detailPhim.id%>" id="idPhim">
 					<div class="social-btn">
 						<a href="#" class="parent-btn"><i class="ion-heart"></i> Add to Favorite</a>
 						<div class="hover-bnt">
