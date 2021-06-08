@@ -8402,3 +8402,9 @@ em.day {
   border:0px;
   color: rgb(41, 41, 41);
 }
+.plotMovie{
+  white-space: nowrap; 
+  width: 500px; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}

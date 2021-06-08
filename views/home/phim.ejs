@@ -24,14 +24,21 @@
 				</div>
                 <% listPhim.forEach(list =>{ %> 
 				<div class="movie-item-style-2">
-					<img src="/<%-list.Poster%>" alt="">
+					<img src="/<%-list.poster%>" alt="">
 					<div class="mv-item-infor">
-						<h6><a href="/phim/detail?id=<%-list.id%>"><%-list.Ten%> <span>(2012)</span></a></h6>
+						<h6><a href="/phim/detail?id=<%-list.movieisn%>"><%-list.moviename%> <span>(2012)</span></a></h6>
 						<p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
-						<p class="describe">Earth's mightiest heroes must come together and learn to fight as a team if they are to stop the mischievous Loki and his alien army from enslaving humanity...</p>
-						<p class="run-time"> Thời Lượng: <%-list.ThoiLuong%> phút  .     <span>MMPA: PG-13 </span>    .     <span>Phát hành: <%-list.NgayCongChieu%></span></p>
-						<p>Director: <a href="#">Joss Whedon</a></p>
-						<p>Stars: <a href="#">Robert Downey Jr.,</a> <a href="#">Chris Evans,</a> <a href="#">  Chris Hemsworth</a></p>
+						<p class="plotMovie"><%-list.plot%></p>
+						<%FullDate = new Date(list.premiere)%>
+												<%date = FullDate.getDate();
+												month =  FullDate.getMonth() + 1;
+												year = FullDate.getFullYear();	
+												%>
+						            	
+						<p class="run-time"> Thời Lượng: <%-list.movietime%> phút .     <span>Phát hành: <%-date%>/<%-month%>/<%-year%></span></p>
+						<p>Director: <a href="#"><%-list.director%></a></p>
+						<p>Kind: <a href="#"><%-list.kindofmovie%></a></p>
+						<p class="describe">Country: <a href="#"><%-list.country%></a></p>
 					</div>
 				</div>
                 <%})%>

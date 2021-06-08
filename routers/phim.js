@@ -20,7 +20,8 @@ var json_encode = require('json_encode');
 
 //show ra danh sách phim
 router.get('/',asyncHandler(async function(req,res){
-    const listCumRap = await CumRap.findAll(); 
+   const cumRap =   await CumRap.findListCumRap(); 
+   const listCumRap = cumRap.rows
    // console.log(req.query.id);
    // const id = req.query.id;
     const listPhim = await Phim.findAll();
@@ -33,10 +34,14 @@ router.get('/',asyncHandler(async function(req,res){
 }));
  //chi tiết phim
  router.get('/detail',asyncHandler(async function(req,res){
-    const listCumRap = await CumRap.findAll(); 
+   const cumRap =   await CumRap.findListCumRap(); 
+   const listCumRap = cumRap.rows
 
     const id = req.query.id;
-    const detailPhim = await Phim.findById(id);
+    const phim = await Phim.findById(id);
+    const detailPhim = phim.rows
+    console.log("ahahaha");
+    console.log(detailPhim[0].MovieName);
     const date = new Date();
     res.render('home/detail-phim',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap,detailPhim,date})
  }))
@@ -44,21 +49,28 @@ router.get('/',asyncHandler(async function(req,res){
 
  //show ra các phim đang chiếu
  router.get('/phimdangchieu',asyncHandler(async function(req,res){
-    const listCumRap = await CumRap.findAll(); 
+   const cumRap =   await CumRap.findListCumRap(); 
+   const listCumRap = cumRap.rows
+
     
              const title = 'Danh sách phim đang chiếu';
-            const lists = await SuatChieu.findMoviePlaying();
-            res.render('home/phim2',{layout:'layouts/user',lists:lists,title,listCumRap:listCumRap,user: req.user});
+             const phim = await Phim.findPhimDangChieu();
+             const listPhim = phim.rows;
+           //  console.log(listPhim);
+            res.render('home/phim',{layout:'layouts/user',listPhim:listPhim,title,listCumRap:listCumRap,user: req.user});
  }));
 
 
   //show ra các phim sắp chiếu
   router.get('/phimsapchieu',asyncHandler(async function(req,res){
-    const listCumRap = await CumRap.findAll(); 
-    
+   const cumRap =   await CumRap.findListCumRap(); 
+   const listCumRap = cumRap.rows
+  
              const title = 'Danh sách phim sắp chiếu';
-            const listPhim = await Phim.findPhimSapChieu();
-            
+            const phim = await Phim.findPhimSapChieu();
+            const listPhim = phim.rows;
+            console.log("ahahah")
+            console.log(listPhim);
             res.render('home/phim',{layout:'layouts/user',listPhim:listPhim,title,listCumRap:listCumRap,user: req.user});
  }));
 
@@ -66,10 +78,10 @@ router.get('/',asyncHandler(async function(req,res){
  //danh sách rạp có chiếu phim tìm theo ngày chiếu phim 
  router.post('/datve',asyncHandler(async function(req,res){
       const {date,idPhim} = req.body;
-   
+   // console.log(d)
      
      const listPhimRap = await SuatChieu.findRapByDateAndMovie(date,idPhim);
-   //  console.log(listPhimRap[0].Rap.TenRap);
+     console.log(listPhimRap[0].Rap.TenRap);
      var listsPhimRap = json_encode(listPhimRap);
      
      console.log(listPhimRap[1]);

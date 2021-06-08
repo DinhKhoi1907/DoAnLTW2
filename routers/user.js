@@ -28,7 +28,7 @@ const passport = require('passport')
 router.get('/',asyncHandler(async function(req,res){
     const cumRap =   await CumRap.findListCumRap(); 
    const listCumRap = cumRap.rows
-    console.log(cumRap);
+  //  console.log(cumRap);
     res.render('user/home',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap});
     
 }))

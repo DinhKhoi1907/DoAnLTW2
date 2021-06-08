@@ -12,11 +12,11 @@ const CumRap = require("../configs/config.js");
 //     res.status(200).json(results.rows);
 //   });
 // };
-
+const Province = 'Province';
 
 //const findListCumRap = CumRap.query(new findListCumRap('SELECT * FROM fn_GetAllProvinces()'))
  CumRap.findListCumRap = async function() {
-  return CumRap.query(`SELECT * FROM fn_GetAllProvinces()`);
+  return CumRap.query(`SELECT * FROM "Province"`);
 }
  //findListCumRap = CumRap.query('SELECT * FROM fn_GetAllProvinces()')
 
