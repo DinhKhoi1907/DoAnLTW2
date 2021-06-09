@@ -15,7 +15,7 @@ $(document).ready(function () {
       
         $.ajax({
             //${window.location.origin}
-            url:`/phim/datve`, // lay du lieu tu file
+            url:`/datcho/findCr`, // lay du lieu tu file
             type:"POST",
             timeout: 5000,
             data: {
@@ -73,7 +73,7 @@ $(document).ready(function () {
                        //ban đầu cho mảng rap = rỗng để thêm phần tử dầu
                        $.ajax({
                         //${window.location.origin}
-                        url:`/phim/datve2`, // lay du lieu tu file
+                        url:`/datcho/findR`, // lay du lieu tu file
                         type:"POST",
                         timeout: 5000,
                         data: {
@@ -111,7 +111,7 @@ $(document).ready(function () {
                             SuatChieuId = Number(string3.slice(10));
                             
                         
-                            window.location.href = `/user/datcho/${SuatChieuId}`;
+                            window.location.href = `/datcho/chonGhe/${SuatChieuId}`;
             
                         
                       }

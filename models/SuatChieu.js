@@ -12,7 +12,9 @@ SuatChieu.findCrByDateAndMovie = async function(date,idPhim) {
   SuatChieu.findRapByDateAndMovieCr = async function(date,CumRapId,idPhim) {
     return SuatChieu.query(`SELECT * FROM fn_showtimesofmovie_getbydateandprovince($1,$2,$3)`,[date,CumRapId,idPhim]);
   }
-
+  SuatChieu.findById = async function(SuatChieuId) {
+    return SuatChieu.query(`SELECT * FROM "ShowTime" WHERE "ShowTimeISN" = $1`,[SuatChieuId]);
+  }
 module.exports = SuatChieu;
 
 // const SuatChieu = db.define('SuatChieu', {

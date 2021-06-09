@@ -55,7 +55,7 @@ router.post('/register',asyncHandler (async function(req,res){
 
     // kiem tra username da ton toi trong db chua
     
-      const found = await User.findByEmail(email);
+      const found = await User.findUserByEmail(email);
 
 
         if(!email||!password||!repassword){
@@ -72,7 +72,7 @@ router.post('/register',asyncHandler (async function(req,res){
       
         else{
             //neu chua co thi tao user 
-            await  User.create(user);
+            await  User.InsertNewUserReturnId(user);
             //tim User moi dang ky
             const found3 = await User.findByEmail(email);
             //gui mail xac nhan cho user 
@@ -97,10 +97,10 @@ router.post('/register',asyncHandler (async function(req,res){
   router.post('/login',asyncHandler(async function(req,res){
     console.log(req.body);
     const {email,password} = req.body;
-    const found = await User.findByEmail(email);
-    if(found && passwordHash.verify(password,found.password) ){
+    const found = await User.findUserByEmail(email);
+    if(found && passwordHash.verify(password,found.rows[0].Password) ){
         //luu id vao session
-        req.session.userId = found.id;
+        req.session.userId = found.rows[0].CustomerISN;
         //return 1
         res.end ("1");
     } else{
@@ -116,7 +116,7 @@ router.post('/register',asyncHandler (async function(req,res){
 router.post('/forgot',asyncHandler(async function(req,res){
 
           const {email} = req.body;
-          const found = await User.findByEmail(email);
+          const found = await User.findUserByEmail(email);
           if(found){
             //dat thong bao thay doi password
             found.resetPasswordToken = randomstring.generate(20);
@@ -202,38 +202,7 @@ router.get('/rap',asyncHandler(async function(req,res){
    
     
 }));
-//đặt chỗ
-router.get('/datcho/:SuatChieuId',asyncHandler(async function(req,res){
-  const cumRap =   await CumRap.findListCumRap(); 
-  const listCumRap = cumRap.rows
 
-    const title = 'Đặt Chỗ';
-    //console.log(listPhim);
-  //lấy ra được rapid 
-  const SuatChieuId = req.params.SuatChieuId;
-     // lấy ra dãy gế và trạng thái gế
-  const ghe = await Ghe.findListGhe(SuatChieuId) ;
-  const listGhe = ghe.rows;
-   // lấy ra phim vừa chọn
-  const p = await Phim.findPhimBySC(SuatChieuId);
-  const phim = p.rows;
- console.log(listGhe)
-  res.render('user/datcho',{layout:'./layouts/user',listGhe:listGhe,phim,title,user: req.user ,listCumRap:listCumRap});
-}));
-
-router.post('/datcho',asyncHandler(async function(req,res){
-    const {IdSuatChieu,ViTriGhes,IdRap} = req.body;
-
-    for(i=0;i<ViTriGhes.length;i++){
-      const ghe = {};
-       ghe.ViTriHang = ViTriGhes[i].slice(0,1);
-       ghe.ViTriCot = ViTriGhes[i].slice(2,3);
-      ghe.RapId = IdRap;
-      await Ghe.create(ghe);
-    }
-      
-    res.end();
-}));
 router.get('/logout',function(req,res){
      //delete req.currentUser.id;
     req.session=null;

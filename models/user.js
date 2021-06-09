@@ -1,9 +1,17 @@
-const db = require('../configs/config');
+const User = require('../configs/config');
 
+User.findUserByEmail = async function(email){
+    User.query(`SELECT * FROM "Customer" WHERE "CustomerEmail" = $1`,[email])
+}
+User.InsertNewUserReturnId = async function(email){
+    User.query(`SELECT * FROM "Customer" WHERE "CustomerEmail" = $1 RETURNING CustomerISN`,[email])
+}
 
-
-
-
+// return mdUser.query(`insert into ${tbl_users} (name, email) values ($1, $2) RETURNING id`, [
+//     name,
+//     email,
+//   ]);
+module.exports = User;
 // // const User = db.define('User',{
 // //     name:{
 // //         type:DataTypes.STRING,

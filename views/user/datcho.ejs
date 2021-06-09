@@ -12,43 +12,76 @@
 		<div class="row ipad-width2">
 			<div class="col-md-8 col-sm-12 col-xs-12">
 				<div id="ListGhe">
-					<% key =0 %>
-						<%for(i=0;i < listGhe.length;i++){ %>
-								<%if(listGhe[i].SeatStatus = 0){ %>
-									<button class= "btnGhe AnGhe"><%-listGhe[i].SeatName%></button>
+					<% key=0 %>
+						<%for(i=0;i < room[0].RowSeats;i++){ %>
+							<%for(j=0;j < room[0].ColumnSeats;j++){ %>
+								<%if(listGhe[key].SeatStatus == 1){ %>
+									<button class= "btnGhe AnGhe"><%-listGhe[key].SeatName%></button>
 								<%}else{ %> 
-									<button class= "btnGhe" value="<%-listGhe[i].SeatISN%>"><%-listGhe[i].SeatName%></button> 
+									<button class= "btnGhe" value="<%-listGhe[key].SeatName%>"><%-listGhe[key].SeatName%></button> 
 								<% } key ++ ;%>
-						  <%if(key==10){%> <br> <% key =0 %> <%}%>
-					<% }%>		
+						  <%}%>
+						  <br>
+					<% }%>
+					
 				</div>	
 			</div>
 
+			
 
 			<div class="col-md-4 col-sm-12 col-xs-12">
 				<div class="sidebar">
 					<div class="searh-form">
-					<input type="hidden" id="idSuatChieu" value="">
-					<input type="hidden" id="idRap" value="<%-rap.id%>">
+					<input type="hidden" id="idSuatChieu" value="<%-suatchieu[0].ShowTimeISN%>">
+					<input type="hidden" id="idRap" value="rapidvaoday">
 						<form class="form-style-1" action="#">
 							<div class="row">
 								<div class="col-md-12 form-it">
-									<h1 style="color: cornsilk;text-align: center;"><%-phim.MovieName%></h1>
+									<h1 style="color: cornsilk;text-align: center; font-family: ui-serif;"><%-phim[0].MovieName%></h1>
 								<img src="/<%-phim.Poster%>" alt="" style="width:250px; height: 290px;">
 									
 								</div>
 								<div class="col-md-12 form-it">
-									<div><%-rap.TenRap%></div>
-									<div><%-suatchieu.ThoiDiemBatDau%> - <%-suatchieu.ThoiDiemKetThuc%></div>
+									<div>Tên rạp : <%-rap[0].CinemaName%></div>
+									
 								</div>
 								<div class="col-md-12 form-it">
-									<div><%-suatchieu.NgayChieu%></div>
+									<div>Địa chỉ : <%-rap[0].CinemaAddress%></div>
+									
+								</div>
+								<div class="col-md-12 form-it">
+									<% 
+									StartTime = new Date(suatchieu[0].DateTimeFrom);
+									startHours= StartTime.getHours(); 
+									startMinutes= StartTime.getMinutes(); 
+									startSeconds= StartTime.getSeconds(); 
+									FullTimeStart = startHours + ":" + startMinutes+ ":" + startSeconds 
+
+
+									EndTime = new Date(suatchieu[0].DateTimeTo);
+									EndHours= EndTime.getHours(); 
+									EndMinutes= EndTime.getMinutes(); 
+									EndSeconds= EndTime.getSeconds(); 
+									FullTimeEnd = startHours + ":" + startMinutes+ ":" + startSeconds 
+									%>
+									<div>Giờ chiếu : <%-FullTimeStart%> - <%-FullTimeEnd%></div>
+								</div>
+								<div class="col-md-12 form-it">
+								<%
+								fullTimeDate = new Date(suatchieu[0].DateTimeFrom);
+									date= fullTimeDate.getDate(); 
+									month= fullTimeDate.getMonth(); 
+									year= fullTimeDate.getFullYear(); 
+									FullDate = date + "/" + month+ "/" + year 
+									%>
+
+									<div>Ngày chiếu  :  <%-FullDate%></div>
 								
 								</div>
 								<div class="col-md-12 form-it">
-									<input type="hidden" value="<%-suatchieu.GiaVe%>" id="Tien">
+									<input type="hidden" value="<%-suatchieu[0].TicketPrice%>" id="Tien">
 									<input type="hidden" value="0" id="SetTongTien">
-									<div>Tổng Tiền : <p id="TongTien">0</p></div>
+									<div style="display: flex;">Tổng tiền : <p id="TongTien">0</p></div>
 								</div>
 								<div class="col-md-12 ">
 									<input class="submit" type="submit" value="Đặt chỗ" id="DatCho">

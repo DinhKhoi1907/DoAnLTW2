@@ -6402,6 +6402,7 @@ ul {
 }
 .form-style-1 .form-it {
   margin-bottom: 15px;
+  color:darkgray;
 }
 .form-style-1 label {
   font-family: 'Dosis', sans-serif;
@@ -8407,4 +8408,9 @@ em.day {
   width: 500px; 
   overflow: hidden;
   text-overflow: ellipsis; 
+}
+
+#TongTien{
+  margin-left: 10px;
+  font-size: 17px;
 }

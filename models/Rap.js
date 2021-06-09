@@ -1,4 +1,3 @@
-
 const Rap  = require('../configs/config');
 
 
@@ -6,9 +5,14 @@ const Rap  = require('../configs/config');
 
 
 Rap.findListRapByIdCR = async function(id) {
+
     return Rap.query(`SELECT * FROM "Cinema" WHERE "ProvinceISN" = $1`,[id]);
   }
-
+Rap.findRapPhimBySC = async function(SuatChieuId){
+  return Rap.query(`SELECT * FROM "Cinema" c JOIN  "Room" r ON (c."CinemaISN" = r."CinemaISN")
+                    JOIN "ShowTime" st ON (r."RoomISN" = st."RoomISN")
+                     WHERE st."ShowTimeISN"  = $1`,[SuatChieuId]);
+}
 
 module.exports=Rap;
 //const Ghe = require('./Ghe.js');

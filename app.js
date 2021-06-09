@@ -6,7 +6,7 @@ var expressLayouts = require('express-ejs-layouts');
 const userRouter = require('./routers/user.js');
 const rapRouter = require('./routers/rap.js');
 const phimRouter = require('./routers/phim.js');
-
+const datchoRouter = require('./routers/datcho.js');
 const asyncHandler = require('express-async-handler')
 const User = require('./models/user.js');
 var cookieSession = require('cookie-session');
@@ -23,7 +23,7 @@ const session  = require('express-session');
 const db = require('./configs/config');
 
 const userMiddlewares = require('./middlewares/user');
-
+const ensureLoggedMiddlewares = require('./middlewares/ensure_logged_in');
 const app = express();
 
 var path = require('path');
@@ -92,12 +92,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-
-
-
-
-
-
 app.get('/',function(req,res){
     //res.render('user/home',{layout:'./layouts/home'});
     res.redirect('/user');
@@ -107,7 +101,7 @@ app.get('/',function(req,res){
 app.use('/user',userRouter);
 app.use('/rap',rapRouter);
 app.use('/phim',phimRouter);
-
+app.use('/datcho',datchoRouter);
 
 var path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));

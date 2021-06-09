@@ -1,34 +1,30 @@
-
-const Phim = require('../configs/config');
+const Phim = require('../configs/config.js');
 
 
 
 //const findListCumRap = CumRap.query(new findListCumRap('SELECT * FROM fn_GetAllProvinces()'))
-Phim.findPhimSapChieu = async function() {
-    return Phim.query(`SELECT * FROM fn_movie_commingsoon()`);
-  }
+// Phim.findPhimSapChieu = async function() {
+//     return Phim.query(`SELECT * FROM fn_movie_commingsoon()`);
+//   },
+Phim.findRapById = async function(id) {
+  //console.log("hahaahaheee");
+  return Phim.query(`SELECT * FROM "Movie" WHERE "MovieISN" = $1`,[id]);
+}, 
   Phim.findPhimDangChieu = async function() {
     return Phim.query(`SELECT * FROM fn_movie_nowshowing()`);
-  }  
+  }, 
 
-  Phim.findById = async function(id) {
-    return Phim.query(`SELECT * FROM "Movie" WHERE "MovieISN" = $1`,[id]);
-  } 
+  
   Phim.findPhimBySC = async function(SuatChieuId){
     return Phim.query(`SELECT * FROM "Movie" mv JOIN "ShowTime" st ON (mv."MovieISN" = st."MovieISN")
                        WHERE st."ShowTimeISN"  = $1`,[SuatChieuId]);
-  } 
-   //findListCumRap = CumRap.query('SELECT * FROM fn_GetAllProvinces()')
+  }
+ // Phim.findListCumRap = CumRap.query('SELECT * FROM fn_GetAllProvinces()')
   
-  // const { Client } = require('pg')
-  // const client = new Client()
-  // await client.connect()
-  // const res = await client.query('SELECT $1::text as message', ['Hello world!'])
-  // console.log(res.rows[0].message) // Hello world!
-  // await client.end()
+ 
   
   
-  module.exports =Phim;
+  module.exports = Phim;
 // const Phim = db.define('Phim', {
 //   Ten: {
 //     type: DataTypes.STRING,

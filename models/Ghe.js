@@ -1,7 +1,7 @@
 const Ghe = require('../configs/config');
 
 Ghe.findListGhe = async function(IdSuatChieu){
-    return Ghe.query(`SELECT * FROM "SeatsOfShowTime" WHERE "ShowTimeISN" = $1`,[IdSuatChieu]);
+    return Ghe.query(`SELECT * FROM "SeatsOfShowTime" WHERE "ShowTimeISN" = $1 ORDER BY "SeatISN" ASC`,[IdSuatChieu]);
 } 
 module.exports = Ghe;
 // const Ghe = db.define('Ghe',{

@@ -1,9 +1,14 @@
-
 const DatCho = require('../configs/config');
 
 DatCho.SeatsOfShowTime = async function(IdSuatChieu){
-    return DatCho.query(`SELECT * FROM SeatsOfShowTime WHERE "ShowTimeISN" = $1`,[SuatChieuId]);
+    return DatCho.query(`SELECT * FROM SeatsOfShowTime WHERE "ShowTimeISN" = $1`,[IdSuatChieu]);
 } 
+
+DatCho.InsertBooking = async function(IdUser,IdSuatChieu,SeatList){
+    return DatCho.query(`SELECT * FROM fn_booking_ins($1,$2,$3) `,[IdUser,IdSuatChieu,SeatList]);
+} 
+
+module.exports = DatCho
 // const DatCho = db.define('DatCho', {
 //   MaDatCho: {
 //     type: DataTypes.UUID,
