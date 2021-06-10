@@ -1,4 +1,4 @@
-require('dotenv').config()
+//require('dotenv').config()
 const express = require('express');
 const bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');

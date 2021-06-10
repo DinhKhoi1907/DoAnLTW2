@@ -30,7 +30,8 @@ $(document).ready(function () {
                 reloadMask(false,$);
                 if(data === "1" ){
                     $("#response").html('<font color="green">login success...!</font>');
-                    window.location.href = "/";
+                   // window.location.href = "/";
+                   window.location.reload();
 
                 }
                else{

@@ -91,31 +91,42 @@
     <div class="login-content">
         <a href="#" class="close">x</a>
         <h3>Register</h3>
-		<p id = "check-reg-empty"></p>
+		<p id = "check-reg-empty" style="margin:-8px;margin: auto;"></p>
         <form method="post" action="/user/register" id="form-register-2">
             
             <div class="row">
                 <label for="email">
                   Email:
-					<p id="check-reg-email" style="margin:-1px;"> &nbsp; </p>
+					<p id="check-reg-email" style="margin:-8px;"> &nbsp; </p>
 					<input type="email" class="form-control" id="email-2" name="email" placeholder="Nhập email..."  aria-describedby="emailHelp"  >
 				</label>
 				
             </div>
              <div class="row">
                 <label for="password">
-                    Password:<p id="check-reg-password" style="margin: -1px;"> &nbsp; </p>
+                    Password:<p id="check-reg-password" style="margin: -8px;"> &nbsp; </p>
                     <input type="password" class="form-control" id="password-2" name="password" placeholder="Nhập mật khẩu..." >
                 </label>
             </div>
              <div class="row">
                 <label for="repassword">
-                    re-type Password:<p id="check-reg-repassword" style="margin:-1px;"> &nbsp; </p>
+                    re-type Password:<p id="check-reg-repassword" style="margin:-8px;"> &nbsp; </p>
                     <input type="password" class="form-control" id="repassword-2" name="repassword" placeholder="Nhập mật khẩu...">
-					
 				</label>
-				
             </div>
+			<div class="row">
+                <label for="name">
+                    Name:<p id="check-reg-name" style="margin: -8px;"> &nbsp; </p>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên..." >
+                </label>
+            </div>
+			<div class="row">
+                <label for="phone">
+                    Phone:<p id="check-reg-phone" style="margin: -8px;"> &nbsp; </p>
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại..." >
+                </label>
+            </div>
+			
            <div class="row">
              <button type="submit" id="registerBtn">Register</button>
            </div>
@@ -254,7 +265,7 @@
 						</li>                
 						<li><a href="#">Help</a></li>
 						<%if(currentUser) { %> 
-                            <li class=""><a href="#"><%- currentUser.email %></a></li>
+                            <li class=""><a href="#"><%- currentUser.CustomerName %></a></li>
                             <li class=""><a href="/user/logout">Log Out</a></li>
                             <%}else if(user) { %> 
 								<li class=""><a href="#"><%- user.displayName %></a></li>
