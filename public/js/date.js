@@ -107,7 +107,7 @@ $(document).ready(function () {
                         this.className += " active2";
                        
                             var string3 = $(".active2").val();
-                            alert(string3);
+                           
                             SuatChieuId = Number(string3.slice(10));
                             
                         

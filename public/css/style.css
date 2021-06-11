@@ -5685,7 +5685,7 @@ ul {
   padding-top: 225px;
 }
 .user-hero .hero-ct h1 {
-  margin-left: -120px;
+  margin-left: -310px;
 }
 .user-hero ul.breadcumb {
   text-align: left;
@@ -8413,4 +8413,9 @@ em.day {
 #TongTien{
   margin-left: 10px;
   font-size: 17px;
+}
+
+p.booking-history{
+  font-size: 15px;
+  margin-top: 10px;
 }

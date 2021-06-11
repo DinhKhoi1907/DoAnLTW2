@@ -28,7 +28,36 @@ User.UpDatePasswordAndToken = async function(idCustomer,token,password){
                         SET "Token" = $1,"Password" = $2
                         WHERE "CustomerISN" = $3;`,[token,password,idCustomer])
 }
-//fn_customer_insupd
+User.UpdateName = async function(idCustomer,name){
+     User.query(`UPDATE "Customer"
+                        SET "CustomerName" = $1
+                        WHERE "CustomerISN" = $2`,[name,idCustomer])
+}
+User.UpdateAddress = async function(idCustomer,address){
+    return User.query(`UPDATE "Customer"
+                        SET "CustomerAddress" = $1
+                        WHERE "CustomerISN" = $2`,[address,idCustomer])
+}
+User.UpdatePassword = async function(idCustomer,password){
+    return User.query(`UPDATE "Customer"
+    SET "Password" = $1
+    WHERE "CustomerISN" = $2`,[password,idCustomer])
+}
+User.UpdatePhone = async function(idCustomer,phone){
+    return User.query(`UPDATE "Customer"
+    SET "CustomerPhone" = $1
+    WHERE "CustomerISN" = $2`,[phone,idCustomer])
+}
+User.findBookingHistoryByIdUser = async function(idCustomer){
+    return User.query(`SELECT * FROM "Customer" c 
+                        JOIN "Booking" b on(c."CustomerISN"=b."CustomerISN")
+                        JOIN "ShowTime" st on(st."ShowTimeISN"= b."ShowTimeISN")
+                        JOIN "Movie" m on (m."MovieISN"=st."MovieISN")
+                        JOIN "Room" r on (r."RoomISN" = st."RoomISN")
+                        JOIN "Cinema" cnm on (cnm."CinemaISN" = r."CinemaISN")
+                        WHERE c."CustomerISN" = $1 ORDER BY b."BookingISN" ASC `,[idCustomer])
+}
+//fn_customer_insupd 
 // return mdUser.query(`insert into ${tbl_users} (name, email) values ($1, $2) RETURNING id`, [
 //     name,
 //     email,

@@ -34,6 +34,62 @@ router.get('/',asyncHandler(async function(req,res){
     res.render('user/try',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap});
 
 }))
+router.get('/profile',asyncHandler(async function(req,res){
+  const cumRap =   await CumRap.findListCumRap(); 
+  const listCumRap = cumRap.rows
+
+  const title = 'Danh sách phim đang chiếu';
+    res.render('user/profile',{layout:'./layouts/user',listCumRap:listCumRap})
+}));
+router.post('/profile/changeinfo',asyncHandler(async function(req,res){
+    const {name,address,phone} = req.body; 
+    if(name){
+       await User.UpdateName(req.currentUser.CustomerISN,name);
+    }
+     if(address){
+      await User.UpdateAddress(req.currentUser.CustomerISN,address);
+    }
+    if(phone){
+      await User.UpdatePhone(req.currentUser.CustomerISN,phone);
+    }
+    res.end("1");
+   
+}));
+
+
+
+router.post('/profile/changepassword',asyncHandler(async function(req,res){
+  const {oldpassword,newpassword,renewpassword} = req.body; 
+
+  if(passwordHash.verify(oldpassword,req.currentUser.Password)){
+     if(newpassword === renewpassword){
+      //success
+      const passwordMH = passwordHash.generate(newpassword);
+      await User.UpdatePassword(req.currentUser.CustomerISN,passwordMH);
+      res.end("1");
+     }
+     else{
+       //mật khẩu nhập lại không giống
+       res.end("-1");
+     }
+      
+  }
+  else {
+   //khật khẩu không đúng
+   res.end("0");
+  }
+  
+ 
+}));
+
+router.get('/bookinghistory',asyncHandler(async function(req,res){
+  const cumRap =   await CumRap.findListCumRap(); 
+  const listCumRap = cumRap.rows
+  const booking = await User.findBookingHistoryByIdUser(req.currentUser.CustomerISN);
+  const listBooking = booking.rows;
+  console.log(listBooking)
+    res.render('user/booking_history',{layout:'./layouts/user',listCumRap:listCumRap,listBooking:listBooking});
+}));
 router.post('/register',asyncHandler (async function(req,res){
 
     //dinh nghi tai khoan gui mail xac nhan cho user dang ky
@@ -122,7 +178,7 @@ router.post('/forgot',asyncHandler(async function(req,res){
            const resetPasswordToken = randomstring.generate(20);
            const newtoken= await User.UpDateToken(found.rows[0].CustomerISN,resetPasswordToken)
           //dinh nghia tai khoan gui mail xac nhan cho user
-           console.log(newtoken.rows[0].Token);
+           //console.log(newtoken.rows[0].Token);
             const transporter = nodemailer.createTransport({
               service: 'gmail',
               host: 'smtp.gmail.com',
