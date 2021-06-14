@@ -14,7 +14,9 @@ Phim.findRapById = async function(id) {
     return Phim.query(`SELECT * FROM fn_movie_nowshowing()`);
   }, 
 
-  
+  Phim.findPhimSapChieu = async function() {
+    return Phim.query(`SELECT * FROM fn_movie_commingsoon()`);
+  }, 
   Phim.findPhimBySC = async function(SuatChieuId){
     return Phim.query(`SELECT * FROM "Movie" mv JOIN "ShowTime" st ON (mv."MovieISN" = st."MovieISN")
                        WHERE st."ShowTimeISN"  = $1`,[SuatChieuId]);
