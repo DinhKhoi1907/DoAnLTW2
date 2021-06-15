@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+
+=======
 //require('dotenv').config()
+>>>>>>> 8c9face9b6685984d895adb217d69734e30feb76
 const express = require('express');
 const bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
@@ -48,7 +52,7 @@ app.set('view engine','ejs');
 app.use(express.static('public'));
 
 //su dung body parser de lay du lieu tu body
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({extended:true}));
 
 // -----Passport session setup. 
 passport.serializeUser(function(user, done) {
@@ -94,7 +98,7 @@ app.use(passport.session());
 
 
 app.get('/',function(req,res){
-    //res.render('user/home',{layout:'./layouts/home'});
+    //res.render('user/try',{layout:'./layouts/try'});
     res.redirect('/user');
 });
  
