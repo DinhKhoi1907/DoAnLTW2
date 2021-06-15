@@ -145,7 +145,7 @@ router.post('/register',asyncHandler (async function(req,res){
               res.end("1");
         }
 
-
+res.render('404');
   //  res.redirect('/');
 
 }));
@@ -163,6 +163,7 @@ router.post('/register',asyncHandler (async function(req,res){
     //neu password va mat khau khong chinh xac return 0
      res.end("0");
     }
+    res.render('404',{layout:'./layouts/404'});
 }));
 
 

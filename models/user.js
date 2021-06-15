@@ -55,7 +55,7 @@ User.findBookingHistoryByIdUser = async function(idCustomer){
                         JOIN "Movie" m on (m."MovieISN"=st."MovieISN")
                         JOIN "Room" r on (r."RoomISN" = st."RoomISN")
                         JOIN "Cinema" cnm on (cnm."CinemaISN" = r."CinemaISN")
-                        WHERE c."CustomerISN" = $1 ORDER BY b."BookingISN" ASC `,[idCustomer])
+                        WHERE c."CustomerISN" = $1 ORDER BY b."BookingISN" DESC `,[idCustomer])
 }
 //fn_customer_insupd 
 // return mdUser.query(`insert into ${tbl_users} (name, email) values ($1, $2) RETURNING id`, [

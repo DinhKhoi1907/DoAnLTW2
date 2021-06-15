@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-
-=======
-//require('dotenv').config()
->>>>>>> 8c9face9b6685984d895adb217d69734e30feb76
 const express = require('express');
 const bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
@@ -13,6 +8,7 @@ const phimRouter = require('./routers/phim.js');
 const datchoRouter = require('./routers/datcho.js');
 const asyncHandler = require('express-async-handler')
 const User = require('./models/user.js');
+const CumRap = require('./models/CumRap.js');
 var cookieSession = require('cookie-session');
 //đăng nhập fb
 
@@ -106,7 +102,10 @@ app.use('/user',userRouter);
 app.use('/rap',rapRouter);
 app.use('/phim',phimRouter);
 app.use('/datcho',datchoRouter);
+app.use(async function(req,res){
 
+  res.status(404).render("404.ejs",{layout:'./layouts/404'});
+});
 var path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 //khoi dong db
