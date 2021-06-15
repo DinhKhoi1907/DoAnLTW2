@@ -9,6 +9,7 @@ const datchoRouter = require('./routers/datcho.js');
 const asyncHandler = require('express-async-handler')
 const User = require('./models/user.js');
 const CumRap = require('./models/CumRap.js');
+const Phim = require('./models/Phim.js');
 var cookieSession = require('cookie-session');
 //đăng nhập fb
 
@@ -92,9 +93,19 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.get('/',function(req,res){
-    //res.render('user/try',{layout:'./layouts/try'});
-    res.redirect('/user');
+app.get('/',async function(req,res){
+  const cumRap =   await CumRap.findListCumRap();
+  const listCumRap = cumRap.rows
+ //  console.log(cumRap);
+ // tìm phim mới được công chiếu
+ const pm = await Phim.findPhimMoiDuocCongChieu();
+ const listphimmoi = pm.rows;
+ // lấy phim được xem nhiều nhất 
+ const top = 8;
+ const pp = await Phim.findPhimDuocXemNhieu(top);
+ const listPDXN = pp.rows
+ console.log(listPDXN);
+   res.render('home/home',{layout:'./layouts/home',user: req.user ,listCumRap:listCumRap,listphimmoi:listphimmoi,listPDXN:listPDXN});
 });
  
 
