@@ -91,31 +91,42 @@
     <div class="login-content">
         <a href="#" class="close">x</a>
         <h3>Register</h3>
-		<p id = "check-reg-empty"></p>
+		<p id = "check-reg-empty" style="margin:-8px;margin: auto;"></p>
         <form method="post" action="/user/register" id="form-register-2">
             
             <div class="row">
                 <label for="email">
                   Email:
-					<p id="check-reg-email" style="margin:-1px;"> &nbsp; </p>
+					<p id="check-reg-email" style="margin:-8px;"> &nbsp; </p>
 					<input type="email" class="form-control" id="email-2" name="email" placeholder="Nhập email..."  aria-describedby="emailHelp"  >
 				</label>
 				
             </div>
              <div class="row">
                 <label for="password">
-                    Password:<p id="check-reg-password" style="margin: -1px;"> &nbsp; </p>
+                    Password:<p id="check-reg-password" style="margin: -8px;"> &nbsp; </p>
                     <input type="password" class="form-control" id="password-2" name="password" placeholder="Nhập mật khẩu..." >
                 </label>
             </div>
              <div class="row">
                 <label for="repassword">
-                    re-type Password:<p id="check-reg-repassword" style="margin:-1px;"> &nbsp; </p>
+                    re-type Password:<p id="check-reg-repassword" style="margin:-8px;"> &nbsp; </p>
                     <input type="password" class="form-control" id="repassword-2" name="repassword" placeholder="Nhập mật khẩu...">
-					
 				</label>
-				
             </div>
+			<div class="row">
+                <label for="name">
+                    Name:<p id="check-reg-name" style="margin: -8px;"> &nbsp; </p>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên..." >
+                </label>
+            </div>
+			<div class="row">
+                <label for="phone">
+                    Phone:<p id="check-reg-phone" style="margin: -8px;"> &nbsp; </p>
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại..." >
+                </label>
+            </div>
+			
            <div class="row">
              <button type="submit" id="registerBtn">Register</button>
            </div>
@@ -144,7 +155,7 @@
             <div class="row">
                 <label for="email-2">
                     your email:
-                    <input type="email" class="form-control" id="check-email" name="email" placeholder="Nhập email..." required pattern="\S+.*"/>
+                    <input type="email" class="form-control" id="check-email" name="email"   placeholder="Nhập email..."  aria-describedby="emailHelp"/>
                 </label>
             </div>
           
@@ -189,12 +200,12 @@
 						</li> -->
 						<li class="dropdown first">
 							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-							Phim<i class="fa fa-angle-down" aria-hidden="true"></i>
+							Movie<i class="fa fa-angle-down" aria-hidden="true"></i>
 							</a>
 							<ul class="dropdown-menu level1">
-								<li><a href="/phim/phimdangchieu">Phim đang chiếu</a></li>
-								<li class="it-last"><a href="/phim/phimsapchieu">Phim sắp chiếu</a></li>
-								<li><a href="/phim">Danh sách phim</a></li>
+								<li><a href="/phim/phimdangchieu">Movie is playing</a></li>
+								<li class="it-last"><a href="/phim/phimsapchieu">Movie comming soon</a></li>
+								<li><a href="/phim">Movie list</a></li>
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" >Thể loại<i class="ion-ios-arrow-forward"></i></a>
 									<ul class="dropdown-menu level2">
@@ -254,7 +265,17 @@
 						</li>                
 						<li><a href="#">Help</a></li>
 						<%if(currentUser) { %> 
-                            <li class=""><a href="#"><%- currentUser.email %></a></li>
+							<li class="dropdown first">
+								
+								<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
+									<i class="fa fa-user" aria-hidden="true" style="margin-left:7px; font-size: 15px;"></i>
+									<%- currentUser.CustomerName %> 
+								</a>
+								<ul class="dropdown-menu level1">
+									<li><a href="/user/profile">My Profile</a></li>
+									<li><a href="/user/bookinghistory">Booking History</a></li>
+								</ul>
+							</li>
                             <li class=""><a href="/user/logout">Log Out</a></li>
                             <%}else if(user) { %> 
 								<li class=""><a href="#"><%- user.displayName %></a></li>
@@ -368,6 +389,8 @@
 <script src="/js/date.js"></script>
 <script src="/js/DatCho.js"></script>
 <script src="/js/phim.js"></script>
+<script src="/js/profile.js"></script>
+
 <!-- js bootstrap -->
 <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

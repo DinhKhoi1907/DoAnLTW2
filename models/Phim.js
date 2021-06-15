@@ -3,9 +3,9 @@ const Phim = require('../configs/config.js');
 
 
 //const findListCumRap = CumRap.query(new findListCumRap('SELECT * FROM fn_GetAllProvinces()'))
-// Phim.findPhimSapChieu = async function() {
-//     return Phim.query(`SELECT * FROM fn_movie_commingsoon()`);
-//   },
+Phim.findPhimSapChieu = async function() {
+    return Phim.query(`SELECT * FROM fn_movie_commingsoon()`);
+  },
 Phim.findRapById = async function(id) {
   //console.log("hahaahaheee");
   return Phim.query(`SELECT * FROM "Movie" WHERE "MovieISN" = $1`,[id]);

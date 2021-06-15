@@ -8,15 +8,15 @@ module.exports = asyncHandler(async function(req,res,next){
     //kiem tra co user tren session khong
     if(userId){
         //neu co thi tim thong tin cua user trong db coi co dung khong
-        const user = await User.findById(userId);
+        const user = await User.findUserById(userId);
         //neu tim duoc thong tin user
         if(user){
             
             //luu vao req de su dung ben router
-            req.currentUser = user;
-            //console.log(user);
+            req.currentUser = user.rows[0];
+           
             //luu vao de su dung ben view
-            res.locals.currentUser = user;
+            res.locals.currentUser = user.rows[0];
         }
         next();
     }else{

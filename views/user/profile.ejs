@@ -1,0 +1,108 @@
+<div class="hero user-hero">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="hero-ct">
+					<h1><%-currentUser.CustomerName%></h1>
+					<ul class="breadcumb">
+						<li class="active"><a href="#">Home</a></li>
+						<li> <span class="ion-ios-arrow-right"></span>Profile</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="page-single">
+	<div class="container">
+		<div class="row ipad-width">
+			<div class="col-md-3 col-sm-12 col-xs-12">
+				<div class="user-information">
+					<div class="user-img">
+						<a href="#"><img src="images/uploads/user-img.png" alt=""><br></a>
+						<a href="#" class="redbtn">Change avatar</a>
+					</div>
+					<div class="user-fav">
+						<p>Account Details</p>
+						<ul>
+							<li  class="active"><a href="/user/profile">Profile</a></li>
+							<li><a href="/user/bookinghistory">Booking History </a></li>
+							<li><a href="userrate.html">Rated movies</a></li>
+						</ul>
+					</div>
+					<div class="user-fav">
+						<p>Others</p>
+						<ul>
+							<li><a href="#">Change password</a></li>
+							<li><a href="/user/logout">Log out</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9 col-sm-12 col-xs-12">
+				<div class="form-style-1 user-pro" action="#">
+					<form action="/user/profile/changeinfo" class="user" method="POST" id="change-info">
+						<h4>01. Profile details</h4>
+						<div class="row">
+							<div class="col-md-6 form-it">
+								<label>Name</label>
+								<input type="text" name="name"placeholder="<%-currentUser.CustomerName%>">
+							</div>
+							<div class="col-md-6 form-it">
+								<label>Email Address</label>
+								<input type="text" placeholder="<%-currentUser.CustomerEmail%>" disabled>
+							</div>
+						</div>
+                        <div class="row">
+							<div class="col-md-6 form-it">
+								<label>Phone</label>
+                                <input type="text" name="phone" placeholder="<%-currentUser.CustomerPhone%>">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-it">
+								<label>Address</label>
+                                <input type="text" name="address" placeholder="<%-currentUser.CustomerAddress%>">
+							</div>
+						</div>
+                        
+						<div class="row">
+							<div class="col-md-2">
+								<input class="submit" type="submit" value="save">
+							</div>
+						</div>	
+					</form>
+					<form action="#" class="password" action="/user/profile/changepassword" method="POST" id="change-password">
+						<h4>02. Change password</h4>
+						<div class="row">
+							<div class="col-md-6 form-it">
+								<label>Old Password</label>
+                                <p id="check-old-password" style="margin: -2px;color: brown;"> &nbsp; </p>
+								<input type="text" name="oldpassword" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-it">
+								<label>New Password</label>
+                                <p id="check-newpassword-password" style="margin: -2px;color: brown;"> &nbsp; </p>
+								<input type="text" name="newpassword" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-it">
+								<label>Confirm New Password</label>
+                                <p id="check-renewpassword-password" style="margin: -2px;color: brown;" > &nbsp; </p>
+								<input type="text" name="renewpassword" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<input class="submit" type="submit" value="change">
+							</div>
+						</div>	
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

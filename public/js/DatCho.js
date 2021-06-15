@@ -54,7 +54,7 @@ $("#DatCho").click(function(e){
             alert("Vui lòng đăng nhập trước khi đặt Chỗ!")
           }else{
             alert("Bạn đã đặt chỗ thành công!")
-            window.location.href = "/"
+            window.location.href = "/user/bookinghistory"
           }
        
       },

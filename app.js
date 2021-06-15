@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 
+=======
+//require('dotenv').config()
+>>>>>>> 8c9face9b6685984d895adb217d69734e30feb76
 const express = require('express');
 const bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');

@@ -55,13 +55,34 @@
 									startHours= StartTime.getHours(); 
 									startMinutes= StartTime.getMinutes(); 
 									startSeconds= StartTime.getSeconds(); 
+									if(startSeconds < 10){
+										startSeconds = "0" + startSeconds;
+									}
+									if(startMinutes < 10){
+										startMinutes = "0" + startMinutes ;
+									}
+									
+									if(startHours < 10){
+										startHours = "0" + startHours
+									}
 									FullTimeStart = startHours + ":" + startMinutes+ ":" + startSeconds 
 
+									
 
 									EndTime = new Date(suatchieu[0].DateTimeTo);
 									EndHours= EndTime.getHours(); 
 									EndMinutes= EndTime.getMinutes(); 
 									EndSeconds= EndTime.getSeconds(); 
+
+									if(EndMinutes < 10){
+										EndMinutes = "0" + EndMinutes ;
+									}
+									if(EndSeconds < 10){
+										EndSeconds = "0" + EndSeconds;
+									}
+									if(EndHours < 10){
+										EndHours = "0" + EndHours
+									}
 									FullTimeEnd = startHours + ":" + startMinutes+ ":" + startSeconds 
 									%>
 									<div>Giờ chiếu : <%-FullTimeStart%> - <%-FullTimeEnd%></div>

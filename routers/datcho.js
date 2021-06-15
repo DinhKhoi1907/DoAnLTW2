@@ -43,7 +43,6 @@ var listsRap = json_encode(rap.rows);
 
 //console.log(listPhimRap[1]);
 
-console.log(rap);
 res.end(listsRap);
 }));
 
@@ -70,7 +69,7 @@ router.get('/chonGhe/:SuatChieuId',asyncHandler(async function(req,res){
   const rap = r.rows;
   const ro = await Phong.findRoomPhimBySC(SuatChieuId);
   const room = ro.rows;
-  console.log(room)
+  
   res.render('user/datcho',{layout:'./layouts/user',room,rap,suatchieu,listGhe:listGhe,phim,title,user: req.user ,listCumRap:listCumRap});
 }));
 
@@ -82,9 +81,10 @@ router.post('/datcho',asyncHandler(async function(req,res){
    else{
     const {IdSuatChieu,seatList,TongTien} = req.body;
     var SeatList = seatList.toString()
-    console.log(IdSuatChieu,SeatList,TongTien);
+  //  console.log(IdSuatChieu,SeatList,TongTien);
     //insert vào bảng booking
-    await DatCho.InsertBooking(req.currentUser.id,IdSuatChieu,SeatList)
+    await DatCho.InsertBooking(req.currentUser.CustomerISN,IdSuatChieu,SeatList)
+    res.end("1");
  }
   
     // for(i=0;i<ViTriGhes.length;i++){
