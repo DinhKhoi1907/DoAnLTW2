@@ -104,7 +104,7 @@ app.get('/',async function(req,res){
  const top = 8;
  const pp = await Phim.findPhimDuocXemNhieu(top);
  const listPDXN = pp.rows
- console.log(listPDXN);
+ 
    res.render('home/home',{layout:'./layouts/home',user: req.user ,listCumRap:listCumRap,listphimmoi:listphimmoi,listPDXN:listPDXN});
 });
  

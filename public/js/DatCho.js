@@ -1,3 +1,14 @@
+function reloadMask(show,$) {
+  if (show)
+  {
+      $('#status').show();
+      $('#preloader').show();
+  }
+  else {
+      $('#status').hide();
+      $('#preloader').hide();
+  }
+}
 $( ".btnGhe" ).click(function(event) {
   if($(this).hasClass('AnGhe')){
 
@@ -37,26 +48,37 @@ $("#DatCho").click(function(e){
   }
     var IdSuatChieu = Number($("#idSuatChieu").val());
     var TongTien = Number($("#SetTongTien").val());
+    var NgayChieu = $("#dcNgayChieu").val();
+    var GioChieu = $("#dcGioChieu").val();
+    var TenRap = $("#dcTenRap").val();
+    var TenPhim= $("#dcTenPhim").val();
+    
+    reloadMask(true,$);
     $.ajax({
-      //${window.location.origin}
+  
       url:`/datcho/datcho`, // lay du lieu tu file
       type:"POST",
       data: {
         IdSuatChieu : IdSuatChieu,
         seatList :seatList,
-        TongTien,TongTien
-       
+        TongTien,TongTien,
+        NgayChieu:NgayChieu,
+        GioChieu:GioChieu,
+        TenRap:TenRap,
+        TenPhim:TenPhim
       },
 
       //thanh cong 
       success: function(data){
+        reloadMask(false,$);
           if(data== "0"){
             alert("Vui lòng đăng nhập trước khi đặt Chỗ!")
-          }else{
+          }
+          else {
             alert("Bạn đã đặt chỗ thành công!")
             window.location.href = "/user/bookinghistory"
           }
-       
+         // window.location.href = "/user/bookinghistory"
       },
       //that bai
       error : function(xhr,status,err){

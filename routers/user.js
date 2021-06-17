@@ -31,7 +31,7 @@ router.get('/',asyncHandler(async function(req,res){
     const cumRap =   await CumRap.findListCumRap();
    const listCumRap = cumRap.rows
   //  console.log(cumRap);
-    res.render('user/try',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap});
+    res.render('user/try',{layout:'./layouts/home',user: req.user ,listCumRap:listCumRap});
 
 }))
 router.get('/profile',asyncHandler(async function(req,res){
@@ -39,7 +39,7 @@ router.get('/profile',asyncHandler(async function(req,res){
   const listCumRap = cumRap.rows
 
   const title = 'Danh sách phim đang chiếu';
-    res.render('user/profile',{layout:'./layouts/user',listCumRap:listCumRap})
+    res.render('user/profile',{layout:'./layouts/home',listCumRap:listCumRap})
 }));
 router.post('/profile/changeinfo',asyncHandler(async function(req,res){
     const {name,address,phone} = req.body; 
@@ -87,8 +87,8 @@ router.get('/bookinghistory',asyncHandler(async function(req,res){
   const listCumRap = cumRap.rows
   const booking = await User.findBookingHistoryByIdUser(req.currentUser.CustomerISN);
   const listBooking = booking.rows;
-  console.log(listBooking)
-    res.render('user/booking_history',{layout:'./layouts/user',listCumRap:listCumRap,listBooking:listBooking});
+
+    res.render('user/booking_history',{layout:'./layouts/home',listCumRap:listCumRap,listBooking:listBooking});
 }));
 router.post('/register',asyncHandler (async function(req,res){
 
@@ -144,9 +144,6 @@ router.post('/register',asyncHandler (async function(req,res){
             req.session.userId = id.rows[0].fn_customer_insupd;
               res.end("1");
         }
-
-res.render('404');
-  //  res.redirect('/');
 
 }));
 
@@ -513,7 +510,7 @@ router.get('/rap',asyncHandler(async function(req,res){
    const listCumRap = await CumRap.findAll();
      //  const id = req.params.id;
        //const listRap = await Rap.findByIdCumRap(id);
-       res.render('home/rap',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap});
+       res.render('home/rap',{layout:'./layouts/home',user: req.user ,listCumRap:listCumRap});
 
 
 }));

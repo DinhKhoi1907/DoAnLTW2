@@ -70,7 +70,7 @@ router.get('/chonGhe/:SuatChieuId',asyncHandler(async function(req,res){
   const ro = await Phong.findRoomPhimBySC(SuatChieuId);
   const room = ro.rows;
   
-  res.render('user/datcho',{layout:'./layouts/user',room,rap,suatchieu,listGhe:listGhe,phim,title,user: req.user ,listCumRap:listCumRap});
+  res.render('user/datcho',{layout:'./layouts/home',room,rap,suatchieu,listGhe:listGhe,phim,title,user: req.user ,listCumRap:listCumRap});
 }));
 
 router.post('/datcho',asyncHandler(async function(req,res){
@@ -79,12 +79,42 @@ router.post('/datcho',asyncHandler(async function(req,res){
       res.send("0");
   } 
    else{
-    const {IdSuatChieu,seatList,TongTien} = req.body;
+      //dinh nghi tai khoan gui mail thong báo đặt chỗ thành công cho user
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      host: 'smtp.gmail.com',
+      auth: {
+
+        user: "william.lynguyen@gmail.com",
+        pass: "Deobiet_147",
+      },
+    });
+
+    const {IdSuatChieu,seatList,TongTien,NgayChieu,GioChieu,TenRap,TenPhim} = req.body;
+   
     var SeatList = seatList.toString()
   //  console.log(IdSuatChieu,SeatList,TongTien);
     //insert vào bảng booking
-    await DatCho.InsertBooking(req.currentUser.CustomerISN,IdSuatChieu,SeatList)
-    res.end("1");
+     const idDatcho = await DatCho.InsertBooking(req.currentUser.CustomerISN,IdSuatChieu,SeatList);
+
+   
+      //gui mail thông báo user đã đặt vế
+       transporter.sendMail({
+        from: '"XuanLy 👻" <william.lynguyen@gmail.com>', // sender address
+        to: `${req.currentUser.CustomerEmail}`, // list of receivers
+        subject: "Đặt chỗ thành công ✔", // Subject line
+         html: `<h1>Bạn đã đặt chỗ ở web chúng tôi</h1>  <br> 
+                mã đặt chỗ của bạn là : ${idDatcho.rows[0].fn_booking_ins} <br>
+                Tại rạp :  ${TenRap} <br>
+                bạn đã đặt ghế : ${seatList} <br>
+                Phim bạn chọn là : ${TenPhim}  <br>
+                Ngày chiếu : ${NgayChieu}<br>
+                Giờ bắt đầu : ${GioChieu} <br>
+                Tổng Tiền :  ${TongTien}<br> `,
+      });
+
+    res.send("1");
+  
  }
   
     // for(i=0;i<ViTriGhes.length;i++){
@@ -95,7 +125,6 @@ router.post('/datcho',asyncHandler(async function(req,res){
     //   await Ghe.create(ghe);
     // }
       
-    res.end();
 }));
 router.get('/logout',function(req,res){
      //delete req.currentUser.id;

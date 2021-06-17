@@ -27,7 +27,7 @@ router.get('/',asyncHandler(async function(req,res){
      //khi select tới bảng khác thi mới dùng CumRap 
      const title = 'Danh sách phim đang chiếu';
      //console.log(listPhim);
-    res.render('home/phim',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap,listPhim:listPhim,title});
+    res.render('home/phim',{layout:'./layouts/home',user: req.user ,listCumRap:listCumRap,listPhim:listPhim,title});
 
  
 }));
@@ -42,7 +42,7 @@ router.get('/',asyncHandler(async function(req,res){
 
     //console.log(phim)
     const date = new Date();
-    res.render('home/detail-phim',{layout:'./layouts/user',user: req.user ,listCumRap:listCumRap,detailPhim,date})
+    res.render('home/detail-phim',{layout:'./layouts/home.ejs',user: req.user ,listCumRap:listCumRap,detailPhim,date})
  }))
 
 
@@ -54,7 +54,7 @@ router.get('/',asyncHandler(async function(req,res){
              const title = 'Danh sách phim đang chiếu';
              const phim = await Phim.findPhimDangChieu();
              const listPhim = phim.rows;
-            res.render('home/phim',{layout:'layouts/user',listPhim:listPhim,title,listCumRap:listCumRap,user: req.user});
+            res.render('home/phim',{layout:'layouts/home',listPhim:listPhim,title,listCumRap:listCumRap,user: req.user});
  }));
 
 
@@ -67,7 +67,7 @@ router.get('/',asyncHandler(async function(req,res){
             const phim = await Phim.findPhimSapChieu();
             const listPhim = phim.rows;
          
-            res.render('home/phim',{layout:'layouts/user',listPhim:listPhim,title,listCumRap:listCumRap,user: req.user});
+            res.render('home/phim',{layout:'layouts/home',listPhim:listPhim,title,listCumRap:listCumRap,user: req.user});
  }));
 
  

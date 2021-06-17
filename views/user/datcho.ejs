@@ -32,8 +32,8 @@
 			<div class="col-md-4 col-sm-12 col-xs-12">
 				<div class="sidebar">
 					<div class="searh-form">
-					<input type="hidden" id="idSuatChieu" value="<%-suatchieu[0].ShowTimeISN%>">
-					<input type="hidden" id="idRap" value="rapidvaoday">
+					
+				
 						<form class="form-style-1" action="#">
 							<div class="row">
 								<div class="col-md-12 form-it">
@@ -97,7 +97,11 @@
 									%>
 
 									<div>Ngày chiếu  :  <%-FullDate%></div>
-								
+								<input type="hidden" value="<%-FullDate%>" id="dcNgayChieu">
+								<input type="hidden" value="<%-FullTimeStart%>" id="dcGioChieu">
+								<input type="hidden" id="idSuatChieu" value="<%-suatchieu[0].ShowTimeISN%>">
+								<input type="hidden" id="dcTenRap" value="<%-rap[0].CinemaName%>">
+								<input type="hidden" id="dcTenPhim" value="<%-phim[0].MovieName%>">
 								</div>
 								<div class="col-md-12 form-it">
 									<input type="hidden" value="<%-suatchieu[0].TicketPrice%>" id="Tien">
