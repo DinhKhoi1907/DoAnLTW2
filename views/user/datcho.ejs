@@ -109,8 +109,39 @@
 									<div style="display: flex;">Tổng tiền : <p id="TongTien">0</p></div>
 								</div>
 								<div class="col-md-12 ">
-									<input class="submit" type="submit" value="Đặt chỗ" id="DatCho">
+									<!-- Button trigger modal -->
+									<button class="btnDatCho" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+										Đặt chỗ
+									</button> 
 								</div>
+									
+									<!-- Modal -->
+									<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Choose Payment method, please</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+											</div>
+											<div class="modal-body">
+											<button id="PayAtCinema">Thanh toán tại quầy</button>
+											<hr>
+											<h5>Thanh toán online qua </h5>
+											<button id="PayByPaypal">Paypal</button>
+										
+											</div>
+											<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											
+											</div>
+										</div>
+										</div>
+									</div>
+
+
+
 							</div>
 						</form>
 					</div>

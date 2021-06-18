@@ -114,7 +114,6 @@ app.use('/rap',rapRouter);
 app.use('/phim',phimRouter);
 app.use('/datcho',datchoRouter);
 app.use(async function(req,res){
-
   res.status(404).render("404.ejs",{layout:'./layouts/404'});
 });
 var path = require('path');
