@@ -247,8 +247,33 @@
 							</li>
                             <li class=""><a href="/user/logout">Log Out</a></li>
                             <%}else if(user) { %> 
-								<li class=""><a href="#"><%- user.displayName %></a></li>
-								<li class=""><a href="/user/logout">Log Out</a></li>
+								<%if(user.displayName){%>
+									<li class="dropdown first">
+										<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
+											<i class="fa fa-user" aria-hidden="true" style="margin-left:7px; font-size: 15px;"></i>
+											<%- user.displayName %>
+										</a>
+										<ul class="dropdown-menu level1">
+											<li><a href="/user/profile">My Profile</a></li>
+											<li><a href="/user/bookinghistory">Booking History</a></li>
+										</ul>
+									</li>
+									<li class=""><a href="/user/logout">Log Out</a>
+
+
+									<%}else{%>	
+										<li class="dropdown first">
+											<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
+												<i class="fa fa-user" aria-hidden="true" style="margin-left:7px; font-size: 15px;"></i>
+												<%- user.emails[0].value %>
+											</a>
+											<ul class="dropdown-menu level1">
+												<li><a href="/user/profile">My Profile</a></li>
+												<li><a href="/user/bookinghistory">Booking History</a></li>
+											</ul>
+										</li>
+										<li class=""><a href="/user/logout">Log Out</a>
+								<%}%>
 								<%} else { %> 
 						<li class="loginLink"><a href="#">LOG In</a></li>
 						<li class="btn signupLink"><a href="#">Register</a></li>
