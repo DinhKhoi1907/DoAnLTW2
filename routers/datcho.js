@@ -1,5 +1,4 @@
 const express = require('express');
-const User = require('../models/user.js');
 const asyncHandler = require('express-async-handler');
 const nodemailer = require("nodemailer");
 //random string 
@@ -11,7 +10,6 @@ const Phong= require('../models/Phong.js');
 const Phim = require('../models/Phim.js');
 const SuatChieu= require('../models/SuatChieu.js');
 const DatCho= require('../models/DatCho.js');
-const Ve= require('../models/Ve.js');
 const Ghe= require('../models/Ghe.js');
 const router = express.Router();
 //
@@ -19,13 +17,73 @@ var paypal = require('paypal-rest-sdk');
 const passport = require('passport');
 //từ mảng sang dạng chuỗi để gửi qua ajax
 var json_encode = require('json_encode');
-//const ensureLoggedIn = require('../middlewares/ensure_logged_in.js')
+
+
+const momo = require("mtn-momo");
+
+const { Collections, Disbursements } = momo.create({
+  callbackHost: 'http://localhost:3000'
+});
+// initialise momo library
+
+
+// initialise disbursements
+const disbursements = Disbursements({
+  userSecret: 'NKZNupjDK6ePOj5TC64v2jcZwHKsWQmm',
+  userId: 'gJ7Txw4wLrlSCkOQ',
+ // primaryKey: process.env.DISBURSEMENTS_PRIMARY_KEY
+});
+
+router.get('/momo',function(req,res){
+  const collections = Collections({
+    userSecret: 'NKZNupjDK6ePOj5TC64v2jcZwHKsWQmm',
+    userId: 'gJ7Txw4wLrlSCkOQ',
+    primaryKey: '75442486-0878-440c-9db1-a7006c25a39f',
+  });
+  
+  // Request to pay
+  collections
+    .requestToPay({
+      amount: "50",
+      currency: "EUR",
+      externalId: "123456",
+      payer: {
+        partyIdType: "MSISDN",
+        partyId: "256774290781"
+      },
+      payerMessage: "testing",
+      payeeNote: "hello"
+    })
+    .then(transactionId => {
+      console.log({ transactionId });
+  
+      // Get transaction status
+      return collections.getTransaction(transactionId);
+    })
+    .then(transaction => {
+      console.log({ transaction });
+  
+      // Get account balance
+      return collections.getBalance();
+    })
+    .then(accountBalance => console.log({ accountBalance }))
+    .catch(error => {
+      console.log(error);
+    });
+
+});
+
+
+
+
+
 
 //kết nối tới tài khaonr nhận tiền
+//Giải ngân có nghĩa là ngân hàng xuất (giải quyết) tiền, tài chính (ngân) cho khách hàng theo hợp đồng cho vay đã thỏa thuận.
 paypal.configure({
   'mode': 'sandbox', //sandbox or live
-  'client_id': 'Aeo4IbfQ3KURE0rhGkEY1Oob3mizhRtc_YRWt5oKiHGxaGvOkTmq4CiRHd8V-qA0s-jhjy6kSU_D27kq',
-  'client_secret': 'EJhz4BSkqNsMwm2mdYpx2hY5kw70182NcaocAmq2yAiv6TlqTyxN8eUYHf0dlmRnTc5cAcbe3XV33rtM'
+  'client_id': 'ASJ3j3M4L8u8C-Qwmps4FsAuWwE1FpJ76YIpOFO6Z9bvxIIVDoaJ_HNrwXla8_N4DF6KLPbPA8047jaq',
+  'client_secret': 'EKbmjnfbshxG6TUzkfdwqSJjQ-KyRixwZhSUWKF1MDlWrGwKSjw_up0nw077Qi5l4nygJ6bsq-HbkfgA'
 });
 
 router.post('/PayByPaypal',function(req,res){
@@ -35,6 +93,8 @@ router.post('/PayByPaypal',function(req,res){
   req.session.TongTien = TongTien;
   
  // console.log(IdSuatChieu,seatList,TongTien,NgayChieu,GioChieu,TenRap,TenPhim);
+
+ // Request to pay
   var create_payment_json = {
     "intent": "sale",
     "payer": {
