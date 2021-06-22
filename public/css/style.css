@@ -481,7 +481,7 @@
     width: 41.66666667%;
   }
   .col-md-4 {
-    width: 33.33333333%;
+    width: 30.333333%;
   }
   .col-md-3 {
     width: 25%;
@@ -4032,6 +4032,9 @@ ul {
   text-transform: none;
   margin-bottom: 25px;
 }
+h1.bd-hd:hover{
+  color: rgb(208, 226, 45);
+}
 .bd-hd span {
   font-family: 'Dosis', sans-serif;
   font-size: 24px;
@@ -4058,7 +4061,10 @@ ul {
 .full-width-hd,
 .full-width-ft {
   padding: 0 100px;
+  
 }
+
+
 @media (max-width: 767px) {
   .full-width-hd,
   .full-width-ft {
@@ -4706,6 +4712,9 @@ ul {
   color: #ffffff;
   font-weight: bold;
   text-transform: uppercase;
+}
+.title-hd-sm h4:hover{
+  color: rgb(227, 255, 70);
 }
 @media (max-width: 767px) {
   .title-hd-sm h4 {
@@ -5659,7 +5668,7 @@ ul {
 /*movie single hero*/
 .mv-single-hero {
   background: url('../images/uploads/hero-bg.jpg') no-repeat;
-  height: 598px;
+  height: 480px;
 }
 /*series single hero*/
 .sr-single-hero {
@@ -5788,8 +5797,8 @@ ul {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  width: 290px;
-  height: 45px;
+  width: -webkit-fill-available;
+
   border: 0;
 }
 .yellowbtn:hover{
@@ -5855,7 +5864,11 @@ ul {
 }
 .page-single {
   background-color: #020d18;
-  padding: 75px 0;
+  min-height: 690px;
+}
+.page-overview{
+ 
+  background-color: #020d18;
 }
 .social-btn {
   margin-bottom: 40px;
@@ -5956,12 +5969,12 @@ ul {
   transition: all 0.5s ease-out;
 }
 .movie-single {
-  margin-top: -415px;
+  margin-top: -245px;
 }
 .movie-single .movie-img,
 .movie-single .mv-ceb {
   margin-right: 30px;
-  margin-bottom: 60px;
+  
 }
 @media (max-width: 767px) {
   .movie-single .movie-img,
@@ -5975,6 +5988,7 @@ ul {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+
 }
 .movie-single .movie-img .movie-btn,
 .movie-single .mv-ceb .movie-btn {
@@ -6349,7 +6363,7 @@ ul {
 }
 .movie-single .sb-it {
   margin-bottom: 30px;
-  margin-left: 30px;
+
 }
 @media (max-width: 991px) {
   .movie-single .sb-it {
@@ -6358,11 +6372,14 @@ ul {
 }
 .movie-single .sb-it h6 {
   font-family: 'Dosis', sans-serif;
-  font-size: 14px;
-  color: #abb7c4;
+  font-size: 17px;
+  color: #d1d1d1;
   font-weight: bold;
   text-transform: capitalize;
   margin-bottom: 10px;
+}
+.movie-single .sb-it h6:hover{
+  color: #80a3f0;
 }
 .movie-single .sb-it p.tags a {
   background-color: #233a50;
@@ -6385,7 +6402,7 @@ ul {
   color: #dcf836;
 }
 .movie-single .sticky-sb {
-  position: relative;
+  position: relative; 
   top: 0px;
 }
 @media (max-width: 991px) {
@@ -8152,7 +8169,7 @@ footer {
   background-size: cover;
 }
 footer .flex-parent-ft {
-  padding: 80px 0 60px 0;
+  padding: 144px 0 60px 0;
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
@@ -8404,10 +8421,12 @@ em.day {
   color: rgb(41, 41, 41);
 }
 .plotMovie{
-  white-space: nowrap; 
-  width: 500px; 
+  height: 54px;
+  width:500px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  display: -webkit-box;
 }
 
 #TongTien{
@@ -8418,4 +8437,19 @@ em.day {
 p.booking-history{
   font-size: 14px;
   margin-top: 10px;
+}
+.btnDatCho{
+  font-family: 'Dosis', sans-serif;
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: #dd003f;
+    width: 100%;
+    height: 40px;
+    border-radius: 3px !important;
+    border: 0px;
+}
+.btnDatCho:hover{
+  background: #ff0f53;
 }

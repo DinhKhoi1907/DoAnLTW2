@@ -37,7 +37,7 @@ $(document).ready(function () {
                          //hàm indexOf là hàm kiểm tra phần tử đã có ở mảng hay chưa , nếu có nó sẽ trả về vị trí 0 1  2 ...
                         if(cumRap.indexOf(element.provincename) === -1){
                             if(i==0){
-                                $("#ListCumRap").append(`<button class="btnCumRap active" value="CumRap-${element.provinceisn}">${element.provincename}</button>`);
+                                $("#ListCumRap").append(`<button class="btnCumRap " value="CumRap-${element.provinceisn}">${element.provincename}</button>`);
                                  // gán cho rạp bằng phần tử hiện tại để vòng lặp tiếp theo nó sẽ không thảo điều kiên
                                 cumRap.push(element.provincename);
                             

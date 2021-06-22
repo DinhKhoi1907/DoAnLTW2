@@ -167,7 +167,7 @@
     </div>
 </div>
 <!-- BEGIN | Header -->
-<header class="ht-header">
+<header class="ht-header ht-header full-width-hd">
 	<div class="container">
 		<nav class="navbar navbar-default navbar-custom">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -278,7 +278,10 @@
 							</li>
                             <li class=""><a href="/user/logout">Log Out</a></li>
                             <%}else if(user) { %> 
-								<li class=""><a href="#"><%- user.displayName %></a></li>
+						
+								<li class=""><a href="#">acv<%- user.displayName %></a></li>
+								
+								
 								<li class=""><a href="/user/logout">Log Out</a></li>
 								<%} else { %> 
 						<li class="loginLink"><a href="#">LOG In</a></li>
@@ -289,14 +292,7 @@
 			<!-- /.navbar-collapse -->
 	    </nav>
 	    
-	    <!-- top search form -->
-	    <div class="top-search">
-	    	<select>
-				<option value="united">TV show</option>
-				<option value="saab">Others</option>
-			</select>
-			<input type="text" placeholder="Search for a movie, TV Show or celebrity that you are looking for">
-	    </div>
+	  
 	</div>
 </header>
 <!-- END | Header -->

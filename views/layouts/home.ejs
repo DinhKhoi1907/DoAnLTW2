@@ -25,15 +25,15 @@
 	<meta name="format-detection" content="telephone-no">
 
 	<!-- CSS files -->
-	<link rel="stylesheet" href="css/plugins.css">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/style-2.css">
+	<link rel="stylesheet" href="/css/plugins.css">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/style-2.css">
 	
 </head>
 <body>
 <!--preloading-->
 <div id="preloader">
-    <img class="logo" src="images/logo1.png" alt="" width="119" height="58">
+    <img class="logo" src="/images/logo1.png" alt="" width="119" height="58">
     <div id="status">
         <span></span>
         <span></span>
@@ -86,36 +86,47 @@
     </div>
 </div>
 <!--end of login form popup-->
-<!--signup form popup-->
+<!--Register form popup-->
 <div class="login-wrapper"  id="signup-content">
     <div class="login-content">
         <a href="#" class="close">x</a>
         <h3>Register</h3>
-		<p id = "check-reg-empty"></p>
+		<p id = "check-reg-empty" style="margin:-8px;margin: auto;"></p>
         <form method="post" action="/user/register" id="form-register-2">
             
             <div class="row">
                 <label for="email">
                   Email:
-					<p id="check-reg-email" style="margin:-1px;"> &nbsp; </p>
+					<p id="check-reg-email" style="margin:-8px;"> &nbsp; </p>
 					<input type="email" class="form-control" id="email-2" name="email" placeholder="Nhập email..."  aria-describedby="emailHelp"  >
 				</label>
 				
             </div>
              <div class="row">
                 <label for="password">
-                    Password:<p id="check-reg-password" style="margin: -1px;"> &nbsp; </p>
+                    Password:<p id="check-reg-password" style="margin: -8px;"> &nbsp; </p>
                     <input type="password" class="form-control" id="password-2" name="password" placeholder="Nhập mật khẩu..." >
                 </label>
             </div>
              <div class="row">
                 <label for="repassword">
-                    re-type Password:<p id="check-reg-repassword" style="margin:-1px;"> &nbsp; </p>
+                    re-type Password:<p id="check-reg-repassword" style="margin:-8px;"> &nbsp; </p>
                     <input type="password" class="form-control" id="repassword-2" name="repassword" placeholder="Nhập mật khẩu...">
-					
 				</label>
-				
             </div>
+			<div class="row">
+                <label for="name">
+                    Name:<p id="check-reg-name" style="margin: -8px;"> &nbsp; </p>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên..." >
+                </label>
+            </div>
+			<div class="row">
+                <label for="phone">
+                    Phone:<p id="check-reg-phone" style="margin: -8px;"> &nbsp; </p>
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại..." >
+                </label>
+            </div>
+			
            <div class="row">
              <button type="submit" id="registerBtn">Register</button>
            </div>
@@ -144,7 +155,7 @@
             <div class="row">
                 <label for="email-2">
                     your email:
-                    <input type="email" class="form-control" id="check-email" name="email" placeholder="Nhập email..." required pattern="\S+.*"/>
+                    <input type="email" class="form-control" id="check-email" name="email"   placeholder="Nhập email..."  aria-describedby="emailHelp"/>
                 </label>
             </div>
           
@@ -170,74 +181,45 @@
 							<span></span>
 						</div>
 				    </div>
-				    <a href="index-2.html"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
+				    <a href="/"><img class="logo" src="/images/logo1.png" alt="" width="119" height="58"></a>
 			    </div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav flex-child-menu menu-left">
-						<li class="hidden">
-							<a href="#page-top"></a>
-						</li>
+					
+						
 						<li class="dropdown first">
 							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-							Home <i class="fa fa-angle-down" aria-hidden="true"></i>
+							Movie<i class="fa fa-angle-down" aria-hidden="true"></i>
 							</a>
 							<ul class="dropdown-menu level1">
-								<li><a href="index-2.html">Home 01</a></li>
-								<li><a href="homev2.html">Home 02</a></li>
-								<li><a href="homev3.html">Home 03</a></li>
-							</ul>
-						</li>	
-						<li class="dropdown first">
-							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-							movies<i class="fa fa-angle-down" aria-hidden="true"></i>
-							</a>
-							<ul class="dropdown-menu level1">
-								<!-- <li class="dropdown">
-									<a href="#">about us <i class="fa fa-caret-right" aria-hidden="true"></i></a>
+								<li><a href="/phim/phimdangchieu">Movie is playing</a></li>
+								<li class="it-last"><a href="/phim/phimsapchieu">Movie comming soon</a></li>
+								<li><a href="/phim">Movie list</a></li>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" >Thể loại<i class="ion-ios-arrow-forward"></i></a>
 									<ul class="dropdown-menu level2">
-										<li><a href="aboutv1.html">About Us 01</a></li>
-										<li><a href="aboutv2.html">About Us 02</a></li>
+										<li><a href="moviegrid.html">Siêu nhân</a></li>
+										<li><a href="moviegridfw.html">Dật gân</a></li>
+										<li><a href="moviegridfw.html">Viễn tưởng</a></li>
 									</ul>
-								</li> -->
-								<li><a href="moviegrid.html">Movie grid</a></li>
-								<li><a href="moviegridfw.html">movie grid full width</a></li>
-								<li><a href="movielist.html">Movie list</a></li>
-								<li class="it-last"><a href="moviesingle.html">Movie single</a></li>
+								</li>
 							</ul>
 						</li>
 						<li class="dropdown first">
 							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-							celebrities <i class="fa fa-angle-down" aria-hidden="true"></i>
+								Cụm rạp<i class="fa fa-angle-down" aria-hidden="true"></i>
 							</a>
-							<ul class="dropdown-menu level1">
-								<li><a href="celebritygrid01.html">celebrity grid 01</a></li>
-								<li><a href="celebritygrid02.html">celebrity grid 02 </a></li>
-								<li><a href="celebritylist.html">celebrity list</a></li>
-								<li class="it-last"><a href="celebritysingle.html">celebrity single</a></li>
+
+
+							<ul class="dropdown-menu level1">	
+								<% listCumRap.forEach(list => { %>
+								<li><a href="/rap?id=<%-list.ProvinceISN%>"><%- list.ProvinceName %></a></li>
+								<%}) %>
+								
 							</ul>
 						</li>
-						<li class="dropdown first">
-							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-							news <i class="fa fa-angle-down" aria-hidden="true"></i>
-							</a>
-							<ul class="dropdown-menu level1">
-								<li><a href="bloglist.html">blog List</a></li>
-								<li><a href="bloggrid.html">blog Grid</a></li>
-								<li class="it-last"><a href="blogdetail.html">blog Detail</a></li>
-							</ul>
-						</li>
-						<li class="dropdown first">
-							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-							community <i class="fa fa-angle-down" aria-hidden="true"></i>
-							</a>
-							<ul class="dropdown-menu level1">
-								<li><a href="userfavoritegrid.html">user favorite grid</a></li>
-								<li><a href="userfavoritelist.html">user favorite list</a></li>
-								<li><a href="userprofile.html">user profile</a></li>
-								<li class="it-last"><a href="userrate.html">user rate</a></li>
-							</ul>
-						</li>
+						
 					</ul>
 					<ul class="nav navbar-nav flex-child-menu menu-right">
 						<li class="dropdown first">
@@ -250,13 +232,48 @@
 								<li class="it-last"><a href="comingsoon.html">Coming soon</a></li>
 							</ul>
 						</li>                
-						<li><a href="#">Help</a></li>
-                        <%if(currentUser) { %> 
-                            <li class=""><a href="#"><%- currentUser.email %></a></li>
+					
+						<%if(currentUser) { %> 
+							<li class="dropdown first">
+								
+								<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
+									<i class="fa fa-user" aria-hidden="true" style="margin-left:7px; font-size: 15px;"></i>
+									<%- currentUser.CustomerName %> 
+								</a>
+								<ul class="dropdown-menu level1">
+									<li><a href="/user/profile">My Profile</a></li>
+									<li><a href="/user/bookinghistory">Booking History</a></li>
+								</ul>
+							</li>
                             <li class=""><a href="/user/logout">Log Out</a></li>
                             <%}else if(user) { %> 
-								<li class=""><a href="#"><%- user.displayName %></a></li>
-								<li class=""><a href="/user/logout">Log Out</a></li>
+								<%if(user.displayName){%>
+									<li class="dropdown first">
+										<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
+											<i class="fa fa-user" aria-hidden="true" style="margin-left:7px; font-size: 15px;"></i>
+											<%- user.displayName %>
+										</a>
+										<ul class="dropdown-menu level1">
+											<li><a href="/user/profile">My Profile</a></li>
+											<li><a href="/user/bookinghistory">Booking History</a></li>
+										</ul>
+									</li>
+									<li class=""><a href="/user/logout">Log Out</a>
+
+
+									<%}else{%>	
+										<li class="dropdown first">
+											<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
+												<i class="fa fa-user" aria-hidden="true" style="margin-left:7px; font-size: 15px;"></i>
+												<%- user.emails[0].value %>
+											</a>
+											<ul class="dropdown-menu level1">
+												<li><a href="/user/profile">My Profile</a></li>
+												<li><a href="/user/bookinghistory">Booking History</a></li>
+											</ul>
+										</li>
+										<li class=""><a href="/user/logout">Log Out</a>
+								<%}%>
 								<%} else { %> 
 						<li class="loginLink"><a href="#">LOG In</a></li>
 						<li class="btn signupLink"><a href="#">Register</a></li>
@@ -279,7 +296,7 @@
 	<div class="row">
 		<div class="flex-parent-ft">
 			<div class="flex-child-ft item1">
-				 <a href="index-2.html"><img class="logo" src="images/logo1.png" alt=""></a>
+				 <a href="index-2.html"><img class="logo" src="/images/logo1.png" alt=""></a>
 				 <p>5th Avenue st, manhattan<br>
 				New York, NY 10001</p>
 				<p>Call us: <a href="#">(+01) 202 342 6789</a></p>
@@ -333,27 +350,30 @@
 </footer>
 <!-- end of footer v2 section-->
    <!-- ajax -->
+
 <!--  jquery script  -->
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <!--  validation script  -->
 
 
- 
 <!--Add custom scripts here -->
 
 
-<script src="js/jquery.js"></script>
-<script src="js/validation.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/validation.js"></script>
 
-<script src="js/plugins.js"></script>
-<script src="js/plugins2.js"></script>
-<script src="js/custom.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="/js/plugins2.js"></script>
+<script src="/js/custom.js"></script>
 
-<script src="js/check_email.js"></script>
-<script src="js/login.js"></script>
-<script src="js/register.js"></script>
-
+<script src="/js/check_email.js"></script>
+<script src="/js/login.js"></script>
+<script src="/js/register.js"></script>
+<script src="/js/date.js"></script>
+<script src="/js/DatCho.js"></script>
+<script src="/js/phim.js"></script>
+<script src="/js/profile.js"></script>
 
 </body>
 

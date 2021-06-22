@@ -13,7 +13,7 @@
 		</div>
 	</div>
 </div>
-<div class="page-single movie_list">
+<div class="page-single movie_list" style="padding-top: 40px;">
 	<div class="container">
 		<div class="row ipad-width2">
 			<div class="col-md-8 col-sm-12 col-xs-12">
@@ -24,11 +24,11 @@
 				</div>
                 <% listPhim.forEach(list =>{ %> 
 				<div class="movie-item-style-2">
-					<img src="/<%-list.poster%>" alt="">
+					<img src="/<%-list.poster%>" style="width:223px;height:310px">
 					<div class="mv-item-infor">
 						<h6><a href="/phim/detail?id=<%-list.movieisn%>"><%-list.moviename%> <span>(2012)</span></a></h6>
 						<p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
-						<p class="plotMovie"><%-list.plot%></p>
+						<p class="plotMovie describe"><%-list.plot%></p>
 						<%FullDate = new Date(list.premiere)%>
 												<%date = FullDate.getDate();
 												month =  FullDate.getMonth() + 1;
@@ -37,8 +37,8 @@
 						            	
 						<p class="run-time"> Movie time : <%-list.movietime%> phút .     <span>Premiere : <%-date%>/<%-month%>/<%-year%></span></p>
 						<p>Director: <a href="#"><%-list.director%></a></p>
-						<p>Kind: <a href="#"><%-list.kindofmovie%></a></p>
-						<p class="describe">Country: <a href="#"><%-list.country%></a></p>
+						<p>Kind of movie : <a href="#"><%-list.kindofmovie%></a></p>
+						<p >Country: <a href="#"><%-list.country%></a></p>
 					</div>
 				</div>
                 <%})%>

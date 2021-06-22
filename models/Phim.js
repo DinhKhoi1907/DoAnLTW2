@@ -21,6 +21,16 @@ Phim.findRapById = async function(id) {
     return Phim.query(`SELECT * FROM "Movie" mv JOIN "ShowTime" st ON (mv."MovieISN" = st."MovieISN")
                        WHERE st."ShowTimeISN"  = $1`,[SuatChieuId]);
   }
+
+
+  Phim.findPhimMoiDuocCongChieu = async function() {
+    return Phim.query(`SELECT * FROM fn_GetMoviesAreBeenReleased()`);
+  }, 
+ 
+  Phim.findPhimDuocXemNhieu = async function(top) {
+    return Phim.query(`SELECT * FROM fn_getmoviesareintophighestview($1)`,[top]);
+  }, 
+
  // Phim.findListCumRap = CumRap.query('SELECT * FROM fn_GetAllProvinces()')
   
  
