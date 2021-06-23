@@ -15,6 +15,20 @@ User.InsertNewUserReturnId = async function(email,password,name,phone){
     return User.query(`SELECT fn_customer_insupd($1,$2,$3,$4,$5,$6,$7)`,[0,name,email,password,phone,'',''])
 }
 
+//fb and gg  thêm id vào cột email
+User.NewUserFB = async function(email,name){
+   // console.log(id,name);
+    //return User.query(`INSERT INTO "Customer"("CustomerEmail","CustomerName") VALUES($1,$2) RETURNING "CustomerISN"`,[id,name])
+    return User.query(`SELECT fn_customer_insupd($1,$2,$3,$4,$5,$6,$7)`,[0,name,email,' ',' ',' ',' '])
+}
+
+User.InsertNewUserGG = async function(id){
+   // return User.query(`INSERT INTO "Customer"("CustomerEmail") VALUES($1) RETURNING "CustomerISN"`,[id])
+    return User.query(`SELECT fn_customer_insupd($1,$2,$3,$4,$5,$6,$7)`,[0,'',id,'','','',''])
+}
+
+
+
 User.UpDateToken  = async function(idCustomer,token){
     return User.query(`UPDATE "Customer"
                         SET "Token" = $1

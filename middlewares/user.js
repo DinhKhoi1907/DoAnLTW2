@@ -14,7 +14,6 @@ module.exports = asyncHandler(async function(req,res,next){
             
             //luu vao req de su dung ben router
             req.currentUser = user.rows[0];
-           
             //luu vao de su dung ben view
             res.locals.currentUser = user.rows[0];
         }

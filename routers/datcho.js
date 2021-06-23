@@ -1,8 +1,6 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const nodemailer = require("nodemailer");
-//random string 
-var randomstring = require("randomstring");
 //cum rap
 const CumRap = require('../models/CumRap.js');
 const Rap = require('../models/Rap.js');
@@ -13,69 +11,10 @@ const DatCho= require('../models/DatCho.js');
 const Ghe= require('../models/Ghe.js');
 const router = express.Router();
 //
+
 var paypal = require('paypal-rest-sdk');
-const passport = require('passport');
 //từ mảng sang dạng chuỗi để gửi qua ajax
 var json_encode = require('json_encode');
-
-
-const momo = require("mtn-momo");
-
-const { Collections, Disbursements } = momo.create({
-  callbackHost: 'http://localhost:3000'
-});
-// initialise momo library
-
-
-// initialise disbursements
-const disbursements = Disbursements({
-  userSecret: 'NKZNupjDK6ePOj5TC64v2jcZwHKsWQmm',
-  userId: 'gJ7Txw4wLrlSCkOQ',
- // primaryKey: process.env.DISBURSEMENTS_PRIMARY_KEY
-});
-
-router.get('/momo',function(req,res){
-  const collections = Collections({
-    userSecret: 'NKZNupjDK6ePOj5TC64v2jcZwHKsWQmm',
-    userId: 'gJ7Txw4wLrlSCkOQ',
-    primaryKey: '75442486-0878-440c-9db1-a7006c25a39f',
-  });
-  
-  // Request to pay
-  collections
-    .requestToPay({
-      amount: "50",
-      currency: "EUR",
-      externalId: "123456",
-      payer: {
-        partyIdType: "MSISDN",
-        partyId: "256774290781"
-      },
-      payerMessage: "testing",
-      payeeNote: "hello"
-    })
-    .then(transactionId => {
-      console.log({ transactionId });
-  
-      // Get transaction status
-      return collections.getTransaction(transactionId);
-    })
-    .then(transaction => {
-      console.log({ transaction });
-  
-      // Get account balance
-      return collections.getBalance();
-    })
-    .then(accountBalance => console.log({ accountBalance }))
-    .catch(error => {
-      console.log(error);
-    });
-
-});
-
-
-
-
 
 
 //kết nối tới tài khaonr nhận tiền
@@ -224,13 +163,10 @@ router.get('/chonGhe/:SuatChieuId',asyncHandler(async function(req,res){
   res.render('user/datcho',{layout:'./layouts/home',room,rap,suatchieu,listGhe:listGhe,phim,title,user: req.user ,listCumRap:listCumRap});
 }));
 
-router.post('/PayAtCinema',asyncHandler(async function(req,res){
+router.post('/PayAtCounter',asyncHandler(async function(req,res){
     
-  if(!req.currentUser){
-      res.send("0");
-  } 
-   else{
-      //dinh nghi tai khoan gui mail thong báo đặt chỗ thành công cho user
+  if(req.currentUser){
+        //dinh nghi tai khoan gui mail thong báo đặt chỗ thành công cho user
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       host: 'smtp.gmail.com',
@@ -266,7 +202,51 @@ router.post('/PayAtCinema',asyncHandler(async function(req,res){
 
     res.send("1");
   
+  } 
+   else if(req.user) {
+      //dinh nghi tai khoan gui mail thong báo đặt chỗ thành công cho user
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      host: 'smtp.gmail.com',
+      auth: {
+
+        user: "william.lynguyen@gmail.com",
+        pass: "Deobiet_147",
+      },
+    });
+
+    const {IdSuatChieu,seatList,TongTien,NgayChieu,GioChieu,TenRap,TenPhim} = req.body;
+   
+    var SeatList = seatList.toString()
+  //  console.log(IdSuatChieu,SeatList,TongTien);
+    //insert vào bảng booking
+     const idDatcho = await DatCho.InsertBooking(req.user.id,IdSuatChieu,SeatList);
+
+   
+      //gui mail thông báo user đã đặt vế
+      //  transporter.sendMail({
+      //   from: '"XuanLy 👻" <william.lynguyen@gmail.com>', // sender address
+      //   to: `${req.currentUser.CustomerEmail}`, // list of receivers
+      //   subject: "Đặt chỗ thành công ✔", // Subject line
+      //    html: `<h1>Bạn đã đặt chỗ ở web chúng tôi</h1>  <br> 
+      //           mã đặt chỗ của bạn là : ${idDatcho.rows[0].fn_booking_ins} <br>
+      //           Tại rạp :  ${TenRap} <br>
+      //           bạn đã đặt ghế : ${seatList} <br>
+      //           Phim bạn chọn là : ${TenPhim}  <br>
+      //           Ngày chiếu : ${NgayChieu}<br>
+      //           Giờ bắt đầu : ${GioChieu} <br>
+      //           Tổng Tiền :  ${TongTien}<br> `,
+      // });
+
+    res.send("1");
+  
  }
+    else{
+      res.send("0");
+    }
+
+
+
       
 }));
 router.get('/logout',function(req,res){
