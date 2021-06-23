@@ -85,7 +85,7 @@ router.post('/profile/changepassword',asyncHandler(async function(req,res){
 router.get('/bookinghistory',asyncHandler(async function(req,res){
   const cumRap =   await CumRap.findListCumRap(); 
   const listCumRap = cumRap.rows
-  const booking = await User.findBookingHistoryByIdUser(req.currentUser.CustomerISN);
+  const booking = await User.findBookingHistoryByIdUser(req.currentUser.CustomerISN ? req.currentUser.CustomerISN : req.user);
   const listBooking = booking.rows;
 
     res.render('user/booking_history',{layout:'./layouts/home',listCumRap:listCumRap,listBooking:listBooking});
@@ -491,17 +491,43 @@ router.post('/reset/:token',asyncHandler(async function(req,res){
 //đăng nhập bằng fb
 router.get('/facebook', passport.authenticate('facebook',{scope:'email'}));
 
-router.get('/facebook/callback',passport.authenticate('facebook', { successRedirect : '/', failureRedirect: '/login' }),
+router.get('/facebook/callback',passport.authenticate('facebook', { successRedirect : '/user/checkAccountFbOrGg', failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
+    console.log("hahahahahaah")
   });
+
+;
  //đăng nhập bằng google
 router.get('/google', passport.authenticate('google',{scope:'email'}));
 
-router.get('/google/callback',passport.authenticate('google', { successRedirect : '/', failureRedirect: '/login' }),
+router.get('/google/callback',passport.authenticate('google', { successRedirect : '/user/checkAccountFbOrGg', failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
   });
+
+  router.get('/checkAccountFbOrGg',asyncHandler(async function(req,res){
+    const found = await User.findUserByEmail(req.user.id);
+    if(found.rows[0]){  
+      req.session.userId = found.rows[0].CustomerISN;
+      res.redirect('/');
+    }else{
+      if(req.user.displayName){
+        const id = await User.NewUserFB(req.user.id,req.user.displayName);
+        // lưu id vào session 
+        req.session.userId = id.rows[0].CustomerISN;
+        res.redirect('/')
+      }
+      else{
+        const id = await User.InsertUserGG(req.user.emails[0].value);
+        // lưu id vào session 
+        req.session.userId = id.rows[0].CustomerISN;
+        console.log();
+        res.redirect('/');
+      }
+     ;
+    }
+}))
+
 
 //cụm rạp
 //router.get('user/CumRap/:id',asyncHandler())

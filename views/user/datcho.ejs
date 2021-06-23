@@ -42,11 +42,11 @@
 									
 								</div>
 								<div class="col-md-12 form-it">
-									<div>Tên rạp : <%-rap[0].CinemaName%></div>
+									<div>Cinema name : <%-rap[0].CinemaName%></div>
 									
 								</div>
 								<div class="col-md-12 form-it">
-									<div>Địa chỉ : <%-rap[0].CinemaAddress%></div>
+									<div>Address : <%-rap[0].CinemaAddress%></div>
 									
 								</div>
 								<div class="col-md-12 form-it">
@@ -85,7 +85,7 @@
 									}
 									FullTimeEnd = startHours + ":" + startMinutes+ ":" + startSeconds 
 									%>
-									<div>Giờ chiếu : <%-FullTimeStart%> - <%-FullTimeEnd%></div>
+									<div>Time start : <%-FullTimeStart%> - <%-FullTimeEnd%></div>
 								</div>
 								<div class="col-md-12 form-it">
 								<%
@@ -96,7 +96,7 @@
 									FullDate = date + "/" + month+ "/" + year 
 									%>
 
-									<div>Ngày chiếu  :  <%-FullDate%></div>
+									<div>Date start  :  <%-FullDate%></div>
 								<input type="hidden" value="<%-FullDate%>" id="dcNgayChieu">
 								<input type="hidden" value="<%-FullTimeStart%>" id="dcGioChieu">
 								<input type="hidden" id="idSuatChieu" value="<%-suatchieu[0].ShowTimeISN%>">
@@ -106,12 +106,12 @@
 								<div class="col-md-12 form-it">
 									<input type="hidden" value="<%-suatchieu[0].TicketPrice%>" id="Tien">
 									<input type="hidden" value="0" id="SetTongTien">
-									<div style="display: flex;">Tổng tiền : <p id="TongTien">0</p></div>
+									<div style="display: flex;">Total money : <p id="TongTien">0</p></div>
 								</div>
 								<div class="col-md-12 ">
 									<!-- Button trigger modal -->
 									<button class="btnDatCho" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-										Đặt chỗ
+										Booking
 									</button> 
 								</div>
 									
@@ -120,17 +120,19 @@
 										<div class="modal-dialog" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabel">Choose Payment method, please</h5>
+											<h5 class="modal-title" id="exampleModalLabel" style="font-size: 22px;">Choose Payment method, please</h5>
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 											</button>
 											</div>
 											<div class="modal-body">
-											<button id="PayAtCinema">Pay at counter</button>
+											<button id="PayAtCounter">Pay at counter</button>
 											<hr>
 											<h5>Pay online by </h5>
-											<button id="PayByPaypal"><i class="fa fa-paypal"></i> Paypal</button>
-											<a href="/datcho/momo">Momo</a>	
+											<button id="PayByPaypal"><i class="fa fa-paypal"></i> <b style="color: darkblue;">Pay</b><b style="color: darkcyan;"></b>pal</button>
+											
+											<button id="PayBymomo"><b>momo</b></button>
+											<a href="/momo">momo</a>
 											</div>
 											<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

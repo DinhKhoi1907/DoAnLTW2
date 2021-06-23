@@ -235,10 +235,9 @@
 					
 						<%if(currentUser) { %> 
 							<li class="dropdown first">
-								
 								<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
 									<i class="fa fa-user" aria-hidden="true" style="margin-left:7px; font-size: 15px;"></i>
-									<%- currentUser.CustomerName %> 
+									<%- currentUser.CustomerName ?currentUser.CustomerName : currentUser.CustomerEmail  %> 
 								</a>
 								<ul class="dropdown-menu level1">
 									<li><a href="/user/profile">My Profile</a></li>
@@ -246,34 +245,7 @@
 								</ul>
 							</li>
                             <li class=""><a href="/user/logout">Log Out</a></li>
-                            <%}else if(user) { %> 
-								<%if(user.displayName){%>
-									<li class="dropdown first">
-										<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-											<i class="fa fa-user" aria-hidden="true" style="margin-left:7px; font-size: 15px;"></i>
-											<%- user.displayName %>
-										</a>
-										<ul class="dropdown-menu level1">
-											<li><a href="/user/profile">My Profile</a></li>
-											<li><a href="/user/bookinghistory">Booking History</a></li>
-										</ul>
-									</li>
-									<li class=""><a href="/user/logout">Log Out</a>
-
-
-									<%}else{%>	
-										<li class="dropdown first">
-											<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-												<i class="fa fa-user" aria-hidden="true" style="margin-left:7px; font-size: 15px;"></i>
-												<%- user.emails[0].value %>
-											</a>
-											<ul class="dropdown-menu level1">
-												<li><a href="/user/profile">My Profile</a></li>
-												<li><a href="/user/bookinghistory">Booking History</a></li>
-											</ul>
-										</li>
-										<li class=""><a href="/user/logout">Log Out</a>
-								<%}%>
+                   
 								<%} else { %> 
 						<li class="loginLink"><a href="#">LOG In</a></li>
 						<li class="btn signupLink"><a href="#">Register</a></li>
@@ -374,7 +346,7 @@
 <script src="/js/DatCho.js"></script>
 <script src="/js/phim.js"></script>
 <script src="/js/profile.js"></script>
-
+<script src="/js/payment.js"></script>
 </body>
 
 <!-- homev207:28-->

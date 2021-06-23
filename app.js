@@ -6,6 +6,7 @@ const userRouter = require('./routers/user.js');
 const rapRouter = require('./routers/rap.js');
 const phimRouter = require('./routers/phim.js');
 const datchoRouter = require('./routers/datcho.js');
+const momoRouter = require('./routers/momo.js');
 const asyncHandler = require('express-async-handler')
 const User = require('./models/user.js');
 const CumRap = require('./models/CumRap.js');
@@ -113,6 +114,7 @@ app.use('/user',userRouter);
 app.use('/rap',rapRouter);
 app.use('/phim',phimRouter);
 app.use('/datcho',datchoRouter);
+app.use('/momo',momoRouter);
 app.use(async function(req,res){
   res.status(404).render("404.ejs",{layout:'./layouts/404'});
 });
