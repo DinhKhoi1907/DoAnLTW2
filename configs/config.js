@@ -12,7 +12,7 @@ const Pool = require("pg").Pool;
 module.exports = new Pool({
   user: "postgres",
   host: "localhost",
-  database: "CinemaDB5",
+  database: "CinemaDB9",
   password: "aloalo",
   port: "5432",
 });

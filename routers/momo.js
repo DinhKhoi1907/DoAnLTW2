@@ -2,6 +2,8 @@
 const { v1: uuidv1 } = require('uuid');
 const https = require('https');
 const asyncHandler = require('express-async-handler');
+const CumRap = require('../models/CumRap.js');
+const User = require('../models/user.js');
 //parameters send to MoMo get get payUrl
 var endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
 var hostname = "https://test-payment.momo.vn";
@@ -9,7 +11,6 @@ var path = "/gw_payment/transactionProcessor";
 var partnerCode = "MOMOC27G20200806";
 var accessKey = "lm2Vlmt6Nek0Ugqz";
 var serectkey = "7WuFHv01aOMAiYwWW5zf6WQA84auopeN";
-var orderInfo = "movieName : iron man  seatList : A3 A4 A5 DateStart: 1/7/2021 Cinema : 62/8 thân văn nhiếp phường an phú quận 2 thành phố hồ chí minh ";
 var returnUrl = "http://localhost:3000/momo/return";
 var notifyurl = "http://localhost:3000/notify";
 
@@ -20,17 +21,19 @@ var extraData = "merchantName=Nguyễn Xuân Lý ;merchantId=" //pass empty valu
 const express = require('express');
 const router = express.Router();
 
-router.get('/',function(req,res){
-  // const {IdSuatChieu,seatList,TongTien,NgayChieu,GioChieu,TenRap,TenPhim} = req.body;
-  // req.session.IdSuatChieu = IdSuatChieu;
-  // req.session.seatList= seatList;
-  // req.session.TongTien = TongTien;
+router.post('/',function(req,res){
+  const {IdSuatChieu,seatList,TongTien,NgayChieu,GioChieu,TenRap,TenPhim} = req.body;
+   req.session.IdSuatChieu = IdSuatChieu;
+   req.session.seatList= seatList;
+  req.session.TongTien = TongTien;
 
-  
+  console.log(IdSuatChieu,seatList,TongTien,NgayChieu,GioChieu,TenRap,TenPhim);
 
-  var amount = "50000";
-  var nameProduct="Iron man";
-  var NgayChieu="29/9/200";
+  var amount = `${TongTien}`;
+  var orderInfo = `Pay By Momo`;
+
+  //var movieName=TenPhim;
+//  var NgayChieu="29/9/200";
  
 //before sign HMAC SHA256 with format
 //partnerCode=$partnerCode&accessKey=$accessKey&requestId=$requestId&amount=$amount&orderId=$oderId&orderInfo=$orderInfo&returnUrl=$returnUrl&notifyUrl=$notifyUrl&extraData=$extraData
@@ -39,7 +42,6 @@ var rawSignature =
 "&accessKey="+accessKey+
 "&requestId="+requestId+
 "&amount="+amount+
-//"&nameProduct="+nameProduct+
 "&orderId="+orderId+
 "&orderInfo="+orderInfo+
 "&returnUrl="+returnUrl+
@@ -65,7 +67,6 @@ var body = JSON.stringify({
     amount : amount,
     orderId : orderId,
     orderInfo : orderInfo,
-   // nameProduct:nameProduct,
     returnUrl : returnUrl,
     notifyUrl : notifyurl,
     extraData : extraData,
@@ -96,7 +97,7 @@ var request = https.request(options, (response) => {
     console.log('payURL');
     console.log(JSON.parse(body).payUrl);
     //chuyển sang momo để thanh toán
-    res.redirect (JSON.parse(body).payUrl);
+    res.send(JSON.parse(body).payUrl);
   });
   
   response.on('end', () => {
@@ -115,8 +116,13 @@ request.end();
 
 
 })
-router.post('/return',asyncHandler(async function(req,res){
+router.get('/return',asyncHandler(async function(req,res){
+  const cumRap =   await CumRap.findListCumRap(); 
+  const listCumRap = cumRap.rows
+  const booking = await User.findBookingHistoryByIdUser(req.currentUser.CustomerISN ? req.currentUser.CustomerISN : req.user);
+  const listBooking = booking.rows;
   console.log("Thanh toán thành công");      
   console.log(req.query.partnerCode); 
+    res.render('user/booking_history',{layout:'./layouts/home',listCumRap:listCumRap,listBooking:listBooking});
 }));
 module.exports = router;
