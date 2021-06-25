@@ -19,7 +19,7 @@ const passport = require('passport')
 router.get('/',asyncHandler(async function(req,res){
         const cumRap =   await CumRap.findListCumRap(); 
         const listCumRap = cumRap.rows
-        console.log(req.query.id);
+       // console.log(req.query.id);
         const id = req.query.id;
      
         const rap = await Rap.findListRapByIdCR(id);

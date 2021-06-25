@@ -151,16 +151,15 @@ router.post('/register',asyncHandler (async function(req,res){
     console.log(req.body);
     const {email,password} = req.body;
     const found = await User.findUserByEmail(email);
-    if(found && passwordHash.verify(password,found.rows[0].Password) ){
+    if(found.rows[0] && passwordHash.verify(password,found.rows[0].Password) ){
         //luu id vao session
         req.session.userId = found.rows[0].CustomerISN;
         //return 1
-        res.end ("1");
+        res.send ("1");
     } else{
     //neu password va mat khau khong chinh xac return 0
-     res.end("0");
+     res.send("0");
     }
-    res.render('404',{layout:'./layouts/404'});
 }));
 
 
