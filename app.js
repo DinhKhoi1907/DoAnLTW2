@@ -6,7 +6,9 @@ const userRouter = require('./routers/user.js');
 const rapRouter = require('./routers/rap.js');
 const phimRouter = require('./routers/phim.js');
 const datchoRouter = require('./routers/datcho.js');
-const momoRouter = require('./routers/momo.js');
+const momoRouter = require('./routers/PayBymomo.js');
+const PayPalRouter = require('./routers/PayByPayPal.js');
+const CounterRouter = require('./routers/PayAtCounter.js');
 const asyncHandler = require('express-async-handler')
 const User = require('./models/user.js');
 const CumRap = require('./models/CumRap.js');
@@ -101,6 +103,7 @@ app.get('/',async function(req,res){
  // tìm phim mới được công chiếu
  const pm = await Phim.findPhimMoiDuocCongChieu();
  const listphimmoi = pm.rows;
+
  // lấy phim được xem nhiều nhất 
  const top = 8;
  const pp = await Phim.findPhimDuocXemNhieu(top);
@@ -114,7 +117,9 @@ app.use('/user',userRouter);
 app.use('/rap',rapRouter);
 app.use('/phim',phimRouter);
 app.use('/datcho',datchoRouter);
-app.use('/momo',momoRouter);
+app.use('/PayBymomo',momoRouter);
+app.use('/PayByPayPal',PayPalRouter);
+app.use('/PayAtCounter',CounterRouter);
 app.use(async function(req,res){
   res.status(404).render("404.ejs",{layout:'./layouts/404'});
 });

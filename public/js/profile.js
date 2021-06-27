@@ -19,20 +19,30 @@ $(document).ready(function(){
                 //${window.location.origin}
                 url:`/user/profile/changeinfo`, // lay du lieu tu file
                 type:"POST",
-                timeout: 5000,
                 data: data,
          
                 //thanh cong 
                 success: function(data){
                     reloadMask(false,$);
                     if(data === "0" ){
-                        alert("Change profile infomation fail ...");
-    
+                        Swal.fire({
+                            title: "Opps!",
+                            text: "Change profile infomation fail!",
+                            icon: "warning",
+                           
+                          })
                     }
                    else{
-                    alert("Change profile infomation success ...");
-                    // window.location.href = "/";
-                    window.location.reload();
+                      Swal.fire({
+                        title: 'Success!',
+                        text: "Change profile infomation success ...",
+                        icon: 'success',
+                  
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.reload();
+                        }
+                      })
                    }
                 },
                 //that bai
@@ -66,9 +76,17 @@ $(document).ready(function(){
                     $("#check-renewpassword-password").html('The password is not the same as the one above')
                 }
                else{
-                alert("Change Password success ...");
-                // window.location.href = "/";
-                window.location.reload();
+                  Swal.fire({
+                    title: 'Success!',
+                    text: "Change Password success ...",
+                    icon: 'success',
+              
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload();
+                    }
+                  })
+
                }
             },
             //that bai

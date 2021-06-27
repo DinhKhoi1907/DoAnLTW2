@@ -26,7 +26,15 @@ const { promisify } = require('util');
 const readFile = promisify(fs.readFile);
 
 //router.get('/a',CumRap.findListCumRap )
-
+// đảm bảo user đã loggin
+router.post('/ensureLoggedIn',asyncHandler(async function(req,res){
+  if(req.currentUser){
+    res.send("1");
+  }
+  else{
+    res.send("0");
+  }
+}))
 router.get('/',asyncHandler(async function(req,res){
     const cumRap =   await CumRap.findListCumRap();
    const listCumRap = cumRap.rows
@@ -34,6 +42,7 @@ router.get('/',asyncHandler(async function(req,res){
     res.render('user/try',{layout:'./layouts/home',user: req.user ,listCumRap:listCumRap});
 
 }))
+
 router.get('/profile',asyncHandler(async function(req,res){
   const cumRap =   await CumRap.findListCumRap(); 
   const listCumRap = cumRap.rows
@@ -490,19 +499,13 @@ router.post('/reset/:token',asyncHandler(async function(req,res){
 //đăng nhập bằng fb
 router.get('/facebook', passport.authenticate('facebook',{scope:'email'}));
 
-router.get('/facebook/callback',passport.authenticate('facebook', { successRedirect : '/user/checkAccountFbOrGg', failureRedirect: '/login' }),
-  function(req, res) {
-    console.log("hahahahahaah")
-  });
+router.get('/facebook/callback',passport.authenticate('facebook', { successRedirect : '/user/checkAccountFbOrGg', failureRedirect: '/login' }));
 
 ;
  //đăng nhập bằng google
 router.get('/google', passport.authenticate('google',{scope:'email'}));
 
-router.get('/google/callback',passport.authenticate('google', { successRedirect : '/user/checkAccountFbOrGg', failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
+router.get('/google/callback',passport.authenticate('google', { successRedirect : '/user/checkAccountFbOrGg', failureRedirect: '/login' }));
 
   router.get('/checkAccountFbOrGg',asyncHandler(async function(req,res){
     const found = await User.findUserByEmail(req.user.id);
@@ -513,13 +516,14 @@ router.get('/google/callback',passport.authenticate('google', { successRedirect 
       if(req.user.displayName){
         const id = await User.NewUserFB(req.user.id,req.user.displayName);
         // lưu id vào session 
-        req.session.userId = id.rows[0].CustomerISN;
+     
+        req.session.userId = id.rows[0].fn_customer_insupd;
         res.redirect('/')
       }
       else{
-        const id = await User.InsertUserGG(req.user.emails[0].value);
+        const id = await User.InsertUserGG(req.user.id,req.user.emails[0].value);
         // lưu id vào session 
-        req.session.userId = id.rows[0].CustomerISN;
+        req.session.userId = id.rows[0].fn_customer_insupd;
         console.log();
         res.redirect('/');
       }

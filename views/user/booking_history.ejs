@@ -84,12 +84,20 @@
                             <p class="booking-history">Date Start : <b><%-fullDateShow%></b>  </p>
                             <p class="booking-history">Time Start : <b> <%-fullTimeShow%></b> </p>
                             <p  class="booking-history">Total Money : <b><%-list.TotalMoney%> VNĐ</b> </p>
+							<%if(list.BookingStatus == 5 ) {%>
+							<p  class="booking-history"> Status : <b> Đã thanh toán </b> </p>
+							<p  class="booking-history">Payment method : <b>Thanh toán online</b> </p>
+							<%}else{ %>
+								<p  class="booking-history"> Status : <b> Chưa thanh toán </b> </p>
+							<p  class="booking-history">Payment method : <b>Thanh toán tại quầy </b> </p>
+							<%}%>
                         </div>
                       
 					
 					
 					</div>
 				</div>
+			
             <%})%>
 				
 			</div>

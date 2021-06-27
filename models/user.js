@@ -22,9 +22,9 @@ User.NewUserFB = async function(email,name){
     return User.query(`SELECT fn_customer_insupd($1,$2,$3,$4,$5,$6,$7)`,[0,name,email,' ',' ',' ',' '])
 }
 
-User.InsertNewUserGG = async function(id){
+User.InsertUserGG = async function(id,name){
    // return User.query(`INSERT INTO "Customer"("CustomerEmail") VALUES($1) RETURNING "CustomerISN"`,[id])
-    return User.query(`SELECT fn_customer_insupd($1,$2,$3,$4,$5,$6,$7)`,[0,'',id,'','','',''])
+    return User.query(`SELECT fn_customer_insupd($1,$2,$3,$4,$5,$6,$7)`,[0,name,id,'','','',''])
 }
 
 
@@ -62,6 +62,8 @@ User.UpdatePhone = async function(idCustomer,phone){
     SET "CustomerPhone" = $1
     WHERE "CustomerISN" = $2`,[phone,idCustomer])
 }
+
+
 User.findBookingHistoryByIdUser = async function(idCustomer){
     return User.query(`SELECT * FROM "Customer" c 
                         JOIN "Booking" b on(c."CustomerISN"=b."CustomerISN")
@@ -71,6 +73,42 @@ User.findBookingHistoryByIdUser = async function(idCustomer){
                         JOIN "Cinema" cnm on (cnm."CinemaISN" = r."CinemaISN")
                         WHERE c."CustomerISN" = $1 ORDER BY b."BookingISN" DESC `,[idCustomer])
 }
+// User.findBookingHistoryByIdUser = async function(idCustomer){
+//     return User.query(`SELECT fn_historiesbooking ($1)`,[idCustomer])
+// }
+/* <div class="movie-item-style-2 userrate">
+<img src="/<%-list.Poster%>" alt="">
+<div class="mv-item-infor"> 
+    <%var position = list.fn_historiesbooking.indexOf('"');
+     var temp = list.fn_historiesbooking.slice(position+1);
+     
+      
+      position = temp.indexOf('"');
+      result = temp.slice(0,position-1);
+      var temp = temp.slice(position+3);
+    %>
+    <p><a href="#" style="font-size: 17px;">Movie name : <%- result %> </a></p>
+    <div> 
+        <% position = temp.indexOf('"');result = temp.slice(0,position-1); temp = temp.slice(position+3); %>
+
+        <p  class="booking-history"style="font-size: 15px;">Cinema: <b><%-result %></b> </p>
+
+        <%  position = temp.indexOf('"'); result = temp.slice(0,position); var temp = temp.slice(position+3); %>
+        
+        <p  class="booking-history">Cinema Address : <b><%-result %></b> </p>
+        <%  position = temp.indexOf('"'); result = temp.slice(0,position); var temp = temp.slice(position+3); %>
+        <p class="booking-history">Your seat : <b><%-result%></b> </p>
+        <%  position = temp.indexOf('"'); result = temp.slice(0,position); var temp = temp.slice(position+3); %>
+        <p class="booking-history">Date Start : <b><%-result%></b>  </p>
+        <%  position = temp.indexOf(','); result = temp.slice(0,position); var temp = temp.slice(position+1); %>
+        <p class="booking-history">Time Start : <b> <%-result%></b> </p>
+        <%  position = temp.indexOf('"'); result = temp.slice(0,position); var temp = temp.slice(position+3); %>
+        <p  class="booking-history">Total Money : <b><%-result%> VNĐ</b> </p>
+    </div>
+</div>
+</div> */
+
+
 //fn_customer_insupd 
 // return mdUser.query(`insert into ${tbl_users} (name, email) values ($1, $2) RETURNING id`, [
 //     name,

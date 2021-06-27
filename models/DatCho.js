@@ -4,8 +4,8 @@ DatCho.SeatsOfShowTime = async function(IdSuatChieu){
     return DatCho.query(`SELECT * FROM SeatsOfShowTime WHERE "ShowTimeISN" = $1`,[IdSuatChieu]);
 } 
 
-DatCho.InsertBooking = async function(IdUser,IdSuatChieu,SeatList){
-    return DatCho.query(`SELECT * FROM fn_booking_ins($1,$2,$3) `,[IdUser,IdSuatChieu,SeatList]);
+DatCho.InsertBooking = async function(IdUser,IdSuatChieu,SeatList,bookingStatus){
+    return DatCho.query(`SELECT * FROM fn_booking_ins($1,$2,$3,$4) `,[IdUser,IdSuatChieu,SeatList,bookingStatus]);
 } 
 
 module.exports = DatCho

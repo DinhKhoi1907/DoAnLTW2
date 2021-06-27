@@ -17,3 +17,6 @@
 .datve:hover{
     background-color: rgb(209, 226, 55);
 }
+.swal2-popup {
+    font-size: 1.6rem !important;
+  }

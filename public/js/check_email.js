@@ -13,9 +13,6 @@ function reloadMask(show,$) {
 //load du lieu
 $(document).ready(function(){             
     $("#emailSubBtn").on("click",function(e){
-       // e.stopPropagation();
-       // e.stopImmediatePropagation();
-        //khong cho trang load lai
         e.preventDefault();
       
         //laays gia tri tu body
@@ -32,11 +29,26 @@ $(document).ready(function(){
             //thanh cong
             success:function(data){
                 reloadMask(false,$);
+
                 if(data==="0"){
-                        alert("Email này chưa được đăng kí !")
+                        Swal.fire({
+                            title: "Opps!",
+                            text: "This email is not registered!",
+                            icon: "info",
+                         
+                          })
                 }else{
-                    alert("Vui lòng kiểm tra email để đặt lại mật khẩu ! ")
-                    window.location.href = "/";
+                    Swal.fire({
+                        title: 'Success!',
+                        text: "Please check your email to reset your password!",
+                        icon: 'success',
+                  
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.reload();
+                        }
+                      })
+                   
                 }
                 
             },

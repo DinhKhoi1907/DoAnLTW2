@@ -1,14 +1,3 @@
-function reloadMask(show,$) {
-  if (show)
-  {
-      $('#status').show();
-      $('#preloader').show();
-  }
-  else {
-      $('#status').hide();
-      $('#preloader').hide();
-  }
-}
 $( ".btnGhe" ).click(function(event) {
   if($(this).hasClass('AnGhe')){
 

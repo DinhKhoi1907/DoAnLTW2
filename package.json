@@ -37,6 +37,8 @@
     "pg": "^8.6.0",
     "randomstring": "^1.2.1",
     "sequelize": "^6.6.2",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.0.18",
     "util": "^0.12.4",
     "uuidv1": "^1.6.14"
   }

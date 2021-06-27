@@ -1,3 +1,15 @@
+function reloadMask(show,$) {
+  if (show)
+  {
+      $('#status').show();
+      $('#preloader').show();
+  }
+  else {
+      $('#status').hide();
+      $('#preloader').hide();
+  }
+}
+
 $("#PayAtCounter").click(function(e){
  
     var header = document.getElementById("ListGhe");
@@ -16,7 +28,7 @@ $("#PayAtCounter").click(function(e){
       reloadMask(true,$);
       $.ajax({
     
-        url:`/datcho/PayAtCounter`, // lay du lieu tu file
+        url:`/PayAtCounter`, // lay du lieu tu file
         type:"POST",
         data: {
           IdSuatChieu : IdSuatChieu,
@@ -31,14 +43,14 @@ $("#PayAtCounter").click(function(e){
         //thanh cong 
         success: function(data){
           reloadMask(false,$);
-            if(data== "0"){
-              alert("Vui lòng đăng nhập trước khi đặt Chỗ!")
-            }
-            else {
-              alert("Bạn đã đặt chỗ thành công!")
+              swal({
+                title: "Success!",
+                text: "Booking success!",
+                icon: "success",
+                button: true,
+              })
               window.location.href = "/user/bookinghistory"
-            }
-           // window.location.href = "/user/bookinghistory"
+            
         },
         //that bai
         error : function(xhr,status,err){
@@ -61,10 +73,10 @@ $("#PayAtCounter").click(function(e){
       var TenRap = $("#dcTenRap").val();
       var TenPhim= $("#dcTenPhim").val();
       
-     // reloadMask(true,$);
+      reloadMask(true,$);
       $.ajax({
     
-        url:`/datcho/PayByPaypal`, // gửi giữ liệu qua và lấy dữ liệu về từ 
+        url:`/PayByPayPal`, // gửi giữ liệu qua và lấy dữ liệu về từ 
         type:"POST",
         data: {
           IdSuatChieu : IdSuatChieu,
@@ -78,15 +90,10 @@ $("#PayAtCounter").click(function(e){
   
         //thanh cong 
         success: function(data){
-       //   reloadMask(false,$);
-            if(data== "0"){
-              alert("Vui lòng đăng nhập trước khi đặt Chỗ!")
-            }
-            else {
-              //alert("Bạn đã đặt chỗ thành công!")
+          reloadMask(false,$);
+
               window.location.href = `${data}`
-            }
-           // window.location.href = "/user/bookinghistory"
+
         },
         //that bai
         error : function(xhr,status,err){
@@ -109,10 +116,10 @@ $("#PayAtCounter").click(function(e){
       var TenRap = $("#dcTenRap").val();
       var TenPhim= $("#dcTenPhim").val();
       
-     // reloadMask(true,$);
+     reloadMask(true,$);
       $.ajax({
     
-        url:`/momo`, // gửi giữ liệu qua và lấy dữ liệu về từ 
+        url:`/PayBymomo`, // gửi giữ liệu qua và lấy dữ liệu về từ 
         type:"POST",
         data: {
           IdSuatChieu : IdSuatChieu,
@@ -123,18 +130,11 @@ $("#PayAtCounter").click(function(e){
           TenRap:TenRap,
           TenPhim:TenPhim
         },
-  
         //thanh cong 
         success: function(data){
-       //   reloadMask(false,$);
-            if(data== "0"){
-              alert("Vui lòng đăng nhập trước khi đặt Chỗ!")
-            }
-            else {
-              //alert("Bạn đã đặt chỗ thành công!")
+         reloadMask(false,$);
+
               window.location.href = `${data}`
-            }
-           // window.location.href = "/user/bookinghistory"
         },
         //that bai
         error : function(xhr,status,err){
@@ -142,3 +142,8 @@ $("#PayAtCounter").click(function(e){
         } 
     });
   });
+
+  // $("#Booking").on('submit',function(e){
+
+      
+  // })

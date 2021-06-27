@@ -1,5 +1,6 @@
 // //bat click loginBtn
 $(document).ready(function () {
+    
     $(".btnDate").click(function(e){
         e.preventDefault()
        

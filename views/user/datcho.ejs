@@ -9,7 +9,7 @@
 </div>
 <div class="page-single movie_list">
 	<div class="container">
-		<div class="row ipad-width2">
+		<div class="row ipad-width2" style="margin-top:40px">
 			<div class="col-md-8 col-sm-12 col-xs-12">
 				<div id="ListGhe">
 					<% key=0 %>
@@ -32,9 +32,7 @@
 			<div class="col-md-4 col-sm-12 col-xs-12">
 				<div class="sidebar">
 					<div class="searh-form">
-					
-				
-						<form class="form-style-1" action="#">
+						<form class="form-style-1" action="#" id="Booking">
 							<div class="row">
 								<div class="col-md-12 form-it">
 									<h1 style="color: cornsilk;text-align: center; font-family: ui-serif;margin-bottom: 15px;"><%-phim[0].MovieName%></h1>
@@ -110,42 +108,40 @@
 								</div>
 								<div class="col-md-12 ">
 									<!-- Button trigger modal -->
-									<button class="btnDatCho" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+									<button id="btnBooking"class="btnDatCho" type="button" class="btn btn-primary" data-toggle="modal" >
 										Booking
 									</button> 
 								</div>
-									
-									<!-- Modal -->
-									<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-										<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabel" style="font-size: 22px;">Choose Payment method, please</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-											</div>
-											<div class="modal-body">
-											<button id="PayAtCounter">Pay at counter</button>
-											<hr>
-											<h5>Pay online by </h5>
-											<button id="PayByPaypal"><i class="fa fa-paypal"></i> <b style="color: darkblue;">Pay</b><b style="color: darkcyan;"></b>pal</button>
-											
-											<button id="PayBymomo"><b>momo</b></button>
-											
-											</div>
-											<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-											
-											</div>
-										</div>
-										</div>
-									</div>
-
-
-
+		
 							</div>
 						</form>
+									<!-- Modal -->
+						<!-- nút button đặt ngoài form vì đặt trong form sẽ   xử lý logic trong form trước rồi mới đến click, vì vậy click lần đầu sẽ không hoạt động với ajax-->
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel" style="font-size: 22px;">Choose Payment method, please</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								</div>
+								<div class="modal-body">
+								<button id="PayAtCounter">Pay at counter</button>
+								<hr>
+								<h5>Pay online by </h5>
+								<button id="PayByPaypal"><i class="fa fa-paypal"></i> <b style="color: darkblue;">Pay</b><b style="color: darkcyan;"></b>pal</button>
+								
+								<button id="PayBymomo"><b>momo</b></button>
+								
+								</div>
+								<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								
+								</div>
+							</div>
+							</div>
+						</div>
 					</div>
 					<div class="ads">
 						<img src="images/uploads/ads1.png" alt="">

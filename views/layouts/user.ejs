@@ -188,16 +188,7 @@
 						<li class="hidden">
 							<a href="#page-top"></a>
 						</li>
-						<!-- <li class="dropdown first">
-							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
-							Home <i class="fa fa-angle-down" aria-hidden="true"></i>
-							</a>
-							<ul class="dropdown-menu level1">
-								<li><a href="index-2.html">Home 01</a></li>
-								<li><a href="homev2.html">Home 02</a></li>
-								<li><a href="homev3.html">Home 03</a></li>
-							</ul>
-						</li> -->
+					
 						<li class="dropdown first">
 							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
 							Movie<i class="fa fa-angle-down" aria-hidden="true"></i>
@@ -207,11 +198,14 @@
 								<li class="it-last"><a href="/phim/phimsapchieu">Movie comming soon</a></li>
 								<li><a href="/phim">Movie list</a></li>
 								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown" >Thể loại<i class="ion-ios-arrow-forward"></i></a>
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" >Kind of movie<i class="ion-ios-arrow-forward"></i></a>
 									<ul class="dropdown-menu level2">
-										<li><a href="moviegrid.html">Siêu nhân</a></li>
-										<li><a href="moviegridfw.html">Dật gân</a></li>
-										<li><a href="moviegridfw.html">Viễn tưởng</a></li>
+										<li><a href="moviegrid.html">Action Films</a></li>
+										<li><a href="moviegridfw.html">Adventure Films</a></li>
+										<li><a href="moviegridfw.html">Comedy Films</a></li>
+										<li><a href="moviegridfw.html">Horror Films</a></li>
+										<li><a href="moviegridfw.html">Science Fiction Films</a></li>
+										
 									</ul>
 								</li>
 							</ul>
@@ -230,40 +224,10 @@
 							</ul>
 						</li>
 						
-						<li class="dropdown first">
-							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-							news <i class="fa fa-angle-down" aria-hidden="true"></i>
-							</a>
-							<ul class="dropdown-menu level1">
-								<li><a href="bloglist.html">blog List</a></li>
-								<li><a href="bloggrid.html">blog Grid</a></li>
-								<li class="it-last"><a href="blogdetail.html">blog Detail</a></li>
-							</ul>
-						</li>
-						<li class="dropdown first">
-							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-							community <i class="fa fa-angle-down" aria-hidden="true"></i>
-							</a>
-							<ul class="dropdown-menu level1">
-								<li><a href="userfavoritegrid.html">user favorite grid</a></li>
-								<li><a href="userfavoritelist.html">user favorite list</a></li>
-								<li><a href="userprofile.html">user profile</a></li>
-								<li class="it-last"><a href="userrate.html">user rate</a></li>
-							</ul>
-						</li>
+						
+				
 					</ul>
 					<ul class="nav navbar-nav flex-child-menu menu-right">
-						<li class="dropdown first">
-							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-							pages <i class="fa fa-angle-down" aria-hidden="true"></i>
-							</a>
-							<ul class="dropdown-menu level1">
-								<li><a href="landing.html">Landing</a></li>
-								<li><a href="404.html">404 Page</a></li>
-								<li class="it-last"><a href="comingsoon.html">Coming soon</a></li>
-							</ul>
-						</li>                
-						<li><a href="#">Help</a></li>
 						<%if(currentUser) { %> 
 							<li class="dropdown first">
 								
@@ -277,12 +241,6 @@
 								</ul>
 							</li>
                             <li class=""><a href="/user/logout">Log Out</a></li>
-                            <%}else if(user) { %> 
-						
-								<li class=""><a href="#">acv<%- user.displayName %></a></li>
-								
-								
-								<li class=""><a href="/user/logout">Log Out</a></li>
 								<%} else { %> 
 						<li class="loginLink"><a href="#">LOG In</a></li>
 						<li class="btn signupLink"><a href="#">Register</a></li>
