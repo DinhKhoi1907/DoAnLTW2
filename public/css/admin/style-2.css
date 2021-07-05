@@ -1,0 +1,39 @@
+tr td.col-addInfo{
+    padding: 0;
+}
+tr td.col-addInfo input{
+    border: 0px;
+    width: 200px;
+}
+tr td.col-addInfo input:focus{
+    background-color: rgb(246, 252, 252);
+    border: 0px;
+
+}
+tr td input.col-addNameProvice{
+    width: 100%;
+}
+/* tr td .show-textarea{
+    display: none;
+    position:absolute;
+    width: 235px;
+   
+} */
+::-webkit-file-upload-button {
+    background: rgb(22, 116, 35);
+    color: rgb(255, 251, 251);
+   border-radius: 5px;
+   border: 0;
+  }
+  ::-webkit-file-upload-button:hover{
+    background: rgb(27, 150, 44);
+}
+.sumSale{
+    padding-top: 11px;
+    height: 51px;
+    border: 1px solid;
+    border-radius: 8px;
+    width: 470px;
+    text-align: center;
+    background: rgb(255, 245, 231);
+}

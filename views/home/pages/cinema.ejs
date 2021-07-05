@@ -1,0 +1,48 @@
+<div class="hero common-hero">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="hero-ct">
+					<h1> List Cinemas</h1>
+					<ul class="breadcumb">
+						<li class="active"><a href="#">Home</a></li>
+						<li> <span class="ion-ios-arrow-right"></span> List Cinemas</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="page-single movie_list">
+	<div class="container">
+		<div class="row ipad-width2">
+			<div class="col-md-8 col-sm-12 col-xs-12" style="width:100%">
+				<div class="topbar-filter">
+					<p  style="font-size: 18px;" >Found  <span><b><%-listCinema.length%></b></span> cinema</p>
+					
+				</div>
+				<% listCinema.forEach(list => { %>
+					<div class="movie-item-style-2" style="display: inline">
+						<!-- <img src="images/uploads/mv1.jpg" alt=""> -->
+						<div class="mv-item-infor">
+							<h6><a href="<%-listCinema.CinemaISN %>" style="font-size: 22px;"><%-list.CinemaName %> </a></h6>
+							<p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
+							<p class="describe"><%-list.CinemaAddress%></p>
+							<!-- <p class="run-time"> Run Time: 2h21’    .     <span>MMPA: PG-13 </span>    .     <span>Release: 1 May 2015</span></p>
+							<p>Director: <a href="#">Joss Whedon</a></p>
+							<p>Stars: <a href="#">Robert Downey Jr.,</a> <a href="#">Chris Evans,</a> <a href="#">  Chris Hemsworth</a></p> -->
+						</div>
+					</div>
+					<%})%>
+					</div>
+					</div>
+					</div>
+					</div>
+					
+				 
+				
+				
+				
+				
+				
+			

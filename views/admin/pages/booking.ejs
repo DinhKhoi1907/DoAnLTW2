@@ -1,0 +1,128 @@
+
+
+  <!-- Begin page content -->
+  <div class="container-fluid">
+    <!-- Page heading -->
+    <h1 class="h3 md-2 text-gray-800">Booking
+      <button href="" class="btn btn-success btn-circle pull-left" data-toggle="modal" data-target="#ModelCinema">
+        +
+      </button>
+    </h1>
+<!-- Modal -->
+<div class="modal fade" id="ModelCinema" tabindex="-1" role="dialog" aria-labelledby="ModelCinemaTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">ADD NEW BOOKING</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form  id="addCinema">
+      <div class="modal-body" style="height: 261px;">
+        
+          <table class="table table-bordered" style="font-size: 20px;"  width="100%" cellspacing="0">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Staff name</th>
+                <th scope="col">Staff email</th>
+                <th scope="col">Password</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Status</th>
+                <th scope="col">Department</th>
+                <th scope="col">Cinema</th>
+              </tr>
+            </thead>
+            <tbody>
+             
+            </tbody>
+          </table>       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Add Province</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+    <!-- DataTable Movie -->
+    <div class="card shadow md-4">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead class="thead-dark">
+              <tr>
+                <th>ID</th>
+                <th>Staff name</th>
+                <th>Staff email</th>
+                <th>Password</th>
+                <th>Phone</th>
+                <th>Status</th>
+                <th>Address</th>
+                <th>Department</th>
+                <th>Cinema</th>
+                <th>Remove</th>
+              </tr>
+
+            <tfoot>
+              <tr>
+                <th >ID</th>
+                <th >Staff name</th>
+                <th >Staff email</th>
+                <th>Password</th>
+                <th>Phone</th>
+                <th>Status</th>
+                <th>Address</th>
+                <th>Department</th>
+                <th>Cinema</th>
+                <th>Remove</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              <% listStaff.forEach(list=> { %>
+                <tr>
+                  <td>
+                    <%= list.StaffISN %>
+                  </td>
+                  <td>
+                    <%= list.StaffName %>
+                  </td>
+                  <td >
+                    <%= list.StaffEmail %>
+                  </td>
+                  <td>
+                    <%= list.Password %>
+                  </td>
+                  <td>
+                    <%= list.StaffPhone %>
+                  </td>
+                  <td>
+                    <%= list.StaffAddress %>
+                  </td>
+                  <td>
+                    <%= list.StaffStatus %>
+                  </td>
+                  <td>
+                    <%= list.DepartmentISN %>
+                  </td>
+                  <td>
+                    <%= list.CinemaISN %>
+                  </td>
+                  <td>
+              
+                    <button   value="" class="deleteCinema btn btn-danger btn-circle btn-sm"> 
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  
+                  </td>
+                </tr>
+                <% }) %>
+            </tbody>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

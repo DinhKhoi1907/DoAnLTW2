@@ -1,0 +1,68 @@
+<!-- End of Topbar -->
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Revenue statistics</h1>
+
+    <!-- DataTales Example -->
+    <div class="row">
+
+        <div class="col-xl-12 col-lg-10">
+
+            <!-- Area Chart -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+                </div>
+                <div class="card-body">
+                    <div class="inputtime">
+                        <form action="admin/insert/thongke" method="POST" id="Statistical">
+                            <label for="">
+                                <p>DateTime from</p>
+                                <input type="datetime-local"class="form-control" name="dateTimeFrom" required>
+                            </label>
+                            <label for="">
+                                <p>DateTime to</p>
+                                <input type="datetime-local" class="form-control" name="dateTimeTo" required>
+                            </label>
+                            <label for="">
+                                <p>Statistics by</p>
+                                <select name="choosePM"  class="choosePM form-control" required>
+                                    <option value="">--- Choose ---</option>
+                                    <option value="1">Province</option>
+                                    <option value="2">Movie</option>
+                                </select>
+                            </label>
+                            <br>
+                            <label for="" class="chooseSome">
+                             
+                            </label>
+                            <label for="" class="chooseCinema">
+                             
+                            </label>
+                          <br>
+                            <label for="" style="    margin-top: 15px;">
+                                <input type="submit" class="btn btn-primary" value="Statistical">
+                            </label>
+                            <br>
+                        </form>
+                    </div>
+
+                  
+                    <div class="chart-area">
+                        <canvas id="myAreaChart">
+
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+</div>
+    <!-- Footer -->
