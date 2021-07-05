@@ -1,7 +1,7 @@
 const db = require('../configs/config');
 
 const DatCho = require('./DatCho')
-
+const abc = '123'
 // const Ve = db.define('Ve', {
 //   MaVe: {
 //     type: DataTypes.UUID,
