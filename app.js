@@ -1,18 +1,34 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
+//user router
+//const userRouter = require('./routers/user/user.js');
+const bookingRouter = require('./routers/user/booking.js');
+const momoRouter = require('./routers/user/payment/PayBymomo.js');
+const PayPalRouter = require('./routers/user/payment/PayByPayPal.js');
+const CounterRouter = require('./routers/user/payment/PayAtCounter.js');
+const loginRouter = require('./routers/user/login.js');
+const logoutRouter = require('./routers/user/logout.js');
+const profileRouter = require('./routers/user/profile.js');
+const registerRouter = require('./routers/user/register.js');
+const forgotPassRouter = require('./routers/user/forgotPass.js');
+//home router
 
-const userRouter = require('./routers/user.js');
-const rapRouter = require('./routers/rap.js');
-const phimRouter = require('./routers/phim.js');
-const datchoRouter = require('./routers/datcho.js');
-const momoRouter = require('./routers/PayBymomo.js');
-const PayPalRouter = require('./routers/PayByPayPal.js');
-const CounterRouter = require('./routers/PayAtCounter.js');
-const asyncHandler = require('express-async-handler')
-const User = require('./models/user.js');
-const CumRap = require('./models/CumRap.js');
-const Phim = require('./models/Phim.js');
+const cinemaRouter = require('./routers/home/cinema.js');
+const movieRouter = require('./routers/home/movie.js');
+const homeRouter = require('./routers/home/index.js')
+//admin router
+const indexAdRouter = require("./routers/admin/index");
+const cinemaAdRouter = require("./routers/admin/cinema");
+const movieAdRouter = require("./routers/admin/movie");
+const provinceAdRouter = require("./routers/admin/province");
+const showtimeAdRouter = require("./routers/admin/showtime");
+const staffAdRouter = require("./routers/admin/staff");
+const roomAdRouter = require("./routers/admin/room");
+const statisticalAdRouter = require("./routers/admin/statistical");
+
+
+
 var cookieSession = require('cookie-session');
 //đăng nhập fb
 
@@ -25,9 +41,8 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const session  = require('express-session');
 //truoc khi app chay , thi ta chay db truoc
 const db = require('./configs/config');
-
 const userMiddlewares = require('./middlewares/user');
-const ensureLoggedMiddlewares = require('./middlewares/ensure_logged_in');
+
 const app = express();
 
 var path = require('path');
@@ -44,7 +59,7 @@ app.use(userMiddlewares);
 //su dung layout
 app.use(expressLayouts);
 //ban dau cho layout vao main
-app.set('layout','./layouts/user');
+//app.set('layout','./layouts/user');
 
 //su dung ejs
 app.set('view engine','ejs');
@@ -96,35 +111,41 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.get('/',async function(req,res){
-  const cumRap =   await CumRap.findListCumRap();
-  const listCumRap = cumRap.rows
- //  console.log(cumRap);
- // tìm phim mới được công chiếu
- const pm = await Phim.findPhimMoiDuocCongChieu();
- const listphimmoi = pm.rows;
 
- // lấy phim được xem nhiều nhất 
- const top = 8;
- const pp = await Phim.findPhimDuocXemNhieu(top);
- const listPDXN = pp.rows
  
-   res.render('home/home',{layout:'./layouts/home',user: req.user ,listCumRap:listCumRap,listphimmoi:listphimmoi,listPDXN:listPDXN});
-});
- 
+//user
+//app.use('/user',userRouter);
+app.use('/user/booking',bookingRouter);
+app.use('/user/payment/PayBymomo',momoRouter);
+app.use('/user/payment/PayByPayPal',PayPalRouter);
+app.use('/user/payment/PayAtCounter',CounterRouter);
+app.use('/user/login',loginRouter);
+app.use('/user/logout',logoutRouter);
+app.use('/user/profile',profileRouter);
+app.use('/user/forgot',forgotPassRouter);
+app.use('/user/register',registerRouter);
 
-app.use('/user',userRouter);
-app.use('/rap',rapRouter);
-app.use('/phim',phimRouter);
-app.use('/datcho',datchoRouter);
-app.use('/PayBymomo',momoRouter);
-app.use('/PayByPayPal',PayPalRouter);
-app.use('/PayAtCounter',CounterRouter);
+//home
+app.use('/',homeRouter);
+app.use('/home/cinema',cinemaRouter);
+app.use('/home/movie',movieRouter);
+
+//admin 
+app.use("/admin", indexAdRouter);
+app.use("/admin/cinema", cinemaAdRouter);
+app.use("/admin/movie", movieAdRouter);
+app.use("/admin/province", provinceAdRouter);
+app.use("/admin/showtime", showtimeAdRouter);
+app.use("/admin/staff", staffAdRouter);
+app.use("/admin/room", roomAdRouter);
+app.use("/admin/statistical", statisticalAdRouter);
+
+
 app.use(async function(req,res){
-  res.status(404).render("404.ejs",{layout:'./layouts/404'});
+  res.status(404).render("404.ejs",{layout:false});
 });
-var path = require('path');
-app.use(express.static(path.join(__dirname, 'public')));
+//var path = require('path');
+//app.use(express.static(path.join(__dirname, 'public')));
 //khoi dong db
 
     //lam cho no hoat dong tren heroku,

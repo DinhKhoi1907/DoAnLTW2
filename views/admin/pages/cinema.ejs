@@ -1,0 +1,138 @@
+
+
+  <!-- Begin page content -->
+  <div class="container-fluid">
+    <!-- Page heading -->
+    <h1 class="h3 md-2 text-gray-800">Cinema
+      <button href="" class="btn btn-success btn-circle pull-left" data-toggle="modal" data-target="#ModelCinema">
+        +
+      </button>
+    </h1>
+<!-- Modal -->
+<div class="modal fade" id="ModelCinema" tabindex="-1" role="dialog" aria-labelledby="ModelCinemaTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">ADD NEW CINEMA</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form  id="addCinema">
+      <div class="modal-body" style="height: 261px;">
+        
+          <table class="table table-bordered" style="font-size: 20px;"  width="100%" cellspacing="0">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Cinema name</th>
+                <th scope="col">Cinema address</th>
+                <th scope="col">Status</th>
+                <th scope="col">Belong to province</th>
+                <th scope="col">Updated by</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+               
+                <td class="col-addInfo "><input class="form-control col-addNameProvice" type="text" name="CinemaName" required></td>
+                <td class="col-addInfo "><input class="form-control col-addNameProvice" type="text" name="CinemaAddress" required></td>
+                <td class="col-addInfo ">
+                  <select name="CinemaStatus" class="form-control">
+                    <% listDesStatus.forEach(list => { %> 
+                      <option value="<%-list.StatusCode %>"> <%= list.StatusDescription %></option>
+                      <%})%>
+                  </select>
+                </td>
+                <td class="col-addInfo ">
+                  <select class="form-control"name="ProvinceISN">
+                    <%listProvince.forEach(list =>{ %>
+                    <option value="<%-list.ProvinceISN%>"><%-list.ProvinceName%></option>
+                    <%})%>
+                  </select>
+                </td>
+                
+                <td class="col-addInfo ">
+                  <select name="UpdateBy" class="form-control">
+                    <% listStaff.forEach(list=>{%>
+                    <option value="<%-list.StaffISN %>"><%= list.StaffName %></option>
+                    <%})%>
+                  </select>
+                </td>
+
+              </tr>
+            </tbody>
+          </table>       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Add Province</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+    <!-- DataTable Movie -->
+    <div class="card shadow md-4">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead class="thead-dark">
+              <tr>
+                <th>ID Cinema</th>
+                <th>Cinema name</th>
+                <th>Cinema Address</th>
+                <th>Status</th>
+                <th>Province Name</th>
+                <th>Number Of Room</th>
+                <th>Remove</th>
+              </tr>
+
+            <tfoot>
+              <tr>
+                <th>ID Cinema</th>
+                <th>Cinema name</th>
+                <th>Cinema Address</th>
+                <th>Status</th>
+                <th>Province Name</th>
+                <th>Number Of Room</th>
+                <th>Remove</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              <% allCinema.rows.forEach(cinemas=> { %>
+                <tr>
+                  <td>
+                    <%= cinemas.CinemaISN %>
+                  </td>
+                  <td>
+                    <%= cinemas.CinemaName %>
+                  </td>
+                  <td class="plot">
+                    <%= cinemas.CinemaAddress %>
+                  </td>
+                  <td>
+                    <%= cinemas.StatusDescription %>
+                  </td>
+                  <td>
+                    <%= cinemas.ProvinceName %>
+                  </td>
+                  <td>
+                  <a href="/admin/room/roomOfCinema?CinemaISN=<%= cinemas.CinemaISN %>"><%= cinemas.NumberOfRoom %></a>  
+                  </td>
+                  <td>
+              
+                    <button   value="<%= cinemas.CinemaISN %>" class="deleteCinema btn btn-danger btn-circle btn-sm"> 
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  
+                  </td>
+                </tr>
+                <% }) %>
+            </tbody>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

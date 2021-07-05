@@ -1,4 +1,4 @@
-const User = require('../models/user.js');
+const User = require('../models/user/userModel.js');
 const asyncHandler = require('express-async-handler');
 module.exports = asyncHandler(async function(req,res,next){
     //tim userId tren session

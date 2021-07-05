@@ -1,0 +1,152 @@
+
+<!-- Begin page content -->
+<div class="container-fluid">
+  <!-- Page heading -->
+  <h1 class="h3 md-2 text-gray-800">Show Time
+    <button class="btn btn-success btn-circle pull-left" data-toggle="modal" data-target="#ModelShowTime">
+      +
+    </button>
+  </h1>
+<!-- Modal -->
+<div class="modal fade" id="ModelShowTime" tabindex="-1" role="dialog" aria-labelledby="ModelShowTimeTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">ADD NEW SHOW TIME</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form  id="addShowtime">
+      <div class="modal-body" style="height: 261px; overflow-x:scroll">
+        
+          <table class="table table-bordered" style="font-size: 20px;"  width="100%" cellspacing="0">
+            <thead class="thead-dark">
+              <tr>
+              <th scope="col">Movie Name</th>
+              <th scope="col">Cinema Name</th>
+              <th scope="col">Room Name</th>
+              <th scope="col">DateTimeFrom</th>
+              <th scope="col">DateTimeTo</th>
+              <th scope="col">Status</th>
+              <th scope="col">TicketPrice</th>
+              <th scope="col">Updated By</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              <tr>
+                <td class="col-addInfo ">
+                  <select name="MovieISN" class="form-control">
+                    <option selected>Choose movie</option>
+                    <%listMovie.forEach(list=>{%>
+                    <option value="<%=list.MovieISN%>"><%=list.MovieName%></option>
+                    <%})%>
+                  </select>
+                </td>
+                <td class="col-addInfo ">
+                  <select name="CinemaISN" class="form-control" id="CinemaName">
+                    <option selected>Choose cinema</option>
+                    <%listCinema.forEach(list=>{%>
+                    <option value="<%=list.CinemaISN%>"><%=list.CinemaName%></option>
+                    <%})%>
+                  </select>
+                </td>
+                <td class="col-addInfo ">
+                  <select name="RoomISN" class="form-control" style="width:145px" id="RoomName">
+                    <option selected>Choose room</option>
+                 
+                  </select>
+                </td>
+                <td class="col-addInfo "><input  class="form-control"type="datetime-local" name="DateTimeFrom"></td>
+                <td class="col-addInfo "><input  class="form-control" type="datetime-local"  name="DateTimeTo"></td>
+ 
+                <td class="col-addInfo">
+                  <select name="ShowtimeStatus" class="form-control" style="width:150px">
+                    <%listDesStatus.forEach(list =>{%>
+                  <option value="<%-list.StatusCode%>"><%=list.StatusDescription%></option>
+                  <%})%>
+                </select>    
+                </td>
+
+                <td class="col-addInfo "><input  class="form-control" type="text" name="TicketPrice"></td>
+
+                <td class="col-addInfo" > 
+                  <select name="UpdatedBy" class="form-control" style="width:200px" >
+                    <% listStaff.forEach(list => { %>
+                      <option value="<%=list.StaffISN%>"><%= list.StaffName %></option>
+                      <%})%>
+                  </select> 
+                </td>
+
+              </tr>
+            </tbody>
+          </table>       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Add ShowTime</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+  <!-- DataTable Movie -->
+  <div class="card shadow md-4">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead class="thead-dark">
+            <tr>
+              <th>ID</th>
+              <th>Movie Name</th>
+              <th>Cinema Name</th>
+              <th>Room Name</th>
+              <th>DateTimeFrom</th>
+              <th>DateTimeTo</th>
+              <th>TicketPrice</th>
+              <th>Status</th>
+            
+              <th>Remove</th>
+            </tr>
+
+            <tfoot>
+              <tr>
+              <th>ID</th>
+              <th>Movie Name</th>
+              <th>Cinema Name</th>
+              <th>Room Name</th>
+              <th>DateTimeFrom</th>
+              <th>DateTimeTo</th>
+              <th>TicketPrice</th>
+              <th>Status</th>
+        
+              <th>Remove</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              <% listShowTime.forEach(list => { %>
+               <tr>
+                <td><%= list.ShowTimeISN %> </td>
+                <td><%= list.MovieName %> </td>
+                <td><%= list.CinemaName %> </td>
+                <td><%= list.RoomName %> </td>
+                <td><%=moment(list.DateTimFrom).format("D-MM-YYYY (HH:mm)")%></td>
+                <td><%=moment(list.DateTimeTo).format("D-MM-YYYY (HH:mm)") %></td>
+                <td><%= list.TicketPrice %> </td>
+                <td><%= list.StatusDescription %> </td>
+                <td>
+                    <button  class="btn btn-danger btn-circle btn-sm deleteShowtime" value="<%=list.ShowTimeISN%>"> 
+                      <i class="fas fa-trash"></i>
+                    </button> 
+                </td>
+               </tr>
+              <% }) %>
+            </tbody>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

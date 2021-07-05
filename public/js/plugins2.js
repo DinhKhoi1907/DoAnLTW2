@@ -1195,7 +1195,7 @@
 				wSpace,
 				hSpace,
 				origWidth,
-				origHeight,
+				oriseatight,
 				origMaxWidth,
 				origMaxHeight,
 				ratio,
@@ -1217,7 +1217,7 @@
 			hSpace = hMargin + hPadding;
 
 			origWidth  = isPercentage(width)  ? (viewport.w - wSpace) * getScalar(width)  / 100 : width;
-			origHeight = isPercentage(height) ? (viewport.h - hSpace) * getScalar(height) / 100 : height;
+			oriseatight = isPercentage(height) ? (viewport.h - hSpace) * getScalar(height) / 100 : height;
 
 			if (current.type === 'iframe') {
 				iframe = current.content;
@@ -1233,7 +1233,7 @@
 								body.css('overflow-x', 'hidden');
 							}
 
-							origHeight = body.outerHeight(true);
+							oriseatight = body.outerHeight(true);
 						}
 
 					} catch (e) {}
@@ -1248,7 +1248,7 @@
 				}
 
 				if (!current.autoHeight) {
-					inner.height( origHeight );
+					inner.height( oriseatight );
 				}
 
 				if (current.autoWidth) {
@@ -1256,16 +1256,16 @@
 				}
 
 				if (current.autoHeight) {
-					origHeight = inner.height();
+					oriseatight = inner.height();
 				}
 
 				inner.removeClass( 'fancybox-tmp' );
 			}
 
 			width  = getScalar( origWidth );
-			height = getScalar( origHeight );
+			height = getScalar( oriseatight );
 
-			ratio  = origWidth / origHeight;
+			ratio  = origWidth / oriseatight;
 
 			// Calculations for the content
 			minWidth  = getScalar(isPercentage(minWidth) ? getScalar(minWidth, 'w') - wSpace : minWidth);
@@ -1362,7 +1362,7 @@
 				}
 			}
 
-			if (scrollOut && scrolling === 'auto' && height < origHeight && (width + wPadding + scrollOut) < maxWidth_) {
+			if (scrollOut && scrolling === 'auto' && height < oriseatight && (width + wPadding + scrollOut) < maxWidth_) {
 				width += scrollOut;
 			}
 
@@ -1374,7 +1374,7 @@
 			height_ = wrap.height();
 
 			canShrink = (width_ > maxWidth_ || height_ > maxHeight_) && width > minWidth && height > minHeight;
-			canExpand = current.aspectRatio ? (width < origMaxWidth && height < origMaxHeight && width < origWidth && height < origHeight) : ((width < origMaxWidth || height < origMaxHeight) && (width < origWidth || height < origHeight));
+			canExpand = current.aspectRatio ? (width < origMaxWidth && height < origMaxHeight && width < origWidth && height < oriseatight) : ((width < origMaxWidth || height < origMaxHeight) && (width < origWidth || height < oriseatight));
 
 			$.extend(current, {
 				dim : {
@@ -1382,7 +1382,7 @@
 					height	: getValue( height_ )
 				},
 				origWidth  : origWidth,
-				origHeight : origHeight,
+				oriseatight : oriseatight,
 				canShrink  : canShrink,
 				canExpand  : canExpand,
 				wPadding   : wPadding,
