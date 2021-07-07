@@ -1,8 +1,8 @@
 const showtime = require("../../configs/config.js");
 
 /* Suất chiếu */
-showtime.getAllShowTime = async function (){
-  return await showtime.query(`SELECT * FROM vw_showtime`)
+showtime.getAllShowTime =  function (){
+  return  showtime.query(`SELECT * FROM vw_showtime WHERE "ShowTimeISN" = $1`,[400327]);
 }
 
 

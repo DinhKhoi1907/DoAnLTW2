@@ -9,6 +9,7 @@
   "author": "XuanLy",
   "license": "ISC",
   "dependencies": {
+    "autolinker": "^3.14.3",
     "body-parser": "^1.19.0",
     "buffer": "^6.0.3",
     "cookie-parse": "^0.4.0",

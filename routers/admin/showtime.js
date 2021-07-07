@@ -15,6 +15,7 @@ const router = express.Router();
 router.get('/', async function(req, res){
     const showtime = await showtimeModel.getAllShowTime();
     const listShowTime =  showtime.rows
+    console.log(moment(listShowTime[0].DateTimeFrom).format("D-MM-YYYY (HH:mm)"))
     //staff
     const staff = await staffModel.getAllStaff();
     const listStaff = staff.rows
@@ -29,7 +30,7 @@ router.get('/', async function(req, res){
    const cinema = await cinemaModel.getAllCinema();
    const listCinema = cinema.rows
      // console.log(listShowTime)
-    res.render("admin/pages/showtime", { layout:'./admin/layouts/admin',listShowTime:listShowTime, moment: moment,listStaff:listStaff,listDesStatus:listDesStatus,listMovie:listMovie,listCinema:listCinema });
+    res.render("admin/pages/showtime", { layout:'./admin/layouts/admin',listShowTime:listShowTime,moment,listStaff:listStaff,listDesStatus:listDesStatus,listMovie:listMovie,listCinema:listCinema });
   })
   
 router.post('/findRoomByIdRap',async function(req,res){
@@ -43,6 +44,12 @@ router.post('/addShowtime',async function(req,res){
   const {MovieISN,RoomISN,DateTimeFrom,DateTimeTo,ShowtimeStatus,TicketPrice,UpdatedBy} = req.body
   //console.log(Number(MovieISN),Number(RoomISN),DateTimeFrom,DateTimeTo,Number(ShowtimeStatus),Number(TicketPrice),Number(UpdatedBy));
   console.log(req.body)
+  //check time input 
+  const timeStart = new Date(DateTimeFrom) ;
+  const timeEnd = new Date(DateTimeTo) ;
+  if(timeStart >= timeEnd){
+    res.end("-1");
+  }
   //insert thì truyền vào số 0
   const check = await showtimeModel.insUpd_Showtime(0,Number(MovieISN),Number(RoomISN),DateTimeFrom,DateTimeTo,Number(ShowtimeStatus),Number(TicketPrice),Number(UpdatedBy));
   //console.log(check.rows[0].fn_showtime_insupd);

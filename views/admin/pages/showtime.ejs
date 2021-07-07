@@ -131,8 +131,8 @@
                 <td><%= list.MovieName %> </td>
                 <td><%= list.CinemaName %> </td>
                 <td><%= list.RoomName %> </td>
-                <td><%=moment(list.DateTimFrom).format("D-MM-YYYY (HH:mm)")%></td>
-                <td><%=moment(list.DateTimeTo).format("D-MM-YYYY (HH:mm)") %></td>
+                <td><%= moment(list.DateTimeFrom).format("DD-MM-YYYY (HH:mm)")%></td>
+                <td><%= moment(list.DateTimeTo).format("DD-MM-YYYY (HH:mm)") %></td>
                 <td><%= list.TicketPrice %> </td>
                 <td><%= list.StatusDescription %> </td>
                 <td>
