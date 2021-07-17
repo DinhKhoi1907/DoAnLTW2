@@ -20,7 +20,7 @@ $(document).ready(function(){
         reloadMask(true,$);
         //ajax
         $.ajax({
-            url:"user/user/forgot", // lay du lieu tu duong dan
+            url:"/user/forgot", // lay du lieu tu duong dan
             type:"POST", // method post
             timeout:5000,
             data:{

@@ -27,9 +27,9 @@ router.get("/", async function (req, res) {
   });
 
   router.post("/addCinema",async function(req,res){
-    const{ CinemaName,CinemaAddress,CinemaStatus,ProvinceISN,UpdateBy} = req.body;
+    const{ CinemaName,CinemaAddress,CinemaStatus,Location,ProvinceISN,UpdateBy} = req.body;
     //truyền vào số 0 để insert
-    const check = await cinemaModel.insUpd_Cinema(0,CinemaName,CinemaAddress,Number(CinemaStatus),Number(ProvinceISN),Number(UpdateBy))
+    const check = await cinemaModel.insUpd_Cinema(0,CinemaName,CinemaAddress,Number(CinemaStatus),Location,Number(ProvinceISN),Number(UpdateBy))
     res.send(`${check.rows[0].fn_cinema_insupd}`)
   })
   

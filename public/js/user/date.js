@@ -8,7 +8,6 @@ $(document).ready(function () {
         fullDate = new Date($(this).val());
        Ngay =  fullDate.getDate(),
        Thang = fullDate.getMonth() + 1,
-       
        Nam = fullDate.getFullYear(),
         date = String(Nam) + "-" +String(Thang) + "-" +String(Ngay);
       //  alert(date); 

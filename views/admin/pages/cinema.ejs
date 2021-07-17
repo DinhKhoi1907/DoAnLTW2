@@ -28,6 +28,7 @@
                 <th scope="col">Cinema address</th>
                 <th scope="col">Status</th>
                 <th scope="col">Belong to province</th>
+                <th scope="col">Location</th>
                 <th scope="col">Updated by</th>
               </tr>
             </thead>
@@ -50,7 +51,9 @@
                     <%})%>
                   </select>
                 </td>
-                
+                <td class="col-addInfo ">
+                  <input type="text" name="Location" class="form-control col-addNameProvice">
+                </td>
                 <td class="col-addInfo ">
                   <select name="UpdateBy" class="form-control">
                     <% listStaff.forEach(list=>{%>

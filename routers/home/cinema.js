@@ -6,7 +6,7 @@ const cinemaModel = require('../../models/user/cinemaModel.js');
 const router = express.Router();
 
 
-
+// lấy rạp bằng Id cụm rạp
 router.get('/',asyncHandler(async function(req,res){
         const province =   await provinceModel.findlistProvince(); 
         const listProvince = province.rows
@@ -21,5 +21,11 @@ router.get('/',asyncHandler(async function(req,res){
     
      
  }));
+//hiển thị google map
+router.get('/googleMap',asyncHandler(async function(req,res){
+  
+  res.render('home/pages/googleMap',{layout:false});
 
+
+}));
  module.exports = router;

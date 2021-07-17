@@ -11,6 +11,7 @@ const loginRouter = require('./routers/user/login.js');
 const logoutRouter = require('./routers/user/logout.js');
 const profileRouter = require('./routers/user/profile.js');
 const registerRouter = require('./routers/user/register.js');
+const forgotPassRouter = require('./routers/user/forgotPass.js');
 //home router
 
 const cinemaRouter = require('./routers/home/cinema.js');
@@ -121,7 +122,9 @@ app.use('/user/payment/PayAtCounter',CounterRouter);
 app.use('/user/login',loginRouter);
 app.use('/user/logout',logoutRouter);
 app.use('/user/profile',profileRouter);
+app.use('/user/forgot',forgotPassRouter);
 app.use('/user/register',registerRouter);
+
 //home
 app.use('/',homeRouter);
 app.use('/home/cinema',cinemaRouter);

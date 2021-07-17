@@ -4562,7 +4562,7 @@ h1.bd-hd:hover{
   -webkit-appearance: none;
   -moz-appearance: none;
   /* Firefox */
-  background: url('../images/uploads/drop-icon.png') no-repeat right 20px center;
+  background: url('../../images/uploads/drop-icon.png') no-repeat right 20px center;
   border-left: 1px solid #405266;
   border-right: 1px solid #405266;
   border-top: none;
@@ -6450,7 +6450,7 @@ h1.bd-hd:hover{
   -webkit-appearance: none;
   -moz-appearance: none;
   /* Firefox */
-  background: url('../images/uploads/drop-icon.png') no-repeat right 20px center;
+  background: url('../../images/uploads/drop-icon.png') no-repeat right 20px center;
   background-color: #233a50;
 }
 @media (max-width: 991px) {
@@ -7967,7 +7967,7 @@ header .top-search select {
   -webkit-appearance: none;
   -moz-appearance: none;
   /* Firefox */
-  background: url('../images/uploads/drop-icon.png') no-repeat right 20px center;
+  background: url('../../images/uploads/drop-icon.png') no-repeat right 20px center;
   text-transform: uppercase;
   color: #ffffff;
 }
@@ -7975,7 +7975,7 @@ header .top-search input::-webkit-input-placeholder {
   color: #abb7c4;
 }
 header .top-search input {
-  background: url('../images/uploads/topsearch.png') no-repeat right 20px center;
+  background: url('../../images/uploads/topsearch.png') no-repeat right 20px center;
 }
 header #nav-icon1 {
   width: 15px;
@@ -8247,7 +8247,7 @@ footer .flex-parent-ft .flex-child-ft form input {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  background: url('../images/uploads/search-bg.png') no-repeat right 20px center;
+  background: url('../../images/uploads/search-bg.png') no-repeat right 20px center;
 }
 footer .ft-copyright {
   display: -webkit-flex;
