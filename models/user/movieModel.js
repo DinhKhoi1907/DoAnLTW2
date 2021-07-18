@@ -33,7 +33,7 @@ movie.findRapById = async function(id) {
   movie.findAllMovie = async function() {
     return movie.query(`SELECT * FROM "Movie"`);
   }, 
-  
+
  // movie.findlistProvince = province.query('SELECT * FROM fn_GetAllProvinces()')
   
  

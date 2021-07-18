@@ -53,7 +53,7 @@ router.get("/", async function (req, res) {
       //truyền vào số 0 để insert
       var check = await movieModel.insUpd_Movie(0,movieName,plot,kindOfMovie,director,premiere,movieTime,country,imgPosterName,movieStatus,trailer,updatedBy)
       //lấy mã phim 
-      console.log()
+     
       var movieISN = check.rows[0].fn_movie_insupd
       // =-2 là movie đã tồn tại ,nếu tên movie đã tồn tại thì gửi thông báo cho người dúng
       if(movieISN == -2){
@@ -85,10 +85,38 @@ router.get("/", async function (req, res) {
    
     res.send(`${check.rows[0].fn_movie_del}`);
   })
-  
+  router.post("/updateMovie",upload.single('moviePoster'),async function(req,res){
+    const {movieISN}=req.body;
+   
+     const file = req.file;
+      var src = file.path
+      //tên file hình
+      var imgPosterName = src.split('\\').slice(3).join();  // tách chuỗi ở dấu \\ xong lấy phần tử thứ 3 , rồi join lại để về lại chuỗi
+
+     
+      //update
+      await movieModel.updateMovie(movieISN,imgPosterName);
+   
+ 
+    
+      var dest= "public/images/uploads/" + movieISN +"/";
+    /// kiểm tra folder có tồn tại không, không thì tạo, có thì thôi
+      fs.ensureDir(dest)
+          .then(() => {
+            console.log(' create folder success!')
+          })
+          .catch(err => {
+            console.log("thư mục nay đã tồn tại ")
+          })
+
+  // di chuyển file đến chỗ mình muốn , truyền vào đường dẫn đến file , và đường dẫn đến folder + tên file
+             fs.rename(src, dest + imgPosterName); 
+   
+  })
  router.post("/getMovie",async function(req,res){
    const movie = await movieModel.getAllMovie();
    // console.log(movie.rows)
    res.send(movie.rows);
  })
+ 
 module.exports = router;

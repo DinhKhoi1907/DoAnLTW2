@@ -13,5 +13,8 @@ movie.insUpd_Movie = async function(movieISN,movieName,plot,kindOfMovie,director
 movie.deleteMovie = async function(MovieISN){
     return movie.query(`SELECT fn_movie_del($1)`,[MovieISN]);
   }
-
+  movie.updateMovie = async function(MovieISN,imgPosterName){
+    return movie.query(`UPDATE "Movie" SET "Poster" = $1 WHERE "MovieISN" = $2`,[imgPosterName,MovieISN]);
+  }
+  
 module.exports = movie;

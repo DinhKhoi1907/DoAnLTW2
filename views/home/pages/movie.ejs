@@ -24,7 +24,7 @@
 				</div>
                 <% listMovie.forEach(list =>{ %> 
 				<div class="movie-item-style-2">
-					<img src="/<%-list.poster%>" style="width:223px;height:310px">
+					<img src="/images/uploads/<%=list.movieisn%>/<%= list.poster %>" style="width:223px;height:310px">
 					<div class="mv-item-infor">
 						<h6><a href="/home/movie/detailMovie?id=<%-list.movieisn%>"><%-list.moviename%> <span>(2012)</span></a></h6>
 						<p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>

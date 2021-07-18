@@ -134,8 +134,8 @@
                 <td><%= movies.MovieTime %> minutes</td>
                 <td><%= movies.Country %> </td>
                 <td><%= movies.StatusDescription %> </td>
-                <td>
-                  <img src="/images/poster/<%= movies.Poster %> " alt="Chưa thêm hình" height="120px" width="70px">
+                <td  style="    text-align: center;">
+                  <img src="/images/uploads/<%=movies.MovieISN%>/<%= movies.Poster %> " alt="Chưa thêm hình" height="" width="100px">
                  
                 </td>
                 <td><%= movies.KindOfMovie %> </td>
@@ -143,6 +143,35 @@
                     <button   value="<%= movies.MovieISN %>" class="deleteMovie btn btn-danger btn-circle btn-sm"> 
                       <i class="fas fa-trash"></i>
                     </button>
+
+                      <button   value="<%= movies.MovieISN %>" class="updateMovie btn  btn-circle btn-sm btn-success" data-toggle="modal" data-target="#updateMovieModal"> 
+                        <i class="fas fa-pen"></i>
+                      </button>
+
+                      <div class="modal fade" id="updateMovieModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-sm" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">Update Poster</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                          
+                            <form  id="updateMovie" enctype="multipart/form-data" action="/admin/movie/updateMovie" method="POST">
+                            <div class="modal-body" style="overflow-x: scroll;     height: 261px;">
+                              <input type="file" name="moviePoster">
+                               <input type="hidden" value="<%= movies.MovieISN %>" name="movieISN">
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary">Update Poster</button>
+                            </div>
+                          </form>
+                          </div>
+                        </div>
+                      </div>
+
                 </td>
                </tr>
               <% }) %>

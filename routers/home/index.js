@@ -10,7 +10,7 @@ router.get('/',async function(req,res){
    // tìm movie mới được công chiếu
    const pm = await cinemaModel.findmovieMoiDuocCongChieu();
    const listMoviemoi = pm.rows;
-  
+  console.log(listMoviemoi)
    // lấy movie được xem nhiều nhất 
    const top = 8;
    const pp = await cinemaModel.findmovieDuocXemNhieu(top);

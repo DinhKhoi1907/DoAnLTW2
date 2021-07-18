@@ -16,7 +16,7 @@ router.get('/',asyncHandler(async function(req,res){
      const title = 'LIST OF  MOVIES';
   const movie = await movieModel.findAllMovie();
   const listMovie = movie.rows
-  console.log(listMovie)
+
     res.render('home/pages/movie',{layout:'./home/layouts/home',user: req.user ,listProvince:listProvince,listMovie:listMovie,title});
 
  

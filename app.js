@@ -120,6 +120,7 @@ app.use('/user/payment/PayBymomo',momoRouter);
 app.use('/user/payment/PayByPayPal',PayPalRouter);
 app.use('/user/payment/PayAtCounter',CounterRouter);
 app.use('/user/login',loginRouter);
+app.use('/user',loginRouter);
 app.use('/user/logout',logoutRouter);
 app.use('/user/profile',profileRouter);
 app.use('/user/forgot',forgotPassRouter);
