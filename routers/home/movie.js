@@ -30,7 +30,7 @@ router.get('/',asyncHandler(async function(req,res){
     const movie = await movieModel.findRapById(id);
     const detailMovie = movie.rows
 
-    //console.log(movie)
+   
     const date = new Date();
     res.render('home/pages/detailMovie',{layout:'./home/layouts/home.ejs',user: req.user ,listProvince:listProvince,detailMovie: detailMovie,date})
  }))

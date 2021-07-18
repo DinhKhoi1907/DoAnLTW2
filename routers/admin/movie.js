@@ -111,7 +111,7 @@ router.get("/", async function (req, res) {
 
   // di chuyển file đến chỗ mình muốn , truyền vào đường dẫn đến file , và đường dẫn đến folder + tên file
              fs.rename(src, dest + imgPosterName); 
-   
+          res.redirect('/admin/movie');
   })
  router.post("/getMovie",async function(req,res){
    const movie = await movieModel.getAllMovie();

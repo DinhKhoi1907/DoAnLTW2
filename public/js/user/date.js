@@ -10,7 +10,7 @@ $(document).ready(function () {
        Thang = fullDate.getMonth() + 1,
        Nam = fullDate.getFullYear(),
         date = String(Nam) + "-" +String(Thang) + "-" +String(Ngay);
-      //  alert(date); 
+       // alert(date); 
        idmovie = $("#idmovie").val();
       
         $.ajax({
@@ -57,7 +57,10 @@ $(document).ready(function () {
                       for (var i = 0; i < btns.length; i++) {
                         btns[i].addEventListener("click", function() {
                         var current = document.getElementsByClassName("active");
-                        current[0].className = current[0].className.replace(" active", "");
+                            if(current[0]){
+                                current[0].className = current[0].className.replace(" active", "");
+                             }
+                       
                         this.className += " active";
                         });
                       }
@@ -83,14 +86,17 @@ $(document).ready(function () {
                         }, 
                         success: function(data){
                             var obj = JSON.parse(data);
+                            var x=0;
                             for (const element of obj){
-                                         $("#listCinema").append(`<div id="DetailRap" class="RapTime"><p class="TenRap"  >${element.cinemaname}</p><br></div> <hr>`);
+                                console.log(element.cinemaname);
+                                         $("#listCinema").append(`<div class="DetailRap-${x}" class="RapTime"><p class="TenRap"  >${element.cinemaname}</p><br></div> <hr>`);
                                           var isn = element.showtimeisnlist.split(",");
                                             var timelist = element.timeshowlist.split(",");       
                                             for(i=0;i<timelist.length;i++){
-                                                $(`#DetailRap`).append(`<button class="btnTime" value="showtime-${isn[i]}">${timelist[i]}</button>`);            
+                                                console.log(timelist);
+                                                $(`.DetailRap-${x}`).append(`<button class="btnTime" value="showtime-${isn[i]}">${timelist[i]}</button>`);            
                                             }
-                               
+                               x++;
                          }
                           
                     // bắt click vào giờ
