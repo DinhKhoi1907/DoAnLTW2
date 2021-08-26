@@ -1,0 +1,12 @@
+CREATE FUNCTION fn_GetMoviesHaveShowedAtCinema(cinemaISN bigint, ondate date)
+RETURNS TABLE(MovieISN bigint, MovieName character varying, timeshowlist text)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+BEGIN
+	RETURN QUERY SELECT DISTINCT st."MovieISN", mov."MovieName", fn_showtimesofmovie_gettimesbydateandprovince(ondate, cinemaisn, st."MovieISN") FROM "ShowTime" AS st
+				 LEFT OUTER JOIN "Room" AS r ON st."RoomISN"=r."RoomISN"
+				 LEFT OUTER JOIN "Cinema" AS ci ON r."CinemaISN"=ci."CinemaISN"
+				 LEFT OUTER JOIN "Movie" AS mov ON st."MovieISN"=mov."MovieISN"
+				 WHERE st."DateTimeFrom"::date=ondate AND ci."CinemaISN"=cinemaISN;
+END; $$
